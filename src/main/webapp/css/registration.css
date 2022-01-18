@@ -1,0 +1,31 @@
+body {
+    background: url(../images/registration_background.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+#container-fluid {
+    margin-left: 150px;
+}
+
+#login, #password, #confirm-password, #email-address, #phone_number, #sign_up {
+    width: 30%;
+}
+
+b {
+    background-color: blanchedalmond;
+    color: red;
+}
+
+h1 {
+    position: relative;
+    left: 250px;
+    font-size: 40px;
+    color: black;
+}
+
+label {
+    color: black;
+}
