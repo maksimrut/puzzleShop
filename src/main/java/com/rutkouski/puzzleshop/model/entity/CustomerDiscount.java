@@ -3,20 +3,20 @@ package com.rutkouski.puzzleshop.model.entity;
 import java.math.BigDecimal;
 
 public class CustomerDiscount extends AbstractEntity {
-    private BigDecimal discount;
+    private Integer discount;
 
     public CustomerDiscount() {
     }
 
-    public CustomerDiscount(BigDecimal discount) {
+    public CustomerDiscount(Integer discount) {
         this.discount = discount;
     }
 
-    public BigDecimal getDiscount() {
+    public Integer getDiscount() {
         return discount;
     }
 
-    public void setDiscount(BigDecimal discount) {
+    public void setDiscount(Integer discount) {
         this.discount = discount;
     }
 
@@ -25,10 +25,9 @@ public class CustomerDiscount extends AbstractEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
+        CustomerDiscount discount1 = (CustomerDiscount) o;
 
-        CustomerDiscount that = (CustomerDiscount) o;
-
-        return discount != null ? discount.equals(that.discount) : that.discount == null;
+        return discount != null ? discount.equals(discount1.discount) : discount1.discount == null;
     }
 
     @Override

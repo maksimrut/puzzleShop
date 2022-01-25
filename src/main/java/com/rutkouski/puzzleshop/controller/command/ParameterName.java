@@ -24,7 +24,10 @@ public final class ParameterName {
     public static final String PHONE_NUMBER = "phone";
     public static final String TRUE = "true";
 
+
+    public static final String SELECTED_PUZZLE_DIFFICULTY = "puzzle_difficulty";
     public static final String SESSION_LOCALE = "locale";
+    public static final String PUZZLE_ID = "puzzle_id";
 
 
 

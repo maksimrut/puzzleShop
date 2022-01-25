@@ -1,0 +1,37 @@
+body {
+    background: url(../images/registration_background.jpg) no-repeat center fixed;
+    background-size: cover;
+}
+
+h2 {
+    margin-left: 15px;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.contact-info p {
+    font-weight: bold;
+    font-size: 28px;
+}
+
+.contact-phone__item a {
+    font-size: 20px;
+    margin-bottom: 10px;
+    text-decoration: none;
+}
+
+.contact-title {
+    font-size: 36px;
+    font-weight: bold;
+    margin-top: 15px;
+    margin-left: 15px;
+}
+
+.contact-social__item img {
+    width: 36px;
+    max-width: 100%;
+    height: 36px;
+}

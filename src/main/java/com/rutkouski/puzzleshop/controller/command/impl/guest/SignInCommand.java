@@ -36,10 +36,10 @@ public class SignInCommand implements Command {
                 User user = userOptional.get();
                 if (user.getStatus() == User.Status.ACTIVE) {
                     session.setAttribute(SESSION_USER, user);
-                    request.setAttribute(SIGN_IN_RESULT, Boolean.TRUE);
+                    session.setAttribute(SIGN_IN_RESULT, Boolean.TRUE);
                 }
             } else {
-                request.setAttribute(SIGN_IN_RESULT, Boolean.FALSE);
+                session.setAttribute(SIGN_IN_RESULT, Boolean.FALSE);
             }
             router.setPagePath(MAIN_PAGE);
             router.setRoute(Router.RouteType.REDIRECT);

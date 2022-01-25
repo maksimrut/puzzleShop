@@ -9,7 +9,7 @@ import java.util.Optional;
 
 import static com.rutkouski.puzzleshop.model.mapper.ColumnName.*;
 
-public class UserMapper implements RowMapper {
+public class UserMapper implements RowMapper<User> {
 
     @Override
     public Optional<User> mapRow(ResultSet resultSet) {

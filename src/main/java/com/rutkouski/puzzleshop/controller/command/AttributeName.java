@@ -22,6 +22,12 @@ public final class AttributeName {
     public static final String SESSION_USER = "user";
     public static final String SIGN_IN_RESULT = "sign_in_result";
     public static final String CURRENT_PAGE = "current_page";
+    public static final String PUZZLES_LIST = "puzzles_list";
+
+    public static final String BASKET = "basket";
+    public static final String TOTAL_COST = "total_cost";
+    public static final String BASKET_ITEMS_LIST = "basket_items_list";
+    public static final String USER_DISCOUNT = "user_discount";
 
 
 

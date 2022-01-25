@@ -1,5 +1,7 @@
 package com.rutkouski.puzzleshop.controller;
 
+import com.rutkouski.puzzleshop.controller.command.PagePath;
+
 /**
  *  The {@link Router} class contains
  *  pagePath and route fields for request and response
@@ -12,7 +14,7 @@ public class Router {
         REDIRECT
     }
 
-    private String pagePath;
+    private String pagePath = PagePath.INDEX_PAGE;
     private RouteType route = RouteType.FORWARD;
 
     public String getPagePath() {

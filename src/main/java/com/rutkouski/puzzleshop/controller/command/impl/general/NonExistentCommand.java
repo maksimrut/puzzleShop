@@ -5,7 +5,7 @@ import com.rutkouski.puzzleshop.controller.command.Command;
 import com.rutkouski.puzzleshop.model.entity.User;
 import jakarta.servlet.http.HttpServletRequest;
 
-import static com.rutkouski.puzzleshop.controller.command.PagePath.ERROR_400_PAGE;
+import static com.rutkouski.puzzleshop.controller.command.PagePath.ERROR_404_PAGE;
 
 /**
  * The NonExistentCommand redirects the {@link User}
@@ -19,7 +19,7 @@ public class NonExistentCommand implements Command {
     @Override
     public Router execute(HttpServletRequest request) {
         Router router = new Router();
-        router.setPagePath(ERROR_400_PAGE);
+        router.setPagePath(ERROR_404_PAGE);
         return router;
     }
 }

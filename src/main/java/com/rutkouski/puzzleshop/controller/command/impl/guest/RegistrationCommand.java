@@ -7,6 +7,7 @@ import com.rutkouski.puzzleshop.exception.ServiceException;
 import com.rutkouski.puzzleshop.model.entity.User;
 import com.rutkouski.puzzleshop.model.service.impl.UserServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -32,6 +33,7 @@ public class RegistrationCommand implements Command {
     @Override
     public Router execute(HttpServletRequest request) throws CommandException {
         Router router = new Router();
+//        HttpSession session = request.getSession();
         Map<String, String> formValues = new HashMap<>();
         formValues.put(LOGIN, request.getParameter(LOGIN));
         formValues.put(PASSWORD, request.getParameter(PASSWORD));
@@ -42,6 +44,7 @@ public class RegistrationCommand implements Command {
 
             if (registrationResult) {
                 router.setPagePath(MAIN_PAGE);
+//                session.
             } else {
                 router.setPagePath(REGISTRATION_PAGE);
                 for (String key : formValues.keySet()) {

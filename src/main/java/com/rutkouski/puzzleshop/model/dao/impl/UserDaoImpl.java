@@ -72,13 +72,13 @@ public class UserDaoImpl implements UserDao {
             "UPDATE INTO users SET status_id=? WHERE users.id=?";
     private static final String SQL_FIND_USER_BY_ID_AND_PASSWORD =
             "SELECT users.id FROM users WHERE users.id=? AND password=?";
-    private RowMapper<User> mapper = new UserMapper();
+    private final RowMapper<User> mapper = new UserMapper();
 
     @Override
     public List<User> findAll() throws DaoException {
         List<User> users;
         try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
-             PreparedStatement statement	= connection.prepareStatement(SQL_FIND_ALL);
+             PreparedStatement statement = connection.prepareStatement(SQL_FIND_ALL);
              ResultSet resultSet = statement.executeQuery()) {
             users = mapper.mapRows(resultSet);
             logger.debug("findAll method was completed successfully. {} users were found", users.size());
@@ -96,7 +96,9 @@ public class UserDaoImpl implements UserDao {
              PreparedStatement statement = connection.prepareStatement(SQL_FIND_BY_ID)) {
             statement.setInt(FIRST_PARAM_INDEX, id);
             try (ResultSet resultSet = statement.executeQuery()) {
-                optionalUser = mapper.mapRow(resultSet);
+                if (resultSet.next()) {
+                    optionalUser = mapper.mapRow(resultSet);
+                }
             }
         } catch (SQLException e) {
             logger.error("SQL exception happened in findById method: ", e);
@@ -129,7 +131,9 @@ public class UserDaoImpl implements UserDao {
              PreparedStatement statement = connection.prepareStatement(SQL_FIND_USER_BY_EMAIL)) {
             statement.setString(FIRST_PARAM_INDEX, email);
             try (ResultSet resultSet = statement.executeQuery()) {
-                optionalUser = mapper.mapRow(resultSet);
+                if (resultSet.next()) {
+                    optionalUser = mapper.mapRow(resultSet);
+                }
             }
         } catch (SQLException e) {
             logger.error("SQL exception happened in findUserByEmail method: ", e);
@@ -294,7 +298,9 @@ public class UserDaoImpl implements UserDao {
             statement.setString(FIRST_PARAM_INDEX, login);
             statement.setString(SECOND_PARAM_INDEX, passwordHash);
             try (ResultSet resultSet = statement.executeQuery()) {
-                optionalUser = mapper.mapRow(resultSet);
+                if (resultSet.next()) {
+                    optionalUser = mapper.mapRow(resultSet);
+                }
             }
         } catch (SQLException e) {
             logger.error("SQL exception happened in findUserByLoginAndPassword method: ", e);

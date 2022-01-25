@@ -9,29 +9,25 @@ import java.io.IOException;
 
 import static com.rutkouski.puzzleshop.controller.command.AttributeName.CURRENT_PAGE;
 
-@WebFilter(urlPatterns = {"*.jsp"}, dispatcherTypes = {DispatcherType.FORWARD}
-    , initParams = {@WebInitParam(name = "PAGES_ROOT_DIRECTORY", value = "/jsps", description = "Pages Param")
-        , @WebInitParam(name = "INDEX_PAGE", value = "/index.jsp", description = "Pages Param")})
+@WebFilter(urlPatterns = {"/*"})
 public class CurrentPageFilter implements Filter {
-    private String rootDirectory;
-    private String indexPage;
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
-        rootDirectory = filterConfig.getInitParameter("PAGES_ROOT_DIRECTORY");
-        indexPage = filterConfig.getInitParameter("INDEX_PAGE");
-    }
-
-    @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException { // TODO: 24.01.2022 learn
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
-        String requestURI = httpServletRequest.getRequestURI();
-        String currentPage = indexPage;
-        int rootDirectoryFirstIndex = requestURI.indexOf(rootDirectory);
-        if (rootDirectoryFirstIndex != -1) {
-            currentPage = requestURI.substring(rootDirectoryFirstIndex);
+        String currentPage = httpServletRequest.getRequestURL().toString();
+
+        if (currentPage.contains("jsp/")) {
+            int index = currentPage.indexOf("jsp/");
+            currentPage = currentPage.substring(index);
+            httpServletRequest.getSession().setAttribute(CURRENT_PAGE, currentPage);
+        } else if (currentPage.contains("controller") && !httpServletRequest.getParameterMap().isEmpty()
+                && httpServletRequest.getQueryString() != null
+                && !httpServletRequest.getQueryString().contains("command=change_locale")) {
+            int index = currentPage.indexOf("controller");
+            currentPage = currentPage.substring(index) + "?" + httpServletRequest.getQueryString();
+            httpServletRequest.getSession().setAttribute(CURRENT_PAGE, currentPage);
         }
-        httpServletRequest.getSession().setAttribute(CURRENT_PAGE, currentPage);
-        chain.doFilter(request, response);
+        chain.doFilter(httpServletRequest, response);
     }
 }

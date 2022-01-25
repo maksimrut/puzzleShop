@@ -9,6 +9,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import static com.rutkouski.puzzleshop.controller.command.AttributeName.CURRENT_PAGE;
+import static com.rutkouski.puzzleshop.controller.command.PagePath.MAIN_PAGE;
 import static com.rutkouski.puzzleshop.controller.command.ParameterName.SESSION_LOCALE;
 
 public class ChangeLocaleCommand implements Command {
@@ -25,7 +26,11 @@ public class ChangeLocaleCommand implements Command {
         } else {
             logger.warn("Incorrect locale parameter: {}", newLocale);
         }
-        router.setPagePath(currentPage);
+        if (currentPage != null) {
+            router.setPagePath(currentPage);
+        } else {
+            router.setPagePath(MAIN_PAGE);
+        }
         return router;
     }
 }
