@@ -12,6 +12,8 @@ import jakarta.servlet.annotation.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import static com.rutkouski.puzzleshop.controller.command.PagePath.ERROR_500_PAGE;
+
 /**
  *
  * The {@link Controller} class is a main HttpServlet.
@@ -43,7 +45,7 @@ public class Controller extends HttpServlet {
             }
         } catch (CommandException e) {
             logger.error("Internal error occurred", e);
-            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());//TODO
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
         }
     }
 }

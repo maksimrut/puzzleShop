@@ -4,8 +4,10 @@ import com.rutkouski.puzzleshop.controller.Router;
 import com.rutkouski.puzzleshop.controller.command.Command;
 import com.rutkouski.puzzleshop.exception.CommandException;
 import com.rutkouski.puzzleshop.exception.ServiceException;
-import com.rutkouski.puzzleshop.model.entity.*;
-import com.rutkouski.puzzleshop.model.service.impl.CustomerServiceImpl;
+import com.rutkouski.puzzleshop.model.entity.Order;
+import com.rutkouski.puzzleshop.model.entity.OrderItem;
+import com.rutkouski.puzzleshop.model.entity.Puzzle;
+import com.rutkouski.puzzleshop.model.entity.User;
 import com.rutkouski.puzzleshop.model.service.impl.OrderServiceImpl;
 import com.rutkouski.puzzleshop.model.service.impl.PuzzleServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
@@ -25,9 +27,6 @@ import static com.rutkouski.puzzleshop.controller.command.ParameterName.ORDER_CO
 
 public class CreateOrderCommand implements Command {
     static Logger logger = LogManager.getLogger();
-    private static final int MAX_DISCOUNT_VALUE = 15;
-    private static final int ADDITION_DISCOUNT_AFTER_ORDER = 1;
-    private final CustomerServiceImpl customerService = CustomerServiceImpl.getInstance();
     private final PuzzleServiceImpl puzzleService = PuzzleServiceImpl.getInstance();
     private final OrderServiceImpl orderService = OrderServiceImpl.getInstance();
 
@@ -43,7 +42,6 @@ public class CreateOrderCommand implements Command {
         Map<Integer, Integer> basket = (Map<Integer, Integer>) session.getAttribute(BASKET);
         Order order = new Order(LocalDate.now(), totalCost, customerId);
         try {
-            int discount = customerService.findCustomerDiscountById(customerId);
             Order createdOrder = orderService.createOrder(order);
             for (var entry : basket.entrySet()) {
                 int puzzleId = entry.getKey();
@@ -53,9 +51,6 @@ public class CreateOrderCommand implements Command {
                     OrderItem orderItem = new OrderItem(quantity, puzzleId, createdOrder.getId());
                     orderService.createOrderItem(orderItem);
                 }
-            }
-            if (discount < MAX_DISCOUNT_VALUE) {
-                customerService.updateCustomerDiscountById(customerId, discount + ADDITION_DISCOUNT_AFTER_ORDER);
             }
             basket.clear();
             router.setPagePath(CREATED_ORDER_RESULT_PAGE);

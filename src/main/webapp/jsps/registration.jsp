@@ -13,15 +13,15 @@
 <fmt:message key="registration.password" var="psw"/>
 <fmt:message key="registration.confirm_password" var="confirm_psw"/>
 <fmt:message key="registration.email" var="email"/>
-<fmt:message key="registration.phone_number" var="phone_number"/>
+<%--<fmt:message key="registration.phone_number" var="phone_number"/>--%>
 <fmt:message key="registration.invalid_login" var="invalid_login_message"/>
 <fmt:message key="registration.invalid_password" var="invalid_psw_message"/>
 <fmt:message key="registration.invalid_email" var="invalid_email_message"/>
-<fmt:message key="registration.invalid_phone_number" var="invalid_phone_number"/>
+<%--<fmt:message key="registration.invalid_phone_number" var="invalid_phone_number"/>--%>
 <fmt:message key="registration.not_unique_login" var="not_unique_login_message"/>
 <fmt:message key="registration.password_mismatch" var="psw_mismatch_message"/>
 <fmt:message key="registration.not_unique_email" var="not_unique_email_message"/>
-<fmt:message key="registration.not_unique_mobile_number" var="not_unique_mobile_number_message"/>
+<%--<fmt:message key="registration.not_unique_mobile_number" var="not_unique_mobile_number_message"/>--%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -41,7 +41,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
           integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 
-<%--    <script src="${abs}/js/message.js"></script>--%>
     <link rel="stylesheet" href="${abs}/css/registration.css">
     <title>${registration_title}</title>
 </head>

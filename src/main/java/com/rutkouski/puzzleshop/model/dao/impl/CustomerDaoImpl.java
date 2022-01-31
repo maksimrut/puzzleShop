@@ -20,13 +20,17 @@ public class CustomerDaoImpl implements CustomerDao {
     static Logger logger = LogManager.getLogger();
 
     private static final String SQL_FIND_ALL = """
-            SELECT customers.id, login, password, email, first_name, phone, role, status, balance, discount
-            FROM users
-            JOIN customers ON users.id=customers.id""";
-    private static final String SQL_FIND_BY_ID = """
-            SELECT customers.id, login, password, email, first_name, phone, role, status, balance, discount
+            SELECT customers.id, login, password, email, first_name, phone, role, status, discount
             FROM users
             JOIN customers ON users.id=customers.id
+            JOIN roles ON users.role_id=roles.id
+			JOIN user_statuses ON users.status_id=user_statuses.id""";
+    private static final String SQL_FIND_BY_ID = """
+            SELECT customers.id, login, password, email, first_name, phone, role, status, discount
+            FROM users
+            JOIN customers ON users.id=customers.id
+            JOIN roles ON users.role_id=roles.id
+			JOIN user_statuses ON users.status_id=user_statuses.id
             WHERE customers.id=?""";
     private static final String SQL_FIND_DISCOUNT_BY_CUSTOMER_ID = """
             SELECT discount FROM customers

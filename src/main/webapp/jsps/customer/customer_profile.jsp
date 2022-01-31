@@ -11,13 +11,11 @@
 <fmt:message key="profile.login" var="login"/>
 <fmt:message key="profile.email" var="email"/>
 <fmt:message key="allUsers.role" var="role"/>
-<fmt:message key="profile.balance" var="balance"/>
 <fmt:message key="profile.discount" var="discount"/>
 <fmt:message key="admin.goToLink" var="goTo"/>
 <fmt:message key="profile.update_profile" var="updateProfile"/>
 <fmt:message key="profile.update_password" var="updatePassword"/>
 <fmt:message key="client.profile.showOrders" var="showOrders"/>
-<fmt:message key="client.relevantAppointments" var="relevantApp"/>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -37,8 +35,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
           integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 
-    <%--    <script src="${abs}/js/message.js"></script>--%>
-    <%--    <link rel="stylesheet" href="${abs}/css/registration.css">--%>
     <title>${title}</title>
 </head>
 <body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
@@ -58,9 +54,6 @@
 
             <dt class="col-sm-3">${email}</dt>
             <dd class="col-sm-9">${user.email}</dd>
-
-            <dt class="col-sm-3">${balance}</dt>
-            <dd class="col-sm-9">${sessionScope.userMoney} &euro;</dd>
 
             <dt class="col-sm-3">${discount}</dt>
             <dd class="col-sm-9">${sessionScope.user_discount}%</dd>
@@ -84,18 +77,13 @@
             <dt class="col-sm-3">${goTo}</dt>
             <dd class="col-sm-9">
                 <dl class="row">
-                    <dt class="col-sm-4">&#9679;   <a href="${abs}/controller?command=show_orders_by_client"
+                    <dt class="col-sm-4">&#9679;   <a href="${abs}/controller?command=show_orders_for_customer"
                                                       style="color: midnightblue; font-size: 18px">${showOrders}</a></dt>
-                </dl>
-                <dl class="row">
-                    <dt class="col-sm-4">&#9679;   <a href="${abs}/controller?command=show_all_relevant_appointments_by_client"
-                                                      style="color: midnightblue; font-size: 18px">${relevantApp}</a></dt>
                 </dl>
             </dd>
         </dl>
     </div>
 </div>
-
 
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"

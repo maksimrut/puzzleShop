@@ -22,6 +22,7 @@ public enum CommandType {
     SHOW_ALL_GOODS(new ShowAllGoodsCommand(), EnumSet.of(ADMIN, CUSTOMER, GUEST)),
     GO_TO_ABOUT_US(new GoToAboutUsCommand(), EnumSet.of(ADMIN, CUSTOMER, GUEST)),
     SHOW_PUZZLES_BY_DIFFICULTY_LEVEL(new ShowPuzzlesByDifficultyLevelCommand(), EnumSet.of(ADMIN, CUSTOMER, GUEST)),
+    CANCEL_ORDER(new CancelOrderCommand(), EnumSet.of(ADMIN, CUSTOMER)),
 
     /* guest commands */
     GO_TO_REGISTRATION(new GoToRegistrationCommand(), EnumSet.of(GUEST)),
@@ -35,11 +36,16 @@ public enum CommandType {
     ADD_ITEM_TO_BASKET(new AddItemToBasketCommand(), EnumSet.of(CUSTOMER)),
     CREATE_ORDER(new CreateOrderCommand(), EnumSet.of(CUSTOMER)),
     SHOW_ORDERS_FOR_CUSTOMER(new ShowOrdersForCustomerCommand(), EnumSet.of(CUSTOMER)),
+    OPEN_ORDER_INFO(new OpenOrderInfoCommand(), EnumSet.of(CUSTOMER)),
+    GO_TO_CUSTOMER_PROFILE(new GoToCustomerProfileCommand(), EnumSet.of(CUSTOMER)),
 
     /* admin commands */
     GO_TO_EDIT_PUZZLE(new GoToEditPuzzleCommand(), EnumSet.of(ADMIN)),
     EDIT_PUZZLE(new EditPuzzleCommand(), EnumSet.of(ADMIN)),
     USER_MANAGEMENT(new UserManagementCommand(), EnumSet.of(ADMIN)),
+    ORDER_MANAGEMENT(new OrderManagementCommand(), EnumSet.of(ADMIN)),
+    UPDATE_ORDER_STATUS_TO_IN_PROCESS(new UpdateOrderStatusToInProcessCommand(), EnumSet.of(ADMIN)),
+    COMPLETE_ORDER(new CompleteOrderCommand(), EnumSet.of(ADMIN)),
     ADD_PUZZLE(new AddPuzzleCommand(), EnumSet.of(ADMIN)),
     GO_TO_ADD_PUZZLE(new GoToAddPuzzleCommand(), EnumSet.of(ADMIN)),
     DELETE_PUZZLE(new DeletePuzzleCommand(), EnumSet.of(ADMIN));

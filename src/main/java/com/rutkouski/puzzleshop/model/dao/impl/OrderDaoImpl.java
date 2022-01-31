@@ -40,7 +40,7 @@ public class OrderDaoImpl implements OrderDao {
             JOIN order_statuses ON order_status_id = order_statuses.id
             WHERE customer_id=?""";
     private static final String SQL_UPDATE_ORDER_STATUS_BY_ID =
-            "UPDATE orders SET order_status_id=? WHERE customer_id=?";
+            "UPDATE orders SET order_status_id=? WHERE id=?";
     private static final String SQL_INSERT_ORDER_ITEM =
             "INSERT INTO order_items (item_quantity, puzzle_id, order_id) VALUES(?, ?, ?)";
     private static final String SQL_FIND_ALL_ORDER_ITEMS_BY_ORDER_ID = """

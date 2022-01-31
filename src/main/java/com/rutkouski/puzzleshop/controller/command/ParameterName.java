@@ -24,6 +24,7 @@ public final class ParameterName {
     public static final String NOT_UNIQUE_LOGIN_RESULT = "notUniqueLogin";
     public static final String OLD_PASSWORD = "old_password";
     public static final String ORDER_COST = "order_cost";
+    public static final String ORDER_ID = "order_id";
     public static final String PASSWORD = "password";
     public static final String PHONE_NUMBER = "phone";
     public static final String PICTURE_PATH = "picture_path";

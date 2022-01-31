@@ -11,19 +11,24 @@ public final class PagePath {
     public static final String ABOUT_US_PAGE = "/jsps/about_us.jsp";
     public static final String SHOW_ALL_GOODS_PAGE = "controller?command=show_all_goods";
     public static final String REGISTRATION_PAGE = "/jsps/registration.jsp";
+    public static final String ORDER_INFO_PAGE = "/jsps/order_info.jsp";
     /* error pages */
-    public static final String ERROR_404_PAGE = "/jsps/error/error404.jsp";
-    public static final String ERROR_500_PAGE = "/jsps/error/error500.jsp";
+    public static final String ERROR_404_PAGE = "jsps/error/error404.jsp";
+    public static final String ERROR_500_PAGE = "jsps/error/error500.jsp";
     /* customer pages */
     public static final String GOODS_PAGE = "/jsps/goods.jsp";
     public static final String BASKET_PAGE = "/jsps/customer/basket.jsp";
     public static final String CREATED_ORDER_RESULT_PAGE = "/jsps/customer/created_order_result.jsp";
     public static final String CUSTOMER_ORDERS_LIST_PAGE = "/jsps/customer/orders_list.jsp";
+    public static final String GO_TO_CUSTOMER_PROFILE_PAGE = "/jsps/customer/customer_profile.jsp";
+    public static final String SHOW_ORDERS_FOR_CUSTOMER_PAGE = "controller?command=show_orders_for_customer";
     /* admin pages */
     public static final String USER_MANAGEMENT_PAGE = "/jsps/admin/user_management.jsp";
+    public static final String ORDER_MANAGEMENT_PAGE = "/jsps/admin/order_management.jsp";
     public static final String EDIT_PUZZLE_PAGE = "/jsps/admin/edit_puzzle.jsp";
     public static final String GO_TO_EDIT_PUZZLE_PAGE = "controller?command=go_to_edit_puzzle&puzzle_id=";
     public static final String GO_TO_ADD_PUZZLE_PAGE = "jsps/admin/add_puzzle.jsp";
+    public static final String TO_ORDER_MANAGEMENT_PAGE = "/controller?command=order_management";
 
     private PagePath() {
     }

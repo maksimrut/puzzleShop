@@ -11,6 +11,8 @@ public final class AttributeName {
     public static final String BASKET = "basket";
     public static final String BASKET_ITEMS_LIST = "basket_items_list";
     public static final String CURRENT_PAGE = "current_page";
+    public static final String CUSTOMER = "customer";
+    public static final String DISCOUNT = "discount";
     public static final String ERROR_MESSAGE = "error_message";
     public static final String INCORRECT_PASSWORD = "incorrect_passport";
     public static final String INVALID_EMAIL = "invalid_email";
@@ -19,7 +21,10 @@ public final class AttributeName {
     public static final String INVALID_MESSAGE = "invalid_message";
     public static final String INVALID_PASSWORD = "invalid_password";
     public static final String NOT_UNIQUE_MESSAGE = "not_unique_message";
+    public static final String ORDER = "order";
+    public static final String ORDER_LIST = "orders";
     public static final String PASSWORD_MISMATCH = "password_mismatch";
+    public static final String PUZZLE_MAP = "puzzle_map";
     public static final String PUZZLES_LIST = "puzzles_list";
     public static final String PUZZLE_TO_EDIT = "puzzle_to_edit";
     public static final String REGISTRATION_RESULT = "registration_result";

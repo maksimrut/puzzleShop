@@ -23,6 +23,7 @@
 <fmt:message key="header.puzzles" var="puzzles"/>
 <fmt:message key="header.discount" var="discount"/>
 <fmt:message key="admin_header.user_management" var="user_management"/>
+<fmt:message key="admin_header.order_management" var="order_management"/>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -58,6 +59,9 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="${abs}/controller?command=user_management">${user_management}</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="${abs}/controller?command=order_management">${order_management}</a>
+                </li>
             </c:if>
         </ul>
 
@@ -74,7 +78,7 @@
                     </li>
                     <li><a class="nav-link" href="#">${discount} = ${sessionScope.user_discount}%</a><li>
                     <li class="nav-item">
-                        <a class="nav-link" href="${abs}/jsps/customer/customer_profile.jsp">${profile}</a>
+                        <a class="nav-link" href="${abs}/controller?command=go_to_customer_profile">${profile}</a>
                     </li>
 
                 </c:when>
