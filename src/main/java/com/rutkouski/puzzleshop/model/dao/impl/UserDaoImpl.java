@@ -69,10 +69,21 @@ public class UserDaoImpl implements UserDao {
 			JOIN user_statuses ON status_id=user_statuses.id
 			WHERE users.login=? AND users.password=?""";
     private static final String SQL_UPDATE_USER_STATUS =
-            "UPDATE INTO users SET status_id=? WHERE users.id=?";
+            "UPDATE users SET status_id=? WHERE users.id=?";
     private static final String SQL_FIND_USER_BY_ID_AND_PASSWORD =
             "SELECT users.id FROM users WHERE users.id=? AND password=?";
+    private static UserDaoImpl instance;
     private final RowMapper<User> mapper = new UserMapper();
+
+    private UserDaoImpl() {
+    }
+
+    public static UserDaoImpl getInstance() {
+        if (instance == null) {
+            instance = new UserDaoImpl();
+        }
+        return instance;
+    }
 
     @Override
     public List<User> findAll() throws DaoException {
@@ -173,7 +184,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public int create(User user) throws DaoException {
+    public User create(User user) throws DaoException { // TODO: 29.01.2022  
         try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
              PreparedStatement statement = connection.prepareStatement(SQL_INSERT_NEW_USER, Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(FIRST_PARAM_INDEX, user.getLogin());
@@ -185,12 +196,14 @@ public class UserDaoImpl implements UserDao {
             statement.setInt(SEVENTH_PARAM_INDEX, user.getStatus().ordinal() + 1);
             statement.executeUpdate();
             try (ResultSet resultSet = statement.getGeneratedKeys()) {
-                int userId = 0;
+//                int userId = 0;
+                User createdUser = null;
                 if (resultSet.next()) {
-                    userId = resultSet.getInt(FIRST_PARAM_INDEX);
-                    logger.info("create(User user) method was completed successfully. User with the id={} was created", userId);
+                    createdUser = mapper.mapRow(resultSet).get();
+//                    userId = resultSet.getInt(FIRST_PARAM_INDEX);
+                    logger.info("create(User user) method was completed successfully. User {} was created", createdUser);
                 }
-                return userId;
+                return createdUser;
             }
         } catch (SQLException e) {
             logger.error("SQL exception happened in create(User user) method: ", e);

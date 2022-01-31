@@ -3,33 +3,22 @@ package com.rutkouski.puzzleshop.model.entity;
 import java.math.BigDecimal;
 
 public class Customer extends User {
-    private BigDecimal balance;
-    private CustomerDiscount customerDiscount;
+    private int discount;
 
     public Customer() {
     }
 
-    public Customer(String login, String password, String email, Role role,
-                    BigDecimal balance, CustomerDiscount customerDiscount) {
+    public Customer(String login, String password, String email, Role role) {
         super(login, password, email, role);
-        this.balance = balance;
-        this.customerDiscount = customerDiscount;
+        this.discount = 0;
     }
 
-    public BigDecimal getBalance() {
-        return balance;
+    public int getDiscount() {
+        return discount;
     }
 
-    public void setBalance(BigDecimal balance) {
-        this.balance = balance;
-    }
-
-    public CustomerDiscount getCustomerDiscount() {
-        return customerDiscount;
-    }
-
-    public void setCustomerDiscount(CustomerDiscount customerDiscount) {
-        this.customerDiscount = customerDiscount;
+    public void setDiscount(int discount) {
+        this.discount = discount;
     }
 
     @Override
@@ -40,23 +29,20 @@ public class Customer extends User {
 
         Customer customer = (Customer) o;
 
-        if (balance != null ? !balance.equals(customer.balance) : customer.balance != null) return false;
-        return customerDiscount != null ? customerDiscount.equals(customer.customerDiscount) : customer.customerDiscount == null;
+        return discount == customer.discount;
     }
 
     @Override
     public int hashCode() {
         int result = super.hashCode();
-        result = 31 * result + (balance != null ? balance.hashCode() : 0);
-        result = 31 * result + (customerDiscount != null ? customerDiscount.hashCode() : 0);
+        result = 31 * result + discount;
         return result;
     }
 
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Customer{");
-        sb.append("balance=").append(balance);
-        sb.append(", customerDiscount=").append(customerDiscount);
+        sb.append("discount=").append(discount);
         sb.append('}');
         return sb.toString();
     }

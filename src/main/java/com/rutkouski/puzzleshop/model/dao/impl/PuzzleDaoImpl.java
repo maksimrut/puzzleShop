@@ -26,17 +26,37 @@ public class PuzzleDaoImpl implements PuzzleDao {
     private static final String SQL_INSERT_NEW_PUZZLE = """
             INSERT INTO puzzles (name, price, difficulty_level, description, image)
             VALUES(?, ?, ?, ?, ?)""";
+    private static final String SQL_FIND_ALL_BY_DIFFICULTY_LEVEL = """
+            SELECT id, name, price, difficulty_level, description, image 
+            FROM puzzles
+            WHERE difficulty_level=?""";
+    private static final String SQL_UPDATE_PUZZLE = """
+            UPDATE puzzles
+            SET name=?, price=?, difficulty_level=?, description=?, image=?
+            WHERE id=?""";
+    private static final String SQL_CREATE_PUZZLE = """
+            INSERT INTO puzzles (name, price, difficulty_level, description, image)
+            VALUES ()""";
 
+    private static PuzzleDaoImpl instance;
+    private final RowMapper<Puzzle> mapper = new PuzzleMapper();
 
+    private PuzzleDaoImpl() {
+    }
 
-    private RowMapper<Puzzle> mapper = new PuzzleMapper();
+    public static PuzzleDaoImpl getInstance() {
+        if (instance == null) {
+            instance = new PuzzleDaoImpl();
+        }
+        return instance;
+    }
 
     @Override
     public List<Puzzle> findAll() throws DaoException {
         List<Puzzle> puzzles;
-        try(Connection connection = CustomConnectionPool.getInstance().takeConnection();
-        PreparedStatement statement = connection.prepareStatement(SQL_FIND_ALL);
-        ResultSet resultSet = statement.executeQuery()) {
+        try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
+             PreparedStatement statement = connection.prepareStatement(SQL_FIND_ALL);
+             ResultSet resultSet = statement.executeQuery()) {
             puzzles = mapper.mapRows(resultSet);
             logger.debug("findAll method was completed successfully. {} puzzles were found", puzzles.size());
         } catch (SQLException e) {
@@ -52,7 +72,7 @@ public class PuzzleDaoImpl implements PuzzleDao {
         try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
              PreparedStatement statement = connection.prepareStatement(SQL_FIND_BY_ID)) {
             statement.setInt(FIRST_PARAM_INDEX, id);
-            try(ResultSet resultSet = statement.executeQuery()) {
+            try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
                     optionalPuzzle = mapper.mapRow(resultSet);
                 }
@@ -69,7 +89,7 @@ public class PuzzleDaoImpl implements PuzzleDao {
     @Override
     public boolean deleteById(Integer id) throws DaoException {
         try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
-            PreparedStatement statement = connection.prepareStatement(SQL_DELETE_BY_ID)) {
+             PreparedStatement statement = connection.prepareStatement(SQL_DELETE_BY_ID)) {
             statement.setInt(FIRST_PARAM_INDEX, id);
             boolean result = statement.executeUpdate() == 1;
             logger.debug("deleteById method was completed successfully. Result: {}", result);
@@ -82,8 +102,8 @@ public class PuzzleDaoImpl implements PuzzleDao {
 
     @Override
     public boolean delete(Puzzle puzzle) throws DaoException {
-        try(Connection connection = CustomConnectionPool.getInstance().takeConnection();
-            PreparedStatement statement = connection.prepareStatement(SQL_DELETE_BY_ID)) {
+        try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
+             PreparedStatement statement = connection.prepareStatement(SQL_DELETE_BY_ID)) {
             statement.setInt(FIRST_PARAM_INDEX, puzzle.getId());
             boolean result = statement.executeUpdate() == 1;
             logger.debug("delete(Puzzle puzzle) method was completed successfully. Result: {}", result);
@@ -95,22 +115,22 @@ public class PuzzleDaoImpl implements PuzzleDao {
     }
 
     @Override
-    public int create(Puzzle puzzle) throws DaoException {
-        try(Connection connection = CustomConnectionPool.getInstance().takeConnection();
-            PreparedStatement statement = connection.prepareStatement(SQL_INSERT_NEW_PUZZLE, Statement.RETURN_GENERATED_KEYS)) {
+    public Puzzle create(Puzzle puzzle) throws DaoException {
+        try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
+             PreparedStatement statement = connection.prepareStatement(SQL_INSERT_NEW_PUZZLE, Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(FIRST_PARAM_INDEX, puzzle.getName());
             statement.setBigDecimal(SECOND_PARAM_INDEX, puzzle.getPrice());
             statement.setInt(THIRD_PARAM_INDEX, puzzle.getDifficultyLevel());
             statement.setString(FOURTH_PARAM_INDEX, puzzle.getDescription());
             statement.setString(FIFTH_PARAM_INDEX, puzzle.getPicturePath());
             statement.executeUpdate();
-            try(ResultSet resultSet = statement.getGeneratedKeys()) {
-                int puzzleId = 0;
+            try (ResultSet resultSet = statement.getGeneratedKeys()) {
                 if (resultSet.next()) {
-                    puzzleId = resultSet.getInt(FIRST_PARAM_INDEX);
-                    logger.info("create(Puzzle puzzle) method was completed successfully. Puzzle with the id={} was created", puzzleId);
+                    int puzzleId = resultSet.getInt(FIRST_PARAM_INDEX);
+                    puzzle.setId(puzzleId);
+                    logger.info("create(Puzzle puzzle) method was completed successfully. Puzzle id={} was created", puzzleId);
                 }
-                return puzzleId;
+                return puzzle;
             }
         } catch (SQLException e) {
             logger.error("SQL exception happened in create(Puzzle puzzle) method: ", e);
@@ -119,12 +139,38 @@ public class PuzzleDaoImpl implements PuzzleDao {
     }
 
     @Override
-    public List<Puzzle> findAllByDifficultyLevel(int difficultyLevel) {
-        return null;
+    public List<Puzzle> findAllByDifficultyLevel(int difficultyLevel) throws DaoException {
+        List<Puzzle> puzzles;
+        try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
+             PreparedStatement statement = connection.prepareStatement(SQL_FIND_ALL_BY_DIFFICULTY_LEVEL)) {
+            statement.setInt(FIRST_PARAM_INDEX, difficultyLevel);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                puzzles = mapper.mapRows(resultSet);
+                logger.debug("findAll method was completed successfully. {} puzzles were found", puzzles.size());
+                return puzzles;
+            }
+        } catch (SQLException e) {
+            logger.error("SQL exception happened in findAllByDifficultyLevel method: ", e);
+            throw new DaoException("SQL exception happened in findAllByDifficultyLevel method", e);
+        }
     }
 
     @Override
-    public List<Puzzle> findAllByRatingNotLessThan(int rating) {
-        return null;
+    public boolean updatePuzzle(Puzzle puzzle) throws DaoException {
+        try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
+             PreparedStatement statement = connection.prepareStatement(SQL_UPDATE_PUZZLE)) {
+            statement.setString(FIRST_PARAM_INDEX, puzzle.getName());
+            statement.setBigDecimal(SECOND_PARAM_INDEX, puzzle.getPrice());
+            statement.setInt(THIRD_PARAM_INDEX, puzzle.getDifficultyLevel());
+            statement.setString(FOURTH_PARAM_INDEX, puzzle.getDescription());
+            statement.setString(FIFTH_PARAM_INDEX, puzzle.getPicturePath());
+            statement.setInt(SIXTH_PARAM_INDEX, puzzle.getId());
+            boolean result = statement.executeUpdate() == 1;
+            logger.debug("The result of puzzle id={} updating is: {}", puzzle.getId(), result);
+            return result;
+        } catch (SQLException e) {
+            logger.error("SQL exception happened in updatePuzzle method: ", e);
+            throw new DaoException("SQL exception happened in updatePuzzle method", e);
+        }
     }
 }

@@ -31,6 +31,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <script type="text/javascript">
+        window.history.forward();
+        function noBack() {
+            window.history.forward();
+        }
+    </script>
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
           integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 
@@ -38,7 +45,7 @@
     <link rel="stylesheet" href="${abs}/css/registration.css">
     <title>${registration_title}</title>
 </head>
-<body>
+<body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
 <br/>
 <br/>
 <h1>${registration_title}</h1>
@@ -55,12 +62,12 @@
         </c:choose>
         <br/>
         <label for="password">${psw}</label><br/>
-        <input type="text" required id="password" class="form-control" name="password" placeholder="${invalid_psw_message}"
+        <input type="password" required id="password" class="form-control" name="password" placeholder="${invalid_psw_message}"
                pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\S+$).{8,50}$">
         <c:if test="${invalid_password eq 'invalid_message'}"><div><b>${invalid_psw_message}</b></div></c:if>
         <br/>
         <label for="confirm-password">${confirm_psw}</label><br/>
-        <input type="text" required id="confirm-password" class="form-control" name="confirm_password" placeholder="${confirm_psw}"
+        <input type="password" required id="confirm-password" class="form-control" name="confirm_password" placeholder="${confirm_psw}"
                pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\S+$).{8,50}$">
         <c:if test="${invalid_password eq 'password_mismatch'}"><div><b>${psw_mismatch_message}</b></div></c:if>
         <br/>

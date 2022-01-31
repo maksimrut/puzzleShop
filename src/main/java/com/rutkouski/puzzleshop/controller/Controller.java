@@ -39,7 +39,7 @@ public class Controller extends HttpServlet {
             router = command.execute(request);
             switch (router.getRoute()) {
                 case FORWARD -> request.getRequestDispatcher(router.getPagePath()).forward(request, response);
-                case REDIRECT -> response.sendRedirect(request.getContextPath() + router.getPagePath());
+                case REDIRECT -> response.sendRedirect(request.getContextPath() + router.getPagePath());// TODO: 28.01.2022
             }
         } catch (CommandException e) {
             logger.error("Internal error occurred", e);

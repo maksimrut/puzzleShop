@@ -20,20 +20,20 @@ import static com.rutkouski.puzzleshop.model.pool.ConnectionFactory.POOL_SIZE;
 public class CustomConnectionPool {
     static Logger logger = LogManager.getLogger();
 
-    private static final int ONE = 1;
+    private static final int LATCH_VALUE_ONE = 1;
     private static final long THREADS_FINISH_DELAY = 100;
     private static final int DELAY_BEFORE_CONNECTION_NUMBER_CHECK = 1;
     private static final int PERIOD_BETWEEN_CONNECTION_NUMBER_CHECK = 1;
 
     private static CustomConnectionPool instance;
-    private static ReentrantLock poolLock = new ReentrantLock();
-    private static AtomicBoolean create = new AtomicBoolean(false);
-    private BlockingQueue<ProxyConnection> freeConnections;
-    private BlockingQueue<ProxyConnection> givenAwayConnections;
+    private static final ReentrantLock poolLock = new ReentrantLock();
+    private static final AtomicBoolean create = new AtomicBoolean(false);
+    private final BlockingQueue<ProxyConnection> freeConnections;
+    private final BlockingQueue<ProxyConnection> givenAwayConnections;
 
     private Timer poolCheck;
     private CountDownLatch connectionsCheckLatch;
-    private AtomicBoolean connectionsNumberCheck = new AtomicBoolean(false);
+    private final AtomicBoolean connectionsNumberCheck = new AtomicBoolean(false);
 
     private CustomConnectionPool() {
         freeConnections = new LinkedBlockingDeque<>(POOL_SIZE);
@@ -140,32 +140,31 @@ public class CustomConnectionPool {
     private void checkPoolSizeTimer() {
         poolCheck = new Timer();
         poolCheck.schedule(new TimerTask() {
-
-                               @Override
-                               public void run() {
-                                   int connectionsNumber = calculateConnectionsNumber();
-                                   if (connectionsNumber < POOL_SIZE) {
-                                       int requiredConnections = POOL_SIZE - connectionsNumber;
-                                       for (int i = 0; i < requiredConnections; i++) {
-                                           try {
-                                               Connection connection = ConnectionFactory.createConnection();
-                                               boolean isAdded = freeConnections.offer((ProxyConnection) connection);
-                                               logger.info("New connection has added to freeConnections: {}", isAdded);
-                                           } catch (SQLException e) {
-                                               logger.error("New connection was not created!", e);
-                                           }
-                                       }
-                                   }
-                               }
-                           }
-                , TimeUnit.HOURS.toMillis(DELAY_BEFORE_CONNECTION_NUMBER_CHECK)
-                , TimeUnit.HOURS.toMillis(PERIOD_BETWEEN_CONNECTION_NUMBER_CHECK));
+            @Override
+            public void run() {
+                int connectionsNumber = calculateConnectionsNumber();
+                if (connectionsNumber < POOL_SIZE) {
+                    int requiredConnections = POOL_SIZE - connectionsNumber;
+                    for (int i = 0; i < requiredConnections; i++) {
+                        try {
+                            Connection connection = ConnectionFactory.createConnection();
+                            boolean isAdded = freeConnections.offer((ProxyConnection) connection);
+                            logger.info("New connection has added to freeConnections: {}", isAdded);
+                        } catch (SQLException e) {
+                            logger.error("New connection was not created!", e);
+                        }
+                    }
+                }
+            }
+        }
+          , TimeUnit.HOURS.toMillis(DELAY_BEFORE_CONNECTION_NUMBER_CHECK)
+          , TimeUnit.HOURS.toMillis(PERIOD_BETWEEN_CONNECTION_NUMBER_CHECK));
     }
 
     private int calculateConnectionsNumber() {
         int currentConnectionsNumber = POOL_SIZE;
         try {
-            connectionsCheckLatch = new CountDownLatch(ONE);
+            connectionsCheckLatch = new CountDownLatch(LATCH_VALUE_ONE);
             connectionsNumberCheck.set(true);
             TimeUnit.MILLISECONDS.sleep(THREADS_FINISH_DELAY);
             currentConnectionsNumber = freeConnections.size() + givenAwayConnections.size();

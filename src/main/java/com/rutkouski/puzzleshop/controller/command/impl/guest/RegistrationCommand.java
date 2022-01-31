@@ -4,8 +4,9 @@ import com.rutkouski.puzzleshop.controller.Router;
 import com.rutkouski.puzzleshop.controller.command.Command;
 import com.rutkouski.puzzleshop.exception.CommandException;
 import com.rutkouski.puzzleshop.exception.ServiceException;
+import com.rutkouski.puzzleshop.model.entity.Customer;
 import com.rutkouski.puzzleshop.model.entity.User;
-import com.rutkouski.puzzleshop.model.service.impl.UserServiceImpl;
+import com.rutkouski.puzzleshop.model.service.impl.CustomerServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
@@ -28,23 +29,25 @@ import static com.rutkouski.puzzleshop.controller.command.ParameterName.*;
 
 public class RegistrationCommand implements Command {
     static Logger logger = LogManager.getLogger();
-    private static final UserServiceImpl userService = UserServiceImpl.getInstance();
+    private final CustomerServiceImpl customerService = CustomerServiceImpl.getInstance();
 
     @Override
     public Router execute(HttpServletRequest request) throws CommandException {
         Router router = new Router();
-//        HttpSession session = request.getSession();
+        HttpSession session = request.getSession();
         Map<String, String> formValues = new HashMap<>();
         formValues.put(LOGIN, request.getParameter(LOGIN));
         formValues.put(PASSWORD, request.getParameter(PASSWORD));
         formValues.put(CONFIRM_PASSWORD, request.getParameter(CONFIRM_PASSWORD));
         formValues.put(EMAIL, request.getParameter(EMAIL));
         try {
-            boolean registrationResult = userService.registerNewUser(formValues);
-
+            Customer customer = customerService.registerNewCustomer(formValues);
+            boolean registrationResult = customer != null;
             if (registrationResult) {
                 router.setPagePath(MAIN_PAGE);
-//                session.
+                router.setRoute(Router.RouteType.REDIRECT);
+                session.setAttribute(SESSION_USER, customer);
+                session.setAttribute(SIGN_IN_RESULT, Boolean.TRUE);
             } else {
                 router.setPagePath(REGISTRATION_PAGE);
                 for (String key : formValues.keySet()) {

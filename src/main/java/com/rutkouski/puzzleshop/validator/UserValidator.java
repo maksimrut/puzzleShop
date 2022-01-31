@@ -1,18 +1,6 @@
 package com.rutkouski.puzzleshop.validator;
 
-import com.rutkouski.puzzleshop.exception.DaoException;
-import com.rutkouski.puzzleshop.model.dao.impl.UserDaoImpl;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import java.util.Map;
-
-import static com.rutkouski.puzzleshop.controller.command.AttributeName.PASSWORD_MISMATCH;
-import static com.rutkouski.puzzleshop.controller.command.ParameterName.*;
-import static com.rutkouski.puzzleshop.controller.command.ParameterName.EMAIL;
-
 public class UserValidator {
-    static Logger logger = LogManager.getLogger();
     private static final String LOGIN_REGEX = "[a-zA-Z]\\w{3,15}";
     private static final String PASSWORD_REGEX = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,50}$";
     private static final String NAME_REGEX = "[A-Za-zА-Яа-я-]{2,40}";

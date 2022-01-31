@@ -6,22 +6,12 @@
 <fmt:setLocale value="${sessionScope.locale}"/>
 <fmt:setBundle basename="/localization/locale"/>
 
-
-<fmt:message key="goods.page.title" var="title"/>
 <fmt:message key="goods.image" var="image"/>
 <fmt:message key="goods.difficulty_level" var="difficulty_level"/>
 <fmt:message key="goods.description" var="description"/>
 <fmt:message key="goods.name" var="name"/>
 <fmt:message key="goods.price" var="price"/>
-<fmt:message key="goods.delete" var="delete"/>
-<fmt:message key="goods.restore" var="restore"/>
-<%--<fmt:message key="goods.deleted" var="deleted"/>--%>
-<fmt:message key="goods.edit" var="edit"/>
-<fmt:message key="goods.addToBasket" var="addToBasket"/>
-<fmt:message key="goods.notAvailable" var="notAvailable"/>
-<fmt:message key="goods.addNew" var="newOne"/>
 <fmt:message key="basket.quantity" var="quantity"/>
-<fmt:message key="basket.pricePerUnit" var="unitPrice"/>
 <fmt:message key="basket.addItem" var="addItem"/>
 <fmt:message key="basket.removeItem" var="removeItem"/>
 <fmt:message key="basket.empty" var="emptyBasket"/>
@@ -37,6 +27,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <script type="text/javascript">
+        window.history.forward();
+        function noBack() {
+            window.history.forward();
+        }
+    </script>
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
           integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 
@@ -44,12 +41,8 @@
     <%--    <link rel="stylesheet" href="${abs}/css/registration.css">--%>
     <title>${title}</title>
 </head>
-<body>
+<body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
 
-
-<%--<br/>--%>
-<%--<br/>--%>
-<%--<h1>${registration_title}</h1>--%>
 <br/>
 <div class="container-fluid" id="container-fluid">
     <c:choose>
@@ -81,7 +74,6 @@
                         <td>${element.difficultyLevel}</td>
                         <td>${element.description}</td>
                         <td>${element.price}</td>
-
                         <td>${sessionScope.basket.get(element.id)}</td>
                         <td>
                             <a href="${abs}/controller?command=recount_order_while_adding_item&puzzle_id=${element.id}">&#10010;</a>
@@ -89,42 +81,32 @@
                         <td>
                             <a href="${abs}/controller?command=recount_order_while_removing_item&puzzle_id=${element.id}">&#8212;</a>
                         </td>
-
                     </tr>
                 </c:forEach>
                 </tbody>
             </table>
         </c:otherwise>
     </c:choose>
-
     <hr/><br/>
 
     <c:if test="${sessionScope.basket != null && !empty sessionScope.basket}">
         <p align="center">${totalCost}: ${requestScope.total_cost} &euro;</p>
         <div class="container">
             <div class="row" style="justify-content: center">
-                    <%--                    <a class="btn btn-primary" style="justify-content: center"--%>
-                    <%--                       href="${pageContext.request.contextPath}/controller?command=create_order"--%>
-                    <%--                       role="button">${makeOrder}</a>--%>
-
                 <form action="${abs}/controller" method="post">
                     <input type="hidden" name="command" value="create_order">
-                    <input type="hidden" name="orderCost" value="${requestScope.total_cost}">
-
+                    <input type="hidden" name="order_cost" value="${requestScope.total_cost}">
                     <div class="form-group col-md-2">
-                        <button type="submit" class="btn btn-light"
-                                style="background-color: burlywood; border-color: black">
-                                ${makeOrder}</button>
+                        <button type="submit" class="btn btn-light" style="background-color: burlywood;
+                         border-color: black">${makeOrder}</button>
                     </div>
                 </form>
             </div>
         </div>
     </c:if>
-
     <br/><br/>
 
 </div>
-
 
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"

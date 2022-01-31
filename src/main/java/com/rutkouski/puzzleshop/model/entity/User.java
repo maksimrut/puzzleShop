@@ -10,7 +10,7 @@ public class User extends AbstractEntity {
     private String phoneNumber;
 
     public enum Role {
-        ADMIN, CUSTOMER, MANAGER, GUEST
+        ADMIN, CUSTOMER, GUEST
     }
 
     public enum Status {

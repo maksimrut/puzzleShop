@@ -21,6 +21,8 @@
 <fmt:message key="header.difficult" var="difficult"/>
 <fmt:message key="header.extreme" var="extreme"/>
 <fmt:message key="header.puzzles" var="puzzles"/>
+<fmt:message key="header.discount" var="discount"/>
+<fmt:message key="admin_header.user_management" var="user_management"/>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -43,29 +45,40 @@
                     ${puzzles}
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">${middle}</a>
-                    <a class="dropdown-item" href="#">${difficult}</a>
+                    <a class="dropdown-item" href="${abs}/controller?command=show_puzzles_by_difficulty_level&puzzle_difficulty=1">${middle}</a>
+                    <a class="dropdown-item" href="${abs}/controller?command=show_puzzles_by_difficulty_level&puzzle_difficulty=2">${difficult}</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">${extreme}</a>
+                    <a class="dropdown-item" href="${abs}/controller?command=show_puzzles_by_difficulty_level&puzzle_difficulty=3">${extreme}</a>
                 </div>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="${abs}/controller?command=go_to_about_us">${about}</a>
             </li>
+            <c:if test="${user.role eq 'ADMIN'}">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="${abs}/controller?command=user_management">${user_management}</a>
+                </li>
+            </c:if>
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
+            <li><a class="nav-link" href="#">${user.login}</a><li>
             <c:choose>
                 <%--                <c:when test="${user.role eq 'ADMIN'}"><%@include file="fragment/admin_header.jspf" %></c:when>--%>
                 <%--                <c:when test="${user.role eq 'MANAGER'}"><%@include file="fragment/manager_header.jspf" %></c:when>--%>
                 <c:when test="${user.role eq 'CUSTOMER'}">
+                
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page"
                            href="${abs}/controller?command=show_basket"><i style="font-size:24px" class="fa">&#xf291;</i></a>
                     </li>
+                    <li><a class="nav-link" href="#">${discount} = ${sessionScope.user_discount}%</a><li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="${abs}/jsps/customer/customer_profile.jsp">${profile}</a>
+                    </li>
+
                 </c:when>
             </c:choose>
-            <li><a class="nav-link" href="#">${user.login}</a><li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     RU/EN
@@ -78,7 +91,7 @@
             </li>
 
             <c:choose>
-                <c:when test="${user.role eq 'ADMIN' or user.role eq 'MANAGER' or user.role eq 'CUSTOMER'}">
+                <c:when test="${user.role eq 'ADMIN' or user.role eq 'CUSTOMER'}">
                     <li><a class="nav-link" href="${abs}/controller?command=log_out"><span class="glyphicon glyphicon-log-out"></span> ${logOut}</a></li>
                 </c:when>
                 <c:otherwise>
@@ -88,10 +101,11 @@
                         <div class="modal-dialog modal-sm">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                                     <h4 class="modal-title">${authorization}</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 </div>
                                 <div class="modal-body">
+                                    <br/>
                                     <form action="${abs}/controller" method="post" id="log-form" class="form-group">
                                         <input type="hidden" name="command" value="sign_in"/>
                                         <label for="user_name"><span class="glyphicon glyphicon-user"></span> ${login}</label>

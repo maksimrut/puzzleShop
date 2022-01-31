@@ -13,8 +13,6 @@
 <fmt:message key="goods.name" var="name"/>
 <fmt:message key="goods.price" var="price"/>
 <fmt:message key="goods.delete" var="delete"/>
-<fmt:message key="goods.restore" var="restore"/>
-<%--<fmt:message key="goods.deleted" var="deleted"/>--%>
 <fmt:message key="goods.edit" var="edit"/>
 <fmt:message key="goods.addToBasket" var="addToBasket"/>
 <fmt:message key="goods.notAvailable" var="notAvailable"/>
@@ -28,6 +26,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <script type="text/javascript">
+        window.history.forward();
+        function noBack() {
+            window.history.forward();
+        }
+    </script>
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
           integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 
@@ -35,15 +40,16 @@
 <%--    <link rel="stylesheet" href="${abs}/css/registration.css">--%>
     <title>${title}</title>
 </head>
-<body>
-
-
-
-<%--<br/>--%>
-<%--<br/>--%>
-<%--<h1>${registration_title}</h1>--%>
+<body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
 <br/>
 <div class="container-fluid" id="container-fluid">
+
+    <c:if test="${user.role=='ADMIN'}">
+        <h4 align="center">
+            <a href="${abs}/controller?command=go_to_add_puzzle"
+               style="color: burlywood">${newOne}</a>
+        </h4>
+    </c:if>
 
     <table class="table table-striped" style="height: inherit">
         <thead>
@@ -53,9 +59,9 @@
             <th scope="col">${difficulty_level}</th>
             <th scope="col">${description}</th>
             <th scope="col">${price}</th>
-            <c:if test="${sessionScope.userRole=='ADMIN'}">
-                <th scope="col">${delete} / ${restore}</th>
+            <c:if test="${user.role=='ADMIN'}">
                 <th scope="col">${edit}</th>
+                <th scope="col">${delete}</th>
             </c:if>
             <c:if test="${user.role=='CUSTOMER'}">
                 <th scope="col">${addToBasket}</th>
@@ -77,71 +83,26 @@
 
                 <c:if test="${user.role=='ADMIN'}">
                     <td>
-                        <a href="${abs}/controller?command=delete_jewelry&puzzle_id=${element.id}&page=${requestScope.page}"
-                           style="color: crimson">${delete}</a>
+                        <a href="${abs}/controller?command=go_to_edit_puzzle&puzzle_id=${element.id}&page=${requestScope.page}">&#9998;</a>
                     </td>
                     <td>
-                        <a href="${abs}/controller?command=go_to_edit_jewelry&puzzle_id=${element.id}&page=${requestScope.page}">&#9998;</a>
+                        <a href="${abs}/controller?command=delete_puzzle&puzzle_id=${element.id}&page=${requestScope.page}"
+                           style="color: crimson">${delete}</a>
                     </td>
                 </c:if>
 
                 <c:if test="${user.role=='CUSTOMER'}">
                     <td>
                         <a href="${abs}/controller?command=add_item_to_basket&puzzle_id=${element.id}">&#10010;</a>
-<%--                              &page=${requestScope.page}">  --%>
                     </td>
                 </c:if>
             </tr>
         </c:forEach>
         </tbody>
     </table>
-
-<%--    <div class="container">--%>
-<%--        <div class="row" style="justify-content: center">--%>
-<%--            <nav aria-label="Page navigation">--%>
-<%--                <ul class="pagination">--%>
-<%--                    <li class="page-item">--%>
-<%--                        <c:choose>--%>
-<%--                            <c:when test="${requestScope.page > 1}">--%>
-<%--                                <a class="page-link"--%>
-<%--                                   href="${pageContext.request.contextPath}/controller?command=show_all_jewelry&page=${requestScope.page-1}"--%>
-<%--                                   aria-label="Previous">--%>
-<%--                                    <span aria-hidden="true">&laquo;</span>--%>
-<%--                                </a>--%>
-<%--                            </c:when>--%>
-<%--                            <c:otherwise>--%>
-<%--                                <a class="page-link"--%>
-<%--                                   href="#"--%>
-<%--                                   aria-label="Previous" hidden>--%>
-<%--                                    <span aria-hidden="true">&laquo;</span>--%>
-<%--                                </a>--%>
-<%--                            </c:otherwise>--%>
-<%--                        </c:choose>--%>
-<%--                    </li>--%>
-<%--                    <li class="page-item"><span class="page-link">${requestScope.page}</span></li>--%>
-<%--                    <li class="page-item">--%>
-<%--                        <a class="page-link"--%>
-<%--                           href="${pageContext.request.contextPath}/controller?command=show_all_jewelry&page=${requestScope.page+1}"--%>
-<%--                           aria-label="Next">--%>
-<%--                            <span aria-hidden="true">&raquo;</span>--%>
-<%--                        </a>--%>
-<%--                    </li>--%>
-<%--                </ul>--%>
-<%--            </nav>--%>
-<%--        </div>--%>
-<%--    </div>--%>
-
     <br/>
-    <c:if test="${sessionScope.userRole=='ADMIN'}">
-        <h3 align="center">
-            <a href="#"
-               style="color: darkgreen">${newOne}</a>
-        </h3>
-    </c:if>
-
 
 </div>
-
 
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"

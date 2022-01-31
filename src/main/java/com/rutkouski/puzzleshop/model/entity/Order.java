@@ -1,46 +1,46 @@
 package com.rutkouski.puzzleshop.model.entity;
 
 import java.math.BigDecimal;
-import java.time.OffsetDateTime;
+import java.time.LocalDate;
 
 public class Order extends AbstractEntity {
-    private OffsetDateTime date;
+    private LocalDate date;
     private BigDecimal totalPrice;
     private Status status;
     private int customerId;
 
     public enum Status {
-        IN_PROCESS("В обработке"),
-        APPROVED("Одобрен"),
-        PAID("Оплачен"),
-        CANCELLED("Отменен");
-
-        String value;
-
-        Status(String value) {
-            this.value = value;
-        }
-
-        public String getValue() {
-            return value;
-        }
+        IN_PROCESS, CANCELLED, COMPLETED
+//        IN_PROCESS("В обработке"),
+//        CANCELLED("Отменен"),
+//        COMPLETED("Завершен");
+//
+//        final String value;
+//
+//        Status(String value) {
+//            this.value = value;
+//        }
+//
+//        public String getValue() {
+//            return value;
+//        }
     }
 
     public Order() {
     }
 
-    public Order(OffsetDateTime date, BigDecimal totalPrice, int customerId) {
+    public Order(LocalDate date, BigDecimal totalPrice, int customerId) {
         this.date = date;
         this.totalPrice = totalPrice;
         this.status = Status.IN_PROCESS;
         this.customerId = customerId;
     }
 
-    public OffsetDateTime getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(OffsetDateTime date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

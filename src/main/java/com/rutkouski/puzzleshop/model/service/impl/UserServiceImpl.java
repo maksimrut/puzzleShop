@@ -20,7 +20,7 @@ import static com.rutkouski.puzzleshop.controller.command.ParameterName.*;
 public class UserServiceImpl implements UserService {
     static Logger logger = LogManager.getLogger();
     private static UserServiceImpl instance;
-    private UserDaoImpl userDao = new UserDaoImpl();
+    private final UserDaoImpl userDao = UserDaoImpl.getInstance();
 
     private UserServiceImpl() {
     }
@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean registerNewUser(Map<String, String> formValues) throws ServiceException {
-        boolean result = false;
+        boolean result;
         String login = formValues.get(LOGIN);
         String password = formValues.get(PASSWORD);
         String confirmPassword = formValues.get(CONFIRM_PASSWORD);
@@ -72,8 +72,8 @@ public class UserServiceImpl implements UserService {
             if (result) {
                 User.Role role = User.Role.CUSTOMER;
                 String encryptedPassword = PasswordEncryptor.encrypt(password);
-                User user = new User(login, encryptedPassword, email, role);
-                userDao.create(user);
+                User user = new User(login, encryptedPassword, email, role);// TODO: 25.01.2022  
+                userDao.create(user);// TODO: 25.01.2022
             } else {
                 formValues.remove(CONFIRM_PASSWORD, confirmPassword);
                 formValues.replace(LOGIN, loginCheckResult);

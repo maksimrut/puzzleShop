@@ -24,25 +24,19 @@ public final class ColumnName {
     public static final String IMAGE = "puzzles.image";
     /* customers table */
     public static final String CUSTOMER_ID = "customers.id";
-    public static final String CUSTOMER_BALANCE = "customers.balance";
-    /* discounts table */
-    public static final String DISCOUNT_VALUE = "discounts.value";
-
-
-
-
-    //TODO
-    public static final String REGISTERED = "users.registered";
+    public static final String DISCOUNT_VALUE = "customers.discount";
     /* orders table */
     public static final String ORDER_ID = "orders.id";
-    public static final String ORDER_CREATED = "orders.created";
-    public static final String ORDER_CASH = "orders.cash";
-    public static final String ORDER_USER_ID = "orders.user_id";
-    public static final String DELIVERY_TIME = "orders.delivery_time";
+    public static final String ORDER_DATE = "orders.order_date";
+    public static final String TOTAL_PRICE = "orders.total_price";
+    public static final String ORDER_CUSTOMER_ID = "orders.customer_id";
     /* order_statuses table */
     public static final String ORDER_STATUS = "order_statuses.status";
-    /* orders_have_meals table */
-    public static final String ORDER_QUANTITY = "orders_have_meals.quantity";
+    /* order_statuses table */
+    public static final String ORDER_ITEM_ID = "order_items.id";
+    public static final String ITEM_QUANTITY = "order_items.item_quantity";
+    public static final String ITEM_ID = "order_items.puzzle_id";
+    public static final String ORDER_ITEMS_ORDER_ID = "order_items.order_id";
 
     private ColumnName() {
     }

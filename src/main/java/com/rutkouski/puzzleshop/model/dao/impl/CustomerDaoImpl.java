@@ -20,30 +20,36 @@ public class CustomerDaoImpl implements CustomerDao {
     static Logger logger = LogManager.getLogger();
 
     private static final String SQL_FIND_ALL = """
-            SELECT customers.id, login, password, email, first_name, phone, role, status, balance, discounts.value
+            SELECT customers.id, login, password, email, first_name, phone, role, status, balance, discount
             FROM users
-            JOIN customers ON users.id=customers.id
-            JOIN discounts ON customers.discount_id=discounts_id""";
+            JOIN customers ON users.id=customers.id""";
     private static final String SQL_FIND_BY_ID = """
-            SELECT customers.id, login, password, email, first_name, phone, role, status, balance, discounts.value
+            SELECT customers.id, login, password, email, first_name, phone, role, status, balance, discount
             FROM users
             JOIN customers ON users.id=customers.id
-            JOIN discounts ON customers.discount_id=discounts_id
             WHERE customers.id=?""";
     private static final String SQL_FIND_DISCOUNT_BY_CUSTOMER_ID = """
-            SELECT discounts.value FROM discounts
-            JOIN customers ON customers.discount_id=discounts.id
+            SELECT discount FROM customers
             WHERE customers.id=?""";
     private static final String SQL_UPDATE_CUSTOMER_DISCOUNT =
-            "UPDATE customers SET discount_id=? WHERE customers.id=?";
-    private static final String SQL_UPDATE_CUSTOMER_BALANCE =
-            "UPDATE customers SET balance=? WHERE customers.id=?";
+            "UPDATE customers SET discount=? WHERE customers.id=?";
     private static final String SQL_INSERT_NEW_USER = """
             INSERT INTO users (login, password, email, first_name, phone, role_id, status_id)
 			VALUES (?, ?, ?, ?, ?, ?, ?)""";
     private static final String SQL_INSERT_NEW_CUSTOMER =
             "INSERT INTO customers (customers.id) VALUES (?)";
+    private static CustomerDaoImpl instance;
     private final RowMapper<Customer> mapper = new CustomerMapper();
+
+    private CustomerDaoImpl() {
+    }
+
+    public static CustomerDaoImpl getInstance() {
+        if (instance == null) {
+            instance = new CustomerDaoImpl();
+        }
+        return instance;
+    }
 
     @Override
     public List<Customer> findAll() throws DaoException {
@@ -82,16 +88,16 @@ public class CustomerDaoImpl implements CustomerDao {
 
     @Override
     public boolean deleteById(Integer id) throws DaoException {
-        throw new UnsupportedOperationException("Customer deleting can be realized only by user deleting!");
+        throw new UnsupportedOperationException("Customer deleting can be realized only through user deleting!");
     }
 
     @Override
     public boolean delete(Customer entity) throws DaoException {
-        throw new UnsupportedOperationException("Customer deleting can be realized only by user deleting!");
+        throw new UnsupportedOperationException("Customer deleting can be realized only through user deleting!");
     }
 
     @Override
-    public int create(Customer customer) throws DaoException {
+    public Customer create(Customer customer) throws DaoException {
         try(Connection connection = CustomConnectionPool.getInstance().takeConnection();
                 PreparedStatement userStatement = connection.prepareStatement(SQL_INSERT_NEW_USER, Statement.RETURN_GENERATED_KEYS);
         PreparedStatement customerStatement = connection.prepareStatement(SQL_INSERT_NEW_CUSTOMER)) {
@@ -127,7 +133,7 @@ public class CustomerDaoImpl implements CustomerDao {
             throw new DaoException("SQL exception happened in create method: ", e);
         }
         logger.debug("Customer {} was created successfully", customer);
-        return customer.getId();
+        return customer;
     }
 
     @Override
@@ -161,21 +167,6 @@ public class CustomerDaoImpl implements CustomerDao {
         } catch (SQLException e) {
             logger.error("SQL exception happened in updateCustomerDiscount method: ", e);
             throw new DaoException("SQL exception happened in updateCustomerDiscount method", e);
-        }
-    }
-
-    @Override
-    public boolean updateCustomerBalance(Integer id, BigDecimal balance) throws DaoException {
-        try(Connection connection = CustomConnectionPool.getInstance().takeConnection();
-                PreparedStatement statement = connection.prepareStatement(SQL_UPDATE_CUSTOMER_BALANCE)) {
-            statement.setBigDecimal(FIRST_PARAM_INDEX, balance);
-            statement.setInt(SECOND_PARAM_INDEX, id);
-            boolean result = statement.executeUpdate() == 1;
-            logger.debug("The result of customer id={} balance updating is: {}", id, result);
-            return result;
-        } catch (SQLException e) {
-            logger.error("SQL exception happened in updateCustomerBalance method: ", e);
-            throw new DaoException("SQL exception happened in updateCustomerBalance method", e);
         }
     }
 }

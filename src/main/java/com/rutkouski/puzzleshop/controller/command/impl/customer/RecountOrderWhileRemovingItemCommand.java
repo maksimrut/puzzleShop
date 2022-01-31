@@ -18,7 +18,7 @@ import static com.rutkouski.puzzleshop.controller.command.AttributeName.*;
 import static com.rutkouski.puzzleshop.controller.command.PagePath.BASKET_PAGE;
 import static com.rutkouski.puzzleshop.controller.command.ParameterName.PUZZLE_ID;
 
-public class RecountOrderWhileRemovingItem implements Command {
+public class RecountOrderWhileRemovingItemCommand implements Command {
     static Logger logger = LogManager.getLogger();
     private final PuzzleServiceImpl puzzleService = PuzzleServiceImpl.getInstance();
 
@@ -42,15 +42,15 @@ public class RecountOrderWhileRemovingItem implements Command {
                 Optional<Puzzle> puzzle = puzzleService.findPuzzleById(id);
                 puzzle.ifPresent(basketItems::add);
             }
-
-//            int discount = (Integer) session.getAttribute(USER_DISCOUNT);// TODO: 24.01.2022
-            BigDecimal totalCost = puzzleService.calculatePuzzleSet(basket, 0);// TODO: 24.01.2022
+            int discount = (int) session.getAttribute(USER_DISCOUNT);
+            BigDecimal totalCost = puzzleService.calculatePuzzleSet(basket, discount);
 
             request.setAttribute(TOTAL_COST, totalCost);
             request.setAttribute(BASKET_ITEMS_LIST, basketItems);
             router.setPagePath(BASKET_PAGE);
         } catch (ServiceException e) {
-            e.printStackTrace();// TODO: 23.01.2022
+            logger.error("Error occurred in RecountOrderWhileRemovingItemCommand: ", e);
+            throw new CommandException("Error occurred in RecountOrderWhileRemovingItemCommand: ", e);
         }
         return router;
     }

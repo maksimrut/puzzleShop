@@ -1,11 +1,9 @@
 package com.rutkouski.puzzleshop.model.mapper.impl;
 
 import com.rutkouski.puzzleshop.model.entity.Customer;
-import com.rutkouski.puzzleshop.model.entity.CustomerDiscount;
 import com.rutkouski.puzzleshop.model.entity.User;
 import com.rutkouski.puzzleshop.model.mapper.RowMapper;
 
-import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Optional;
@@ -27,9 +25,7 @@ public class CustomerMapper implements RowMapper<Customer> {
             customer.setPhoneNumber(resultSet.getString(PHONE));
             customer.setRole(User.Role.valueOf(resultSet.getString(USER_ROLE).toUpperCase()));
             customer.setStatus(User.Status.valueOf(resultSet.getString(USER_STATUS).toUpperCase()));
-            customer.setBalance(BigDecimal.valueOf(resultSet.getDouble(CUSTOMER_BALANCE)));
-            CustomerDiscount discount = new CustomerDiscount(resultSet.getInt(DISCOUNT_VALUE));
-            customer.setCustomerDiscount(discount);
+            customer.setDiscount(resultSet.getInt(DISCOUNT_VALUE));
             return Optional.of(customer);
         } catch (SQLException e) {
             return Optional.empty();

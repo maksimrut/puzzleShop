@@ -5,6 +5,7 @@ import com.rutkouski.puzzleshop.controller.command.Command;
 import com.rutkouski.puzzleshop.exception.CommandException;
 import com.rutkouski.puzzleshop.exception.ServiceException;
 import com.rutkouski.puzzleshop.model.entity.User;
+import com.rutkouski.puzzleshop.model.service.impl.CustomerServiceImpl;
 import com.rutkouski.puzzleshop.model.service.impl.UserServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -13,15 +14,15 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.Optional;
 
-import static com.rutkouski.puzzleshop.controller.command.AttributeName.SESSION_USER;
-import static com.rutkouski.puzzleshop.controller.command.AttributeName.SIGN_IN_RESULT;
+import static com.rutkouski.puzzleshop.controller.command.AttributeName.*;
 import static com.rutkouski.puzzleshop.controller.command.PagePath.MAIN_PAGE;
 import static com.rutkouski.puzzleshop.controller.command.ParameterName.LOGIN;
 import static com.rutkouski.puzzleshop.controller.command.ParameterName.PASSWORD;
 
 public class SignInCommand implements Command {
     static Logger logger = LogManager.getLogger();
-    private static final UserServiceImpl userService = UserServiceImpl.getInstance();
+    private final UserServiceImpl userService = UserServiceImpl.getInstance();
+    private final CustomerServiceImpl customerService = CustomerServiceImpl.getInstance();
 
     @Override
     public Router execute(HttpServletRequest request) throws CommandException {
@@ -37,6 +38,10 @@ public class SignInCommand implements Command {
                 if (user.getStatus() == User.Status.ACTIVE) {
                     session.setAttribute(SESSION_USER, user);
                     session.setAttribute(SIGN_IN_RESULT, Boolean.TRUE);
+                    if (user.getRole().equals(User.Role.CUSTOMER)) {
+                        int discount = customerService.findCustomerDiscountById(user.getId());
+                        session.setAttribute(USER_DISCOUNT, discount);
+                    }
                 }
             } else {
                 session.setAttribute(SIGN_IN_RESULT, Boolean.FALSE);

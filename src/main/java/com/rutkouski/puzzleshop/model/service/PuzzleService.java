@@ -15,6 +15,7 @@ public interface PuzzleService {
     boolean deletePuzzleById(Integer id) throws ServiceException;
     boolean deletePuzzle(Puzzle puzzle) throws ServiceException;
     BigDecimal calculatePuzzleSet(Map<Integer, Integer> items, int customerDiscount) throws ServiceException;
-
-
+    List<Puzzle> findPuzzlesByDifficultyLevel(int difficultyLevel) throws ServiceException;
+    boolean updatePuzzle(Map<String, String> formValues) throws ServiceException;
+    boolean createPuzzle(Map<String, String> formValues) throws ServiceException;
 }

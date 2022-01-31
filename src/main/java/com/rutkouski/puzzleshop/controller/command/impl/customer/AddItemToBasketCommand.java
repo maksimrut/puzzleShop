@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.rutkouski.puzzleshop.controller.command.AttributeName.BASKET;
+import static com.rutkouski.puzzleshop.controller.command.PagePath.SHOW_ALL_GOODS_PAGE;
 import static com.rutkouski.puzzleshop.controller.command.ParameterName.PUZZLE_ID;
 
 public class AddItemToBasketCommand implements Command {
@@ -34,7 +35,8 @@ public class AddItemToBasketCommand implements Command {
         Integer currentItemQuantity = basket.get(puzzleId);
         basket.put(puzzleId, ++currentItemQuantity);
 
-        router.setPagePath("controller?command=show_all_goods");// TODO: 22.01.2022 to pages constant
+        router.setPagePath(SHOW_ALL_GOODS_PAGE);
+        logger.debug("AddItemToBasketCommand was completed successfully");
         return router;
     }
 }

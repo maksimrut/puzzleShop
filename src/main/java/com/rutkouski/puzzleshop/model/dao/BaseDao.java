@@ -66,5 +66,5 @@ public interface BaseDao<K, T extends AbstractEntity> {
      * @return the int
      * @throws DaoException the dao exception
      */
-    int create(T entity) throws DaoException;
+    T create(T entity) throws DaoException;
 }

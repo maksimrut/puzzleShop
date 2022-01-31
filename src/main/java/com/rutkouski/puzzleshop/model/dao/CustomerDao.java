@@ -9,5 +9,5 @@ public interface CustomerDao extends BaseDao<Integer, Customer> {
 
     int findDiscountByCustomerId(Integer id) throws DaoException;
     boolean updateCustomerDiscount(Integer id, Integer discountId) throws DaoException;
-    boolean updateCustomerBalance(Integer id, BigDecimal balance) throws DaoException;
+
 }
