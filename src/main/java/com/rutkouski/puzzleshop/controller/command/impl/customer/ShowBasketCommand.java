@@ -38,7 +38,9 @@ public class ShowBasketCommand implements Command {
                 Optional<Puzzle> puzzle = puzzleService.findPuzzleById(id);
                 puzzle.ifPresent(basketItems::add);
             }
-            int discount = (int) session.getAttribute(USER_DISCOUNT);
+            String stringDiscount = (String) session.getAttribute(USER_DISCOUNT);
+            int discount = stringDiscount == null ? 0 : Integer.parseInt(stringDiscount);
+//            int discount = (int) session.getAttribute(USER_DISCOUNT);
             BigDecimal totalCost = puzzleService.calculatePuzzleSet(basket, discount);
 
             request.setAttribute(TOTAL_COST, totalCost);
@@ -46,7 +48,7 @@ public class ShowBasketCommand implements Command {
             router.setPagePath(BASKET_PAGE);
         } catch (ServiceException e) {
             logger.error("Error occurred in ShowBasketCommand: ", e);
-            throw new CommandException("Error occurred in ShowBasketCommand: ", e);
+            throw new CommandException("Error occurred in ShowBasketCommand: " + e);
         }
         return router;
     }

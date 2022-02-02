@@ -10,16 +10,15 @@
 <fmt:message key="profile.name" var="name"/>
 <fmt:message key="profile.login" var="login"/>
 <fmt:message key="profile.email" var="email"/>
-<fmt:message key="allUsers.role" var="role"/>
+<fmt:message key="user.role" var="role"/>
+<fmt:message key="user.phone_number" var="phone_number"/>
 <fmt:message key="profile.discount" var="discount"/>
-<fmt:message key="admin.goToLink" var="goTo"/>
 <fmt:message key="profile.update_profile" var="updateProfile"/>
 <fmt:message key="profile.update_password" var="updatePassword"/>
-<fmt:message key="client.profile.showOrders" var="showOrders"/>
 
 <!DOCTYPE html>
 <html lang="en">
-<%@include file="../fragment/header.jsp" %>
+<%@include file="fragment/header.jsp" %>
 
 <head>
     <meta charset="utf-8">
@@ -27,6 +26,7 @@
 
     <script type="text/javascript">
         window.history.forward();
+
         function noBack() {
             window.history.forward();
         }
@@ -38,7 +38,7 @@
     <title>${title}</title>
 </head>
 <body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
-
+<br/>
 
 <div class="container" style="height: 80vh; color: black; font-size: 18px">
     <div class="row">
@@ -55,32 +55,30 @@
             <dt class="col-sm-3">${email}</dt>
             <dd class="col-sm-9">${user.email}</dd>
 
-            <dt class="col-sm-3">${discount}</dt>
-            <dd class="col-sm-9">${sessionScope.user_discount}%</dd>
+            <dt class="col-sm-3">${phone_number}</dt>
+            <dd class="col-sm-9">${user.phoneNumber}</dd>
 
+            <c:choose>
+                <c:when test="${user.role eq 'CUSTOMER'}">
+                    <dt class="col-sm-3">${discount}</dt>
+                    <dd class="col-sm-9">${sessionScope.user_discount}%</dd>
+                </c:when>
+            </c:choose>
 
             <dt class="col-sm-3"></dt>
             <dd class="col-sm-9">
                 <dl class="row">
-                    <dt class="col-sm-4">&#9679;   <a href="${abs}/controller?command=go_to_update_profile"
-                                                      style="color: midnightblue; font-size: 18px">${updateProfile}</a></dt>
+                    <dt class="col-sm-4">&#9679; <a href="${abs}/controller?command=go_to_update_profile"
+                                                    style="color: midnightblue; font-size: 18px">${updateProfile}</a>
+                    </dt>
                 </dl>
                 <dl class="row">
-                    <dt class="col-sm-4">&#9679;   <a href="${abs}/jsp/update-password.jsp"
-                                                      style="color: midnightblue; font-size: 18px">${updatePassword}</a></dt>
+                    <dt class="col-sm-4">&#9679; <a href="${abs}/controller?command=go_to_update_password"
+                                                    style="color: midnightblue; font-size: 18px">${updatePassword}</a>
+                    </dt>
                 </dl>
             </dd>
 
-            <dt class="col-sm-3">---------------------</dt>
-            <dd class="col-sm-9"><dl class="row"><dt class="col-sm-4">------------------------</dt></dl></dd>
-
-            <dt class="col-sm-3">${goTo}</dt>
-            <dd class="col-sm-9">
-                <dl class="row">
-                    <dt class="col-sm-4">&#9679;   <a href="${abs}/controller?command=show_orders_for_customer"
-                                                      style="color: midnightblue; font-size: 18px">${showOrders}</a></dt>
-                </dl>
-            </dd>
         </dl>
     </div>
 </div>
@@ -96,5 +94,5 @@
         crossorigin="anonymous"></script>
 </body>
 
-<%@include file="../fragment/footer.jsp" %>
+<%@include file="fragment/footer.jsp" %>
 </html>

@@ -13,15 +13,13 @@
 <fmt:message key="registration.password" var="psw"/>
 <fmt:message key="registration.confirm_password" var="confirm_psw"/>
 <fmt:message key="registration.email" var="email"/>
-<%--<fmt:message key="registration.phone_number" var="phone_number"/>--%>
 <fmt:message key="registration.invalid_login" var="invalid_login_message"/>
 <fmt:message key="registration.invalid_password" var="invalid_psw_message"/>
 <fmt:message key="registration.invalid_email" var="invalid_email_message"/>
-<%--<fmt:message key="registration.invalid_phone_number" var="invalid_phone_number"/>--%>
 <fmt:message key="registration.not_unique_login" var="not_unique_login_message"/>
 <fmt:message key="registration.password_mismatch" var="psw_mismatch_message"/>
 <fmt:message key="registration.not_unique_email" var="not_unique_email_message"/>
-<%--<fmt:message key="registration.not_unique_mobile_number" var="not_unique_mobile_number_message"/>--%>
+<fmt:message key="registration.sign_up_admin" var="sign_up_admin"/>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -33,6 +31,7 @@
 
     <script type="text/javascript">
         window.history.forward();
+
         function noBack() {
             window.history.forward();
         }
@@ -50,37 +49,53 @@
 <h1>${registration_title}</h1>
 <br/>
 <div class="container-fluid" id="container-fluid">
+
     <form action="${abs}/controller" method="post">
         <input type="hidden" name="command" value="registration">
         <label for="login">${login}</label><br/>
         <input type="text" required id="login" class="form-control" name="login" value="${valid_login}"
                placeholder="${login_requirement}" pattern="[a-zA-Z]\w{3,15}">
         <c:choose>
-            <c:when test="${invalid_login eq 'invalid_message'}"><div><b>${invalid_login_message}</b></div></c:when>
-            <c:when test="${invalid_login eq 'not_unique_message'}"><div><b>${not_unique_login_message}</b></div></c:when>
+            <c:when test="${invalid_login eq 'invalid_message'}">
+                <div><b>${invalid_login_message}</b></div>
+            </c:when>
+            <c:when test="${invalid_login eq 'not_unique_message'}">
+                <div><b>${not_unique_login_message}</b></div>
+            </c:when>
         </c:choose>
         <br/>
         <label for="password">${psw}</label><br/>
-        <input type="password" required id="password" class="form-control" name="password" placeholder="${invalid_psw_message}"
-               pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\S+$).{8,50}$">
-        <c:if test="${invalid_password eq 'invalid_message'}"><div><b>${invalid_psw_message}</b></div></c:if>
+        <input type="password" required id="password" class="form-control" name="password"
+               placeholder="${invalid_psw_message}"
+               pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,50}$">
+        <c:if test="${invalid_password eq 'invalid_message'}">
+            <div><b>${invalid_psw_message}</b></div>
+        </c:if>
         <br/>
         <label for="confirm-password">${confirm_psw}</label><br/>
-        <input type="password" required id="confirm-password" class="form-control" name="confirm_password" placeholder="${confirm_psw}"
-               pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\S+$).{8,50}$">
-        <c:if test="${invalid_password eq 'password_mismatch'}"><div><b>${psw_mismatch_message}</b></div></c:if>
+        <input type="password" required id="confirm-password" class="form-control" name="confirm_password"
+               placeholder="${confirm_psw}"
+               pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,50}$">
+        <c:if test="${invalid_password eq 'password_mismatch'}">
+            <div><b>${psw_mismatch_message}</b></div>
+        </c:if>
         <br/>
         <label for="email-address">${email}</label><br/>
         <input type="email" required id="email-address" class="form-control" name="email_address" value="${valid_email}"
                placeholder="${email}">
         <c:choose>
-            <c:when test="${invalid_email eq 'invalid_message'}"><div><b>${invalid_email_message}</b></div></c:when>
-            <c:when test="${invalid_email eq 'not_unique_message'}"><div><b>${not_unique_email_message}</b></div></c:when>
+            <c:when test="${invalid_email eq 'invalid_message'}">
+                <div><b>${invalid_email_message}</b></div>
+            </c:when>
+            <c:when test="${invalid_email eq 'not_unique_message'}">
+                <div><b>${not_unique_email_message}</b></div>
+            </c:when>
         </c:choose>
         <br/><br/>
         <input type="submit" id="sign_up" class="form-control" name="submit" value="${sign_up}"><br/>
     </form>
 </div>
+<br/>
 
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"

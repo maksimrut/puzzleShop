@@ -1,5 +1,8 @@
 # Project exclude paths
 /target/
-*.iml
 /log
-.idea
+.idea/*
+*.iml
+target
+out
+logs

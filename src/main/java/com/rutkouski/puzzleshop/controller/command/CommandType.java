@@ -23,6 +23,11 @@ public enum CommandType {
     GO_TO_ABOUT_US(new GoToAboutUsCommand(), EnumSet.of(ADMIN, CUSTOMER, GUEST)),
     SHOW_PUZZLES_BY_DIFFICULTY_LEVEL(new ShowPuzzlesByDifficultyLevelCommand(), EnumSet.of(ADMIN, CUSTOMER, GUEST)),
     CANCEL_ORDER(new CancelOrderCommand(), EnumSet.of(ADMIN, CUSTOMER)),
+    GO_TO_PROFILE(new GoToProfileCommand(), EnumSet.of(CUSTOMER)),
+    GO_TO_UPDATE_PASSWORD(new GoToUpdatePasswordCommand(), EnumSet.of(ADMIN, CUSTOMER)),
+    GO_TO_UPDATE_PROFILE(new GoToUpdateProfileCommand(), EnumSet.of(ADMIN, CUSTOMER)),
+    UPDATE_USER_PASSWORD(new UpdateUserPasswordCommand(), EnumSet.of(ADMIN, CUSTOMER)),
+    UPDATE_USER_PROFILE(new UpdateUserProfileCommand(), EnumSet.of(ADMIN, CUSTOMER)),
 
     /* guest commands */
     GO_TO_REGISTRATION(new GoToRegistrationCommand(), EnumSet.of(GUEST)),
@@ -37,7 +42,6 @@ public enum CommandType {
     CREATE_ORDER(new CreateOrderCommand(), EnumSet.of(CUSTOMER)),
     SHOW_ORDERS_FOR_CUSTOMER(new ShowOrdersForCustomerCommand(), EnumSet.of(CUSTOMER)),
     OPEN_ORDER_INFO(new OpenOrderInfoCommand(), EnumSet.of(CUSTOMER)),
-    GO_TO_CUSTOMER_PROFILE(new GoToCustomerProfileCommand(), EnumSet.of(CUSTOMER)),
 
     /* admin commands */
     GO_TO_EDIT_PUZZLE(new GoToEditPuzzleCommand(), EnumSet.of(ADMIN)),
@@ -48,6 +52,10 @@ public enum CommandType {
     COMPLETE_ORDER(new CompleteOrderCommand(), EnumSet.of(ADMIN)),
     ADD_PUZZLE(new AddPuzzleCommand(), EnumSet.of(ADMIN)),
     GO_TO_ADD_PUZZLE(new GoToAddPuzzleCommand(), EnumSet.of(ADMIN)),
+    BLOCK_USER(new BlockUserCommand(), EnumSet.of(ADMIN)),
+    UNBLOCK_USER(new UnblockUserCommand(), EnumSet.of(ADMIN)),
+    CHANGE_USER_ROLE(new ChangeUserRoleCommand(), EnumSet.of(ADMIN)),
+    DELETE_USER(new DeleteUserCommand(), EnumSet.of(ADMIN)),
     DELETE_PUZZLE(new DeletePuzzleCommand(), EnumSet.of(ADMIN));
 
     private final Command command;

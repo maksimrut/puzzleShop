@@ -28,7 +28,7 @@ public class ShowAllGoodsCommand implements Command {
             router.setPagePath(GOODS_PAGE);
         } catch (ServiceException e) {
             logger.error("Exception occurred in ShowAllGoodsCommand class", e);
-            throw new CommandException("Exception occurred in ShowAllGoodsCommand class", e);
+            throw new CommandException("Exception occurred in ShowAllGoodsCommand class" + e);
         }
         return router;
     }

@@ -73,7 +73,7 @@ public class RegistrationCommand implements Command {
             return router;
         } catch (ServiceException e) {
             logger.error("User can not be registered: ", e);
-            throw new CommandException("User can not be registered: ", e);
+            throw new CommandException("User can not be registered: " + e);
         }
     }
 }

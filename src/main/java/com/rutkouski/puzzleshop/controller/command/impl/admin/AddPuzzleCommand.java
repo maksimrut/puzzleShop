@@ -40,7 +40,7 @@ public class AddPuzzleCommand implements Command {
             }
         } catch (ServiceException e) {
             logger.error("Puzzle can not be created: ", e);
-            throw new CommandException("Puzzle can not be created: ", e);
+            throw new CommandException("Puzzle can not be created: " + e);
         }
         return router;
     }

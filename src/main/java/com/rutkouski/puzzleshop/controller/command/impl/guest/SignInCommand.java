@@ -16,8 +16,7 @@ import java.util.Optional;
 
 import static com.rutkouski.puzzleshop.controller.command.AttributeName.*;
 import static com.rutkouski.puzzleshop.controller.command.PagePath.MAIN_PAGE;
-import static com.rutkouski.puzzleshop.controller.command.ParameterName.LOGIN;
-import static com.rutkouski.puzzleshop.controller.command.ParameterName.PASSWORD;
+import static com.rutkouski.puzzleshop.controller.command.ParameterName.*;
 
 public class SignInCommand implements Command {
     static Logger logger = LogManager.getLogger();
@@ -37,7 +36,11 @@ public class SignInCommand implements Command {
                 User user = userOptional.get();
                 if (user.getStatus() == User.Status.ACTIVE) {
                     session.setAttribute(SESSION_USER, user);
+                    session.setAttribute(USER_NAME, user.getFirstName());
+                    session.setAttribute(USER_PHONE_NUMBER, user.getPhoneNumber());
                     session.setAttribute(SIGN_IN_RESULT, Boolean.TRUE);
+
+                    // role? for immidiate user blocking or changing to admin
                     if (user.getRole().equals(User.Role.CUSTOMER)) {
                         int discount = customerService.findCustomerDiscountById(user.getId());
                         session.setAttribute(USER_DISCOUNT, discount);
@@ -51,7 +54,7 @@ public class SignInCommand implements Command {
             return router;
         } catch (ServiceException e) {
             logger.error("Authentication can not be completed: ", e);
-            throw new CommandException("Authentication can not be completed: ", e);
+            throw new CommandException("Authentication can not be completed: " + e);
         }
     }
 }

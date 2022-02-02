@@ -42,49 +42,9 @@ public class UserServiceImpl implements UserService {
             }
             return optionalUser;
         } catch (DaoException e) {
-            logger.error("Impossible to find user by login and password: ", e);
-            throw new ServiceException("Impossible to find user by login and password: ", e);
+            logger.error("Impossible to find user by login and password ", e);
+            throw new ServiceException("Impossible to find user by login and password ", e);
         }
-    }
-
-    @Override
-    public boolean registerNewUser(Map<String, String> formValues) throws ServiceException {
-        boolean result;
-        String login = formValues.get(LOGIN);
-        String password = formValues.get(PASSWORD);
-        String confirmPassword = formValues.get(CONFIRM_PASSWORD);
-        String email = formValues.get(EMAIL);
-
-        try {
-            String loginCheckResult = UserValidator.isLoginValid(login)
-                    ? (!userDao.isLoginExist(login) ? TRUE : NOT_UNIQUE_LOGIN_RESULT)
-                    : INVALID_LOGIN_RESULT;
-            String passwordCheckResult = UserValidator.isPasswordValid(password)
-                    ? (password.equals(confirmPassword) ? TRUE : PASSWORD_MISMATCH)
-                    : INVALID_PASSWORD_RESULT;
-            String emailCheckResult = UserValidator.isEmailValid(email)
-                    ? (!userDao.isEmailExist(email) ? TRUE : NOT_UNIQUE_EMAIL_RESULT)
-                    : INVALID_EMAIL_RESULT;
-
-            result = Boolean.parseBoolean(loginCheckResult) && Boolean.parseBoolean(passwordCheckResult)
-                    && Boolean.parseBoolean(emailCheckResult);
-
-            if (result) {
-                User.Role role = User.Role.CUSTOMER;
-                String encryptedPassword = PasswordEncryptor.encrypt(password);
-                User user = new User(login, encryptedPassword, email, role);// TODO: 25.01.2022  
-                userDao.create(user);// TODO: 25.01.2022
-            } else {
-                formValues.remove(CONFIRM_PASSWORD, confirmPassword);
-                formValues.replace(LOGIN, loginCheckResult);
-                formValues.replace(PASSWORD, passwordCheckResult);
-                formValues.replace(EMAIL, emailCheckResult);
-            }
-        } catch (DaoException e) {
-            logger.error("Impossible to create new user: ", e);
-            throw new ServiceException("Impossible to create new user: ", e);
-        }
-        return result;
     }
 
     @Override
@@ -92,8 +52,8 @@ public class UserServiceImpl implements UserService {
         try {
             return userDao.findAll();
         } catch (DaoException e) {
-            logger.error("Impossible to find all users: ", e);
-            throw new ServiceException("Impossible to find all users: ", e);
+            logger.error("Impossible to find all users ", e);
+            throw new ServiceException("Impossible to find all users ", e);
         }
     }
 
@@ -102,8 +62,8 @@ public class UserServiceImpl implements UserService {
         try {
             return userDao.findById(id);
         } catch (DaoException e) {
-            logger.error("Impossible to find user by id: ", e);
-            throw new ServiceException("Impossible to find user by id: ", e);
+            logger.error("Impossible to find user by id ", e);
+            throw new ServiceException("Impossible to find user by id ", e);
         }
     }
 
@@ -112,8 +72,8 @@ public class UserServiceImpl implements UserService {
         try {
             return userDao.findAllActiveUsers();
         } catch (DaoException e) {
-            logger.error("Impossible to find all active users: ", e);
-            throw new ServiceException("Impossible to find all active users: ", e);
+            logger.error("Impossible to find all active users ", e);
+            throw new ServiceException("Impossible to find all active users ", e);
         }
     }
 
@@ -122,8 +82,8 @@ public class UserServiceImpl implements UserService {
         try {
             return userDao.findUserByEmail(email);
         } catch (DaoException e) {
-            logger.error("Impossible to find user by email: ", e);
-            throw new ServiceException("Impossible to find user by email: ", e);
+            logger.error("Impossible to find user by email ", e);
+            throw new ServiceException("Impossible to find user by email ", e);
         }
     }
 
@@ -132,8 +92,8 @@ public class UserServiceImpl implements UserService {
         try {
             return userDao.deleteById(id);
         } catch (DaoException e) {
-            logger.error("Impossible to delete user by id: ", e);
-            throw new ServiceException("Impossible to delete user by id: ", e);
+            logger.error("Impossible to delete user by id ", e);
+            throw new ServiceException("Impossible to delete user by id ", e);
         }
     }
 
@@ -142,8 +102,8 @@ public class UserServiceImpl implements UserService {
         try {
             return userDao.delete(user);
         } catch (DaoException e) {
-            logger.error("Impossible to delete user: ", e);
-            throw new ServiceException("Impossible to delete user: ", e);
+            logger.error("Impossible to delete user ", e);
+            throw new ServiceException("Impossible to delete user ", e);
         }
     }
 
@@ -152,8 +112,8 @@ public class UserServiceImpl implements UserService {
         try {
             return UserValidator.isNameValid(firstName) && userDao.updateUserFirstName(userId, firstName);
         } catch (DaoException e) {
-            logger.error("Impossible to update user's first name: ", e);
-            throw new ServiceException("Impossible to update user's first name: ", e);
+            logger.error("Impossible to update user's first name ", e);
+            throw new ServiceException("Impossible to update user's first name ", e);
         }
     }
 
@@ -162,8 +122,8 @@ public class UserServiceImpl implements UserService {
         try {
             return UserValidator.isPhoneNumberValid(phoneNumber) && userDao.updateUserPhoneNumber(userId, phoneNumber);
         } catch (DaoException e) {
-            logger.error("Impossible to update user's phone number: ", e);
-            throw new ServiceException("Impossible to update user's phone number: ", e);
+            logger.error("Impossible to update user's phone number ", e);
+            throw new ServiceException("Impossible to update user's phone number ", e);
         }
     }
 
@@ -196,8 +156,8 @@ public class UserServiceImpl implements UserService {
             }
             return result;
         } catch (DaoException e) {
-            logger.error("Impossible to update user's password: ", e);
-            throw new ServiceException("Impossible to update user's password: ", e);
+            logger.error("Impossible to update user's password ", e);
+            throw new ServiceException("Impossible to update user's password ", e);
         }
     }
 
@@ -216,8 +176,8 @@ public class UserServiceImpl implements UserService {
             }
             return result;
         } catch (DaoException e) {
-            logger.error("Impossible to update user's email: ", e);
-            throw new ServiceException("Impossible to update user's email: ", e);
+            logger.error("Impossible to update user's email ", e);
+            throw new ServiceException("Impossible to update user's email ", e);
         }
     }
 
@@ -226,8 +186,18 @@ public class UserServiceImpl implements UserService {
         try {
             return userDao.updateUserStatus(userId, status);
         } catch (DaoException e) {
-            logger.error("Impossible to update user's status: ", e);
-            throw new ServiceException("Impossible to update user's status: ", e);
+            logger.error("Impossible to update user's status ", e);
+            throw new ServiceException("Impossible to update user's status ", e);
+        }
+    }
+
+    @Override
+    public boolean changeUserRole(int userId, User.Role role) throws ServiceException {
+        try {
+            return userDao.updateUserRole(userId, role);
+        } catch (DaoException e) {
+            logger.error("Impossible to update user's role ", e);
+            throw new ServiceException("Impossible to update user's role ", e);
         }
     }
 }

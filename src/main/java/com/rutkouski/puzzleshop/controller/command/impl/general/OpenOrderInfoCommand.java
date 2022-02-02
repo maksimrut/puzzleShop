@@ -64,7 +64,7 @@ public class OpenOrderInfoCommand implements Command {
             }
         } catch (ServiceException e) {
             logger.error("Order info can not be opened: ", e);
-            throw new CommandException("Order info can not be opened: ", e);
+            throw new CommandException("Order info can not be opened: " + e);
         }
         return router;
     }

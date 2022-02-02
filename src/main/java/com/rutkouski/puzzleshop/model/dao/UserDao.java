@@ -18,4 +18,5 @@ public interface UserDao extends BaseDao<Integer, User> {
     boolean isLoginExist(String login) throws DaoException;
     boolean isEmailExist(String email) throws DaoException;
     boolean isUserExist(int userId, String passwordHash) throws DaoException;
+    boolean updateUserRole(int userId, User.Role role) throws DaoException;
 }

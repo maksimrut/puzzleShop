@@ -10,9 +10,6 @@
 <fmt:message key="error500.request" var="request"/>
 <fmt:message key="error500.servlet" var="servlet"/>
 <fmt:message key="error500.statusCode" var="code"/>
-<fmt:message key="error500.exception" var="exception"/>
-<fmt:message key="error500.message" var="message"/>
-<fmt:message key="error500.stackTrace" var="stackTrace"/>
 <fmt:message key="error500.backHome" var="home"/>
 
 <!DOCTYPE html>
@@ -45,16 +42,9 @@
     <hr/>
     ${code} ${pageContext.errorData.statusCode}<br/>
     <hr/>
-    ${exception} ${requestScope.exception}<br/>
+        <h5>${requestScope['jakarta.servlet.error.message']}</h5>
+    <br/>
     <hr/>
-    ${message} ${requestScope.exception.message}<br/>
-    <hr/>
-    ${stackTrace}<br/>
-    <c:forEach var="stackTraceElement" items="${requestScope.exception.stackTrace}">
-        <c:out value="${stackTraceElement}"/><br/>
-    </c:forEach><br/>
-    <hr/>
-
     <a style="height: 25px; color: midnightblue" href="${abs}/index.jsp">${home}</a>
 </div>
 

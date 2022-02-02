@@ -28,7 +28,7 @@ public class UpdateOrderStatusToInProcessCommand implements Command {
             return router;
         } catch (ServiceException e) {
             logger.error("Order status can not be updated now: ", e);
-            throw new CommandException("Order status can not be updated now: ", e);
+            throw new CommandException("Order status can not be updated now: " + e);
         }
     }
 }

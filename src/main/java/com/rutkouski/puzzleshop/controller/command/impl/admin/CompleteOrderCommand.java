@@ -45,7 +45,7 @@ public class CompleteOrderCommand implements Command {
             return router;
         } catch (ServiceException e) {
             logger.error("Order can not be completed now: ", e);
-            throw new CommandException("Order can not be completed now: ", e);
+            throw new CommandException("Order can not be completed now: " + e);
         }
     }
 }

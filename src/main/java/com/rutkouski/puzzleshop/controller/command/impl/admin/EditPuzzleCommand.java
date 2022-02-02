@@ -43,7 +43,7 @@ public class EditPuzzleCommand implements Command {
             }
         } catch (ServiceException e) {
             logger.error("Puzzle can not be updated: ", e);
-            throw new CommandException("Puzzle can not be updated: ", e);
+            throw new CommandException("Puzzle can not be updated: " + e);
         }
         logger.debug("EditPuzzleCommand (puzzle id={}) was successful", stringPuzzleId);
         return router;

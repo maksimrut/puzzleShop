@@ -72,6 +72,8 @@ public class UserDaoImpl implements UserDao {
             "UPDATE users SET status_id=? WHERE users.id=?";
     private static final String SQL_FIND_USER_BY_ID_AND_PASSWORD =
             "SELECT users.id FROM users WHERE users.id=? AND password=?";
+    private static final String SQL_UPDATE_USER_ROLE =
+            "UPDATE users SET role_id=? WHERE users.id=?";
     private static UserDaoImpl instance;
     private final RowMapper<User> mapper = new UserMapper();
 
@@ -184,7 +186,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public User create(User user) throws DaoException { // TODO: 29.01.2022  
+    public User create(User user) throws DaoException { // TODO: 02.02.2022
         try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
              PreparedStatement statement = connection.prepareStatement(SQL_INSERT_NEW_USER, Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(FIRST_PARAM_INDEX, user.getLogin());
@@ -196,14 +198,12 @@ public class UserDaoImpl implements UserDao {
             statement.setInt(SEVENTH_PARAM_INDEX, user.getStatus().ordinal() + 1);
             statement.executeUpdate();
             try (ResultSet resultSet = statement.getGeneratedKeys()) {
-//                int userId = 0;
-                User createdUser = null;
                 if (resultSet.next()) {
-                    createdUser = mapper.mapRow(resultSet).get();
-//                    userId = resultSet.getInt(FIRST_PARAM_INDEX);
-                    logger.info("create(User user) method was completed successfully. User {} was created", createdUser);
+                    int userId = resultSet.getInt(FIRST_PARAM_INDEX);
+                    user.setId(userId);
+                    logger.info("create(User user) method was completed successfully. User {} was created", user);
                 }
-                return createdUser;
+                return user;
             }
         } catch (SQLException e) {
             logger.error("SQL exception happened in create(User user) method: ", e);
@@ -328,10 +328,10 @@ public class UserDaoImpl implements UserDao {
     public boolean updateUserStatus(int userId, User.Status status) throws DaoException {
         try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
              PreparedStatement statement = connection.prepareStatement(SQL_UPDATE_USER_STATUS)) {
-            statement.setString(FIRST_PARAM_INDEX, status.toString().toLowerCase());
+            statement.setInt(FIRST_PARAM_INDEX, status.ordinal() + 1);
             statement.setInt(SECOND_PARAM_INDEX, userId);
             boolean result = statement.executeUpdate() == 1;
-            logger.debug("The result of user id={} email updating is: {}", userId, result);
+            logger.debug("The result of user id={} status updating is: {}", userId, result);
             return result;
         } catch (SQLException e) {
             logger.error("SQL exception happened in updateUserStatus method: ", e);
@@ -353,6 +353,21 @@ public class UserDaoImpl implements UserDao {
         } catch (SQLException e) {
             logger.error("SQL exception happened in isUserExist method: ", e);
             throw new DaoException("SQL exception happened in isUserExist method", e);
+        }
+    }
+
+    @Override
+    public boolean updateUserRole(int userId, User.Role role) throws DaoException {
+        try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
+             PreparedStatement statement = connection.prepareStatement(SQL_UPDATE_USER_ROLE)) {
+            statement.setInt(FIRST_PARAM_INDEX, role.ordinal() + 1);
+            statement.setInt(SECOND_PARAM_INDEX, userId);
+            boolean result = statement.executeUpdate() == 1;
+            logger.debug("The result of user id={} role updating is: {}", userId, result);
+            return result;
+        } catch (SQLException e) {
+            logger.error("SQL exception happened in updateUserRole method: ", e);
+            throw new DaoException("SQL exception happened in updateUserRole method", e);
         }
     }
 }

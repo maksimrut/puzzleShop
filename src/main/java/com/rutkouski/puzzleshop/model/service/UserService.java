@@ -10,7 +10,6 @@ import java.util.Optional;
 public interface UserService {
 
     Optional<User> findUserByLoginAndPassword(String login, String password) throws ServiceException;
-    boolean registerNewUser(Map<String, String> formValues) throws ServiceException;
     List<User> findAllUsers() throws ServiceException;
     Optional<User> findUserById(int id) throws ServiceException;
     List<User> findAllActiveUsers() throws ServiceException;
@@ -22,4 +21,5 @@ public interface UserService {
     boolean updateUserPasswordById(int userId, Map<String, String> formValues) throws ServiceException;
     boolean updateUserEmailById(int userId, Map<String, String> formValue) throws ServiceException;
     boolean updateUserStatusById(int userId, User.Status status) throws ServiceException;
+    boolean changeUserRole(int userId, User.Role role) throws ServiceException;
 }

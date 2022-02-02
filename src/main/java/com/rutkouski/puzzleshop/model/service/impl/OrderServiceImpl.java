@@ -32,8 +32,8 @@ public class OrderServiceImpl implements OrderService {
         try {
             return orderDao.findAll();
         } catch (DaoException e) {
-            logger.error("Impossible to find all orders: ", e);
-            throw new ServiceException("Impossible to find all orders: ", e);
+            logger.error("Impossible to find all orders ", e);
+            throw new ServiceException("Impossible to find all orders ", e);
         }
     }
 
@@ -42,8 +42,8 @@ public class OrderServiceImpl implements OrderService {
         try {
             return orderDao.findById(orderId);
         } catch (DaoException e) {
-            logger.error("Impossible to find order by id: ", e);
-            throw new ServiceException("Impossible to find order by id: ", e);
+            logger.error("Impossible to find order by id ", e);
+            throw new ServiceException("Impossible to find order by id ", e);
         }
     }
 
@@ -52,8 +52,8 @@ public class OrderServiceImpl implements OrderService {
         try {
             return orderDao.deleteById(orderId);
         } catch (DaoException e) {
-            logger.error("Impossible to delete order by id: ", e);
-            throw new ServiceException("Impossible to delete order by id: ", e);
+            logger.error("Impossible to delete order by id ", e);
+            throw new ServiceException("Impossible to delete order by id ", e);
         }
     }
 
@@ -62,8 +62,8 @@ public class OrderServiceImpl implements OrderService {
         try {
             return orderDao.delete(order);
         } catch (DaoException e) {
-            logger.error("Impossible to delete order: ", e);
-            throw new ServiceException("Impossible to delete order: ", e);
+            logger.error("Impossible to delete order ", e);
+            throw new ServiceException("Impossible to delete order ", e);
         }
     }
 
@@ -72,8 +72,8 @@ public class OrderServiceImpl implements OrderService {
         try {
             return orderDao.create(order);
         } catch (DaoException e) {
-            logger.error("Impossible to create order: ", e);
-            throw new ServiceException("Impossible to create order: ", e);
+            logger.error("Impossible to create order ", e);
+            throw new ServiceException("Impossible to create order ", e);
         }
     }
 
@@ -82,8 +82,8 @@ public class OrderServiceImpl implements OrderService {
         try {
             return orderDao.findAllOrdersByCustomerId(customerId);
         } catch (DaoException e) {
-            logger.error("Impossible to find orders by customer id: ", e);
-            throw new ServiceException("Impossible to find orders by customer id: ", e);
+            logger.error("Impossible to find orders by customer id ", e);
+            throw new ServiceException("Impossible to find orders by customer id ", e);
         }
     }
 
@@ -92,8 +92,8 @@ public class OrderServiceImpl implements OrderService {
         try {
             return orderDao.updateOrderStatusById(orderId, status);
         } catch (DaoException e) {
-            logger.error("Impossible to update order status: ", e);
-            throw new ServiceException("Impossible to update order status: ", e);
+            logger.error("Impossible to update order status ", e);
+            throw new ServiceException("Impossible to update order status ", e);
         }
     }
 
@@ -102,8 +102,8 @@ public class OrderServiceImpl implements OrderService {
         try {
             return orderDao.createOrderItem(orderItem);
         } catch (DaoException e) {
-            logger.error("Impossible to create order item: ", e);
-            throw new ServiceException("Impossible to create order item: ", e);
+            logger.error("Impossible to create order item ", e);
+            throw new ServiceException("Impossible to create order item ", e);
         }
     }
 
@@ -112,8 +112,8 @@ public class OrderServiceImpl implements OrderService {
         try {
             return orderDao.findAllOrderItemsByOrderId(orderId);
         } catch (DaoException e) {
-            logger.error("Impossible to find order items by order id: ", e);
-            throw new ServiceException("Impossible to find order items by order id: ", e);
+            logger.error("Impossible to find order items by order id ", e);
+            throw new ServiceException("Impossible to find order items by order id ", e);
         }
     }
 }

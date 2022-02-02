@@ -72,8 +72,8 @@ public class CustomerServiceImpl implements CustomerService {
                 formValues.replace(EMAIL, emailCheckResult);
             }
         } catch (DaoException e) {
-            logger.error("Impossible to create new user: ", e);
-            throw new ServiceException("Impossible to create new user: ", e);
+            logger.error("Impossible to create new user ", e);
+            throw new ServiceException("Impossible to create new user ", e);
         }
         return registeredCustomer;
     }
@@ -83,8 +83,8 @@ public class CustomerServiceImpl implements CustomerService {
         try {
             return customerDao.findAll();
         } catch (DaoException e) {
-            logger.error("Impossible to find all customers: ", e);
-            throw new ServiceException("Impossible to find all customers: ", e);
+            logger.error("Impossible to find all customers ", e);
+            throw new ServiceException("Impossible to find all customers ", e);
         }
     }
 
@@ -93,8 +93,8 @@ public class CustomerServiceImpl implements CustomerService {
         try {
             return customerDao.findById(id);
         } catch (DaoException e) {
-            logger.error("Impossible to find customer by id: ", e);
-            throw new ServiceException("Impossible to find customer by id: ", e);
+            logger.error("Impossible to find customer by id ", e);
+            throw new ServiceException("Impossible to find customer by id ", e);
         }
     }
 
@@ -103,8 +103,8 @@ public class CustomerServiceImpl implements CustomerService {
         try {
             return customerDao.findDiscountByCustomerId(customerId);
         } catch (DaoException e) {
-            logger.error("Impossible to find discount by id: ", e);
-            throw new ServiceException("Impossible to find discount by id: ", e);
+            logger.error("Impossible to find discount by id ", e);
+            throw new ServiceException("Impossible to find discount by id ", e);
         }
     }
 
@@ -113,8 +113,8 @@ public class CustomerServiceImpl implements CustomerService {
         try {
             return customerDao.updateCustomerDiscount(customerId, discountId);
         } catch (DaoException e) {
-            logger.error("Impossible to update customer discount: ", e);
-            throw new ServiceException("Impossible to update customer discount: ", e);
+            logger.error("Impossible to update customer discount ", e);
+            throw new ServiceException("Impossible to update customer discount ", e);
         }
     }
 }

@@ -35,8 +35,8 @@ public class PuzzleServiceImpl implements PuzzleService {
         try {
             return puzzleDao.findAll();
         } catch (DaoException e) {
-            logger.error("Impossible to find all puzzles: ", e);
-            throw new ServiceException("Impossible to find all puzzles: ", e);
+            logger.error("Impossible to find all puzzles ", e);
+            throw new ServiceException("Impossible to find all puzzles ", e);
         }
     }
 
@@ -45,8 +45,8 @@ public class PuzzleServiceImpl implements PuzzleService {
         try {
             return puzzleDao.findById(id);
         } catch (DaoException e) {
-            logger.error("Impossible to find user by id: ", e);
-            throw new ServiceException("Impossible to find user by id: ", e);
+            logger.error("Impossible to find user by id ", e);
+            throw new ServiceException("Impossible to find user by id ", e);
         }
     }
 
@@ -55,8 +55,8 @@ public class PuzzleServiceImpl implements PuzzleService {
         try {
             return puzzleDao.deleteById(id);
         } catch (DaoException e) {
-            logger.error("Impossible to delete puzzle by id: ", e);
-            throw new ServiceException("Impossible to delete puzzle by id: ", e);
+            logger.error("Impossible to delete puzzle by id ", e);
+            throw new ServiceException("Impossible to delete puzzle by id ", e);
         }
     }
 
@@ -65,8 +65,8 @@ public class PuzzleServiceImpl implements PuzzleService {
         try {
             return puzzleDao.delete(puzzle);
         } catch (DaoException e) {
-            logger.error("Impossible to delete puzzle: ", e);
-            throw new ServiceException("Impossible to delete puzzle: ", e);
+            logger.error("Impossible to delete puzzle ", e);
+            throw new ServiceException("Impossible to delete puzzle ", e);
         }
     }
 
@@ -80,8 +80,8 @@ public class PuzzleServiceImpl implements PuzzleService {
             try {
                 puzzle = puzzleDao.findById(id);
             } catch (DaoException e) {
-                logger.error("Impossible to delete puzzle: ", e);
-                throw new ServiceException("Impossible to delete puzzle: ", e);
+                logger.error("Impossible to delete puzzle ", e);
+                throw new ServiceException("Impossible to delete puzzle ", e);
             }
             puzzle.ifPresent(puzzles::add);
         }
@@ -100,8 +100,8 @@ public class PuzzleServiceImpl implements PuzzleService {
         try {
             return puzzleDao.findAllByDifficultyLevel(difficultyLevel);
         } catch (DaoException e) {
-            logger.error("Impossible to find puzzles by difficulty level: ", e);
-            throw new ServiceException("Impossible to find puzzles by difficulty level: ", e);
+            logger.error("Impossible to find puzzles by difficulty level ", e);
+            throw new ServiceException("Impossible to find puzzles by difficulty level ", e);
         }
     }
 
@@ -119,8 +119,8 @@ public class PuzzleServiceImpl implements PuzzleService {
                 result = true;
             }
         } catch (DaoException e) {
-            logger.error("Impossible to update puzzle: ", e);
-            throw new ServiceException("Impossible to update puzzle: ", e);
+            logger.error("Impossible to update puzzle ", e);
+            throw new ServiceException("Impossible to update puzzle ", e);
         }
         return result;
     }
@@ -135,8 +135,8 @@ public class PuzzleServiceImpl implements PuzzleService {
                 result = true;
             }
         } catch (DaoException e) {
-            logger.error("Impossible to create puzzle: ", e);
-            throw new ServiceException("Impossible to create puzzle: ", e);
+            logger.error("Impossible to create puzzle ", e);
+            throw new ServiceException("Impossible to create puzzle ", e);
         }
         return result;
     }

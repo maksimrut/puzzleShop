@@ -29,7 +29,7 @@ public class GoToEditPuzzleCommand implements Command {
             router.setPagePath(EDIT_PUZZLE_PAGE);
         } catch (ServiceException e) {
             logger.error("Exception occurred in GoToEditPuzzleCommand class", e);
-            throw new CommandException("Exception occurred in GoToEditPuzzleCommand class", e);
+            throw new CommandException("Exception occurred in GoToEditPuzzleCommand class" + e);
         }
         return router;
     }

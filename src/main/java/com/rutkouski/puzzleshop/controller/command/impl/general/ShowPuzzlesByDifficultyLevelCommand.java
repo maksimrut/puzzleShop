@@ -31,7 +31,7 @@ public class ShowPuzzlesByDifficultyLevelCommand implements Command {
             router.setPagePath(GOODS_PAGE);
         } catch (ServiceException e) {
             logger.error("Exception occurred in ShowPuzzleByDifficultyLevelCommand class", e);
-            throw new CommandException("Exception occurred in ShowPuzzleByDifficultyLevelCommand class", e);
+            throw new CommandException("Exception occurred in ShowPuzzleByDifficultyLevelCommand class" + e);
         }
         return router;
     }

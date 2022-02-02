@@ -30,7 +30,7 @@ public class OrderManagementCommand implements Command {
             return router;
         } catch (ServiceException e) {
             logger.error("Orders can not be found:", e);
-            throw new CommandException("Orders can not be found:", e);
+            throw new CommandException("Orders can not be found:" + e);
         }
     }
 }

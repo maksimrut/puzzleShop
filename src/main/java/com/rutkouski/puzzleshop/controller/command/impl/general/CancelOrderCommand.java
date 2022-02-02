@@ -28,7 +28,7 @@ public class CancelOrderCommand implements Command {
             return router;
         } catch (ServiceException e) {
             logger.error("Order can not be deleted now: ", e);
-            throw new CommandException("Order can not be deleted now: ", e);
+            throw new CommandException("Order can not be deleted now: " + e);
         }
     }
 }

@@ -1,12 +1,12 @@
 package com.rutkouski.puzzleshop.validator;
 
 public class UserValidator {
-    private static final String LOGIN_REGEX = "[a-zA-Z]\\w{3,15}";
-    private static final String PASSWORD_REGEX = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,50}$";
-    private static final String NAME_REGEX = "[A-Za-zА-Яа-я-]{2,40}";
+    private static final String LOGIN_REGEX = "^[a-zA-Z]\\w{3,15}$";
+    private static final String PASSWORD_REGEX = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,50}$";
+    private static final String NAME_REGEX = "[A-Za-zА-Яа-я-]{2,40}$";
     private static final String EMAIL_REGEX = "^([A-Za-z0-9_-]+\\.)*[A-Za-z0-9_-]+@[a-z0-9_-]+(\\.[a-z0-9_-]+)*\\.[a-z]{2,6}$";
     private static final String EMAIL_SYMBOL_NUMBER_REGEX = ".{8,80}";
-    private static final String PHONE_NUMBER_REGEX = "(25|29|33|44)\\d{7}";
+    private static final String PHONE_NUMBER_REGEX = "^(25|29|33|44)\\d{7}$";
 
     private UserValidator() {
     }

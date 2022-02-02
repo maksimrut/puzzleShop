@@ -38,7 +38,9 @@ public class RecountOrderWhileAddingItemCommand implements Command {
                 Optional<Puzzle> puzzle = puzzleService.findPuzzleById(id);
                 puzzle.ifPresent(basketItems::add);
             }
-            int discount = (Integer) session.getAttribute(USER_DISCOUNT);
+//            int discount = (Integer) session.getAttribute(USER_DISCOUNT);
+            String stringDiscount = (String) session.getAttribute(USER_DISCOUNT);
+            int discount = stringDiscount == null ? 0 : Integer.parseInt(stringDiscount);
             BigDecimal totalCost = puzzleService.calculatePuzzleSet(basket, discount);
 
             request.setAttribute(TOTAL_COST, totalCost);
@@ -46,7 +48,7 @@ public class RecountOrderWhileAddingItemCommand implements Command {
             router.setPagePath(BASKET_PAGE);
         } catch (ServiceException e) {
             logger.error("Error occurred in RecountOrderWhileAddingItemCommand: ", e);
-            throw new CommandException("Error occurred in RecountOrderWhileAddingItemCommand: ", e);
+            throw new CommandException("Error occurred in RecountOrderWhileAddingItemCommand: " + e);
         }
         return router;
     }

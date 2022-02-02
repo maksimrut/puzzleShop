@@ -24,32 +24,39 @@
 <fmt:message key="header.discount" var="discount"/>
 <fmt:message key="admin_header.user_management" var="user_management"/>
 <fmt:message key="admin_header.order_management" var="order_management"/>
+<fmt:message key="customer.profile_my_orders" var="show_orders"/>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="${abs}/controller?command=go_to_main">PuzzleSHOP</a>
     <img width="60" src="${abs}/images/logo.JPG" alt="shop logo">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="${abs}/controller?command=go_to_main">${home}<span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="${abs}/controller?command=go_to_main">${home}<span
+                        class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="${abs}/controller?command=show_all_goods">${goods}</a>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
                     ${puzzles}
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="${abs}/controller?command=show_puzzles_by_difficulty_level&puzzle_difficulty=1">${middle}</a>
-                    <a class="dropdown-item" href="${abs}/controller?command=show_puzzles_by_difficulty_level&puzzle_difficulty=2">${difficult}</a>
+                    <a class="dropdown-item"
+                       href="${abs}/controller?command=show_puzzles_by_difficulty_level&puzzle_difficulty=1">${middle}</a>
+                    <a class="dropdown-item"
+                       href="${abs}/controller?command=show_puzzles_by_difficulty_level&puzzle_difficulty=2">${difficult}</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="${abs}/controller?command=show_puzzles_by_difficulty_level&puzzle_difficulty=3">${extreme}</a>
+                    <a class="dropdown-item"
+                       href="${abs}/controller?command=show_puzzles_by_difficulty_level&puzzle_difficulty=3">${extreme}</a>
                 </div>
             </li>
             <li class="nav-item">
@@ -57,34 +64,45 @@
             </li>
             <c:if test="${user.role eq 'ADMIN'}">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="${abs}/controller?command=user_management">${user_management}</a>
+                    <a class="nav-link active" aria-current="page"
+                       href="${abs}/controller?command=user_management">${user_management}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="${abs}/controller?command=order_management">${order_management}</a>
+                    <a class="nav-link active" aria-current="page"
+                       href="${abs}/controller?command=order_management">${order_management}</a>
                 </li>
             </c:if>
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
-            <li><a class="nav-link" href="#">${user.login}</a><li>
-            <c:choose>
-                <%--                <c:when test="${user.role eq 'ADMIN'}"><%@include file="fragment/admin_header.jspf" %></c:when>--%>
-                <%--                <c:when test="${user.role eq 'MANAGER'}"><%@include file="fragment/manager_header.jspf" %></c:when>--%>
-                <c:when test="${user.role eq 'CUSTOMER'}">
-                
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page"
-                           href="${abs}/controller?command=show_basket"><i style="font-size:24px" class="fa">&#xf291;</i></a>
-                    </li>
-                    <li><a class="nav-link" href="#">${discount} = ${sessionScope.user_discount}%</a><li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="${abs}/controller?command=go_to_customer_profile">${profile}</a>
-                    </li>
+            <li><a class="nav-link" href="#">${user.login}</a></li>
 
+            <c:choose>
+                <c:when test="${user.role eq 'ADMIN' or user.role eq 'CUSTOMER'}">
+                    <li class="nav-item">
+                        <a class="nav-link" href="${abs}/controller?command=go_to_profile">${profile}</a>
+                    </li>
                 </c:when>
             </c:choose>
+
+            <c:choose>
+                <c:when test="${user.role eq 'CUSTOMER'}">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page"
+                           href="${abs}/controller?command=show_basket"><i style="font-size:24px"
+                                                                           class="fa">&#xf291;</i></a>
+                    </li>
+                    <li><a class="nav-link" href="#">${discount} = ${user_discount}%</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link"
+                           href="${abs}/controller?command=show_orders_for_customer">${show_orders}</a>
+                    </li>
+                </c:when>
+            </c:choose>
+
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
                     RU/EN
                 </a>
                 <div class="dropdown-menu" aria-labelledby="languageDropdown">
@@ -96,7 +114,8 @@
 
             <c:choose>
                 <c:when test="${user.role eq 'ADMIN' or user.role eq 'CUSTOMER'}">
-                    <li><a class="nav-link" href="${abs}/controller?command=log_out"><span class="glyphicon glyphicon-log-out"></span> ${logOut}</a></li>
+                    <li><a class="nav-link" href="${abs}/controller?command=log_out"><span
+                            class="glyphicon glyphicon-log-out"></span> ${logOut}</a></li>
                 </c:when>
                 <c:otherwise>
                     <li><a class="nav-link" href="${abs}/controller?command=go_to_registration">${signUp}</a></li>
@@ -112,15 +131,20 @@
                                     <br/>
                                     <form action="${abs}/controller" method="post" id="log-form" class="form-group">
                                         <input type="hidden" name="command" value="sign_in"/>
-                                        <label for="user_name"><span class="glyphicon glyphicon-user"></span> ${login}</label>
-                                        <input type="text" id="user_name" class="form-control" name="login" placeholder=${login}><br/>
-                                        <label for="user-psw"><span class="glyphicon glyphicon-eye-open"></span> ${password}</label>
-                                        <input type="password" id="user-psw" class="form-control" name="password" placeholder="${password}">
+                                        <label for="user_name"><span class="glyphicon glyphicon-user"></span> ${login}
+                                        </label>
+                                        <input type="text" id="user_name" class="form-control" name="login"
+                                               placeholder=${login}><br/>
+                                        <label for="user-psw"><span
+                                                class="glyphicon glyphicon-eye-open"></span> ${password}</label>
+                                        <input type="password" id="user-psw" class="form-control" name="password"
+                                               placeholder="${password}">
                                     </form>
 
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="submit" form="log-form" class="btn btn-secondary" data-bs-dismiss="modal">${signIn}</button>
+                                    <button type="submit" form="log-form" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">${signIn}</button>
                                 </div>
                             </div>
                         </div>

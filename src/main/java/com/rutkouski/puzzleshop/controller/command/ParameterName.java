@@ -13,10 +13,8 @@ public final class ParameterName {
     public static final String EMAIL = "email_address";
     public static final String FIRST_NAME = "first_name";
     public static final String INVALID_EMAIL_RESULT = "invalidEmail";
-    public static final String INVALID_FIRST_NAME_RESULT = "invalidFirstName";
     public static final String INVALID_LOGIN_RESULT = "invalidLogin";
     public static final String INVALID_PASSWORD_RESULT = "invalidPassword";
-    public static final String INVALID_PHONE_NUMBER_RESULT = "invalidPhoneNumber";
     public static final String LOGIN = "login";
     public static final String NAME = "name";
     public static final String NEW_PASSWORD = "new_password";
@@ -33,6 +31,7 @@ public final class ParameterName {
     public static final String SELECTED_PUZZLE_DIFFICULTY = "puzzle_difficulty";
     public static final String SESSION_LOCALE = "locale";
     public static final String TRUE = "true";
+    public static final String USER_ID = "user_id";
 
     private ParameterName() {
     }

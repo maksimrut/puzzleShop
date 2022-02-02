@@ -35,7 +35,7 @@ public class ShowOrdersForCustomerCommand implements Command {
             router.setPagePath(CUSTOMER_ORDERS_LIST_PAGE);
         } catch (ServiceException e) {
             logger.error("Error occurred in ShowOrdersForCustomerCommand: ", e);
-            throw new CommandException("Error occurred in ShowOrdersForCustomerCommand: ", e);
+            throw new CommandException("Error occurred in ShowOrdersForCustomerCommand: " + e);
         }
         return router;
     }

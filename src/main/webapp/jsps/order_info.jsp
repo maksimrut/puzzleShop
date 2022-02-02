@@ -9,7 +9,7 @@
 <fmt:message key="order_info.page" var="title"/>
 <fmt:message key="order_info.orderId" var="order_id"/>
 <fmt:message key="order_info.date" var="date"/>
-<fmt:message key="order_info.clientInfo" var="clientInfo"/>
+<fmt:message key="order_info.customer_info" var="customer_Info"/>
 <fmt:message key="order_info.discount" var="discount"/>
 <fmt:message key="order_info.content" var="content"/>
 <fmt:message key="goods.image" var="image"/>
@@ -55,7 +55,7 @@
             <dd class="col-sm-9">${requestScope.order.date}</dd>
 
             <c:if test="${user.role eq 'ADMIN'}">
-                <dt class="col-sm-3">${clientInfo}</dt>
+                <dt class="col-sm-3">${customer_Info}</dt>
                 <dd class="col-sm-9">${requestScope.customer.firstName} ${requestScope.customer.phoneNumber} ${requestScope.customer.email}</dd>
             </c:if>
 

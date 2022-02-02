@@ -57,7 +57,7 @@ public class CreateOrderCommand implements Command {
 //            router.setRoute(Router.RouteType.REDIRECT); todo
         } catch (ServiceException e) {
             logger.error("Order can not be created: ", e);
-            throw new CommandException("Order can not be created: ", e);
+            throw new CommandException("Order can not be created: " + e);
         }
         return router;
     }

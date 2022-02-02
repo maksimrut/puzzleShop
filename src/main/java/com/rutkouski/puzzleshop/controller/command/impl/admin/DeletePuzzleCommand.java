@@ -27,7 +27,7 @@ public class DeletePuzzleCommand implements Command {
             return router;
         } catch (ServiceException e) {
             logger.error("Exception occurred in DeletePuzzleCommand class", e);
-            throw new CommandException("Exception occurred in DeletePuzzleCommand class", e);
+            throw new CommandException("Exception occurred in DeletePuzzleCommand class" + e);
         }
     }
 }
