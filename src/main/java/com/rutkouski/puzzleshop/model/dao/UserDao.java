@@ -126,4 +126,13 @@ public interface UserDao extends BaseDao<Integer, User> {
      * @throws DaoException happens if the request to database could not be handled
      */
     boolean updateUserRole(int userId, User.Role role) throws DaoException;
+
+    /**
+     * Finds user's status by id
+     *
+     * @param userId the user's id
+     * @return the optional of User.Status
+     * @throws DaoException happens if the request to database could not be handled
+     */
+    Optional<User.Status> findUserStatusById(int userId) throws DaoException;
 }

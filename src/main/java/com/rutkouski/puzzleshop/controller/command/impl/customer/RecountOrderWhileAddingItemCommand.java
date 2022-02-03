@@ -44,8 +44,7 @@ public class RecountOrderWhileAddingItemCommand implements Command {
                 Optional<Puzzle> puzzle = puzzleService.findPuzzleById(id);
                 puzzle.ifPresent(basketItems::add);
             }
-            String stringDiscount = (String) session.getAttribute(USER_DISCOUNT);
-            int discount = stringDiscount == null ? 0 : Integer.parseInt(stringDiscount);
+            int discount = (int) session.getAttribute(USER_DISCOUNT);
             BigDecimal totalCost = puzzleService.calculatePuzzleSet(basket, discount);
 
             request.setAttribute(TOTAL_COST, totalCost);

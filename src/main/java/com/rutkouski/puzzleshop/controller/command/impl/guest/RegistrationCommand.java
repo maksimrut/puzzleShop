@@ -48,6 +48,8 @@ public class RegistrationCommand implements Command {
                 router.setRoute(Router.RouteType.REDIRECT);
                 session.setAttribute(SESSION_USER, customer);
                 session.setAttribute(SIGN_IN_RESULT, Boolean.TRUE);
+                int discount = customerService.findCustomerDiscountById(customer.getId());
+                session.setAttribute(USER_DISCOUNT, discount);
             } else {
                 router.setPagePath(REGISTRATION_PAGE);
                 for (String key : formValues.keySet()) {

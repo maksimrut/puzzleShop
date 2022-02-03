@@ -13,6 +13,8 @@ import java.sql.*;
 import java.util.List;
 import java.util.Optional;
 
+import static com.rutkouski.puzzleshop.model.mapper.ColumnName.USER_STATUS;
+
 /**
  * The {@link UserDaoImpl} class provides access to
  * the 'users', 'roles', 'user_statuses' database tables
@@ -72,6 +74,11 @@ public class UserDaoImpl implements UserDao {
             "SELECT users.id FROM users WHERE users.id=? AND password=?";
     private static final String SQL_UPDATE_USER_ROLE =
             "UPDATE users SET role_id=? WHERE users.id=?";
+    private static final String SQL_FIND_USER_STATUS_BY_ID = """
+            SELECT status FROM user_statuses
+            JOIN users ON user_statuses.id=users.status_id
+            WHERE users.id=?""";
+
     private static UserDaoImpl instance;
     private final RowMapper<User> mapper = new UserMapper();
 
@@ -367,5 +374,23 @@ public class UserDaoImpl implements UserDao {
             logger.error("SQL exception happened in updateUserRole method: ", e);
             throw new DaoException("SQL exception happened in updateUserRole method", e);
         }
+    }
+
+    @Override
+    public Optional<User.Status> findUserStatusById(int userId) throws DaoException {
+        Optional<User.Status> optionalStatus = Optional.empty();
+        try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
+             PreparedStatement statement = connection.prepareStatement(SQL_FIND_USER_STATUS_BY_ID)) {
+            statement.setInt(FIRST_PARAM_INDEX, userId);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    optionalStatus = Optional.of(User.Status.valueOf(resultSet.getString(USER_STATUS).toUpperCase()));
+                }
+            }
+        } catch (SQLException e) {
+            logger.error("SQL exception happened in findUserStatusById method: ", e);
+            throw new DaoException("SQL exception happened in findUserStatusById method", e);
+        }
+        return optionalStatus;
     }
 }

@@ -204,4 +204,14 @@ public class UserServiceImpl implements UserService {
             throw new ServiceException("Impossible to update user's role ", e);
         }
     }
+
+    @Override
+    public Optional<User.Status> findUserStatusById(int userId) throws ServiceException {
+        try {
+            return userDao.findUserStatusById(userId);
+        } catch (DaoException e) {
+            logger.error("Impossible to find user's status ", e);
+            throw new ServiceException("Impossible to find user's status ", e);
+        }
+    }
 }

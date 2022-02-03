@@ -43,6 +43,7 @@ public class AddItemToBasketCommand implements Command {
         basket.put(puzzleId, ++currentItemQuantity);
 
         router.setPagePath(SHOW_ALL_GOODS_PAGE);
+//        router.setRoute(Router.RouteType.REDIRECT);
         logger.debug("AddItemToBasketCommand was completed successfully");
         return router;
     }

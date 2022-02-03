@@ -7,6 +7,7 @@ package com.rutkouski.puzzleshop.controller.command;
  */
 public final class AttributeName {
 
+    public static final String ACCOUNT_BLOCKAGE_MESSAGE = "account_blockage_message";
     public static final String ALL_CUSTOMER_ORDERS = "all_customer_orders";
     public static final String BASKET = "basket";
     public static final String BASKET_ITEMS_LIST = "basket_items_list";

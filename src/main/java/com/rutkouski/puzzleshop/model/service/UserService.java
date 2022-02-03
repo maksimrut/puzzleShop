@@ -131,4 +131,13 @@ public interface UserService {
      * @throws ServiceException the service exception
      */
     boolean updateUserRole(int userId, User.Role role) throws ServiceException;
+
+    /**
+     * Finds user's status by id
+     *
+     * @param userId the user id
+     * @return the optional User.Status
+     * @throws ServiceException in case if exception occurred on the DAO level
+     */
+    Optional<User.Status> findUserStatusById(int userId) throws ServiceException;
 }

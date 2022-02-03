@@ -92,7 +92,7 @@
                            href="${abs}/controller?command=show_basket"><i style="font-size:24px"
                                                                            class="fa">&#xf291;</i></a>
                     </li>
-                    <li><a class="nav-link" href="#">${discount} = ${user_discount}%</a></li>
+                    <li><a class="nav-link" href="#">${discount} = ${sessionScope.user_discount}%</a></li>
                     <li class="nav-item">
                         <a class="nav-link"
                            href="${abs}/controller?command=show_orders_for_customer">${show_orders}</a>
