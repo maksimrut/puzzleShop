@@ -13,6 +13,12 @@ import org.apache.logging.log4j.Logger;
 import static com.rutkouski.puzzleshop.controller.command.PagePath.TO_ORDER_MANAGEMENT_PAGE;
 import static com.rutkouski.puzzleshop.controller.command.ParameterName.ORDER_ID;
 
+/**
+ * The command updates the order status
+ * from CANCELLED to IN_PROCESS
+ *
+ * @see com.rutkouski.puzzleshop.controller.command.Command
+ */
 public class UpdateOrderStatusToInProcessCommand implements Command {
     static Logger logger = LogManager.getLogger();
     private final OrderServiceImpl orderService = OrderServiceImpl.getInstance();

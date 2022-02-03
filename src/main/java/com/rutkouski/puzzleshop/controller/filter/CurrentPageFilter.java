@@ -2,18 +2,22 @@ package com.rutkouski.puzzleshop.controller.filter;
 
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
-import jakarta.servlet.annotation.WebInitParam;
 import jakarta.servlet.http.HttpServletRequest;
 
 import java.io.IOException;
 
 import static com.rutkouski.puzzleshop.controller.command.AttributeName.CURRENT_PAGE;
 
+/**
+ * @author Maksim Rutkouski
+ * <p>
+ * The filter for creating current page for locale changing
+ */
 @WebFilter(urlPatterns = {"/*"})
 public class CurrentPageFilter implements Filter {
 
     @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException { // TODO: 24.01.2022 learn
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
         String currentPage = httpServletRequest.getRequestURL().toString();
 

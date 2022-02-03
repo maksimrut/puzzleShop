@@ -13,6 +13,12 @@ import org.apache.logging.log4j.Logger;
 import static com.rutkouski.puzzleshop.controller.command.PagePath.TO_USER_MANAGEMENT_PAGE;
 import static com.rutkouski.puzzleshop.controller.command.ParameterName.USER_ID;
 
+/**
+ * The ChangeUserRoleCommand allows to administrator
+ * change role of certain user
+ *
+ * @see com.rutkouski.puzzleshop.controller.command.Command
+ */
 public class ChangeUserRoleCommand implements Command {
     static Logger logger = LogManager.getLogger();
     UserServiceImpl userService = UserServiceImpl.getInstance();
@@ -29,7 +35,7 @@ public class ChangeUserRoleCommand implements Command {
             changeToRole = User.Role.ADMIN;
         }
         try {
-            userService.changeUserRole(userId, changeToRole);
+            userService.updateUserRole(userId, changeToRole);
             router.setPagePath(TO_USER_MANAGEMENT_PAGE);
         } catch (ServiceException e) {
             logger.error("User can not be deleted: ", e);

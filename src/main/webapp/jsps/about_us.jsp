@@ -30,7 +30,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
           integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 
-    <%--    <script src="${abs}/js/message.js"></script>--%>
     <link rel="stylesheet" href="${abs}/css/about_us.css">
     <title>${title}</title>
 </head>
@@ -43,7 +42,8 @@
     <div class="row">
         <div class="col-lg-5 col-md-12">
             <div class="contact-map">
-                <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A4f8d85e330c15bfc3925d7b7a52a502ef187ab01903eda5438ee783fc0236056&amp;width=100%&amp;height=400&amp;lang=ru_RU&amp;scroll=true"></script>
+                <script type="text/javascript" charset="utf-8" async
+                        src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A4f8d85e330c15bfc3925d7b7a52a502ef187ab01903eda5438ee783fc0236056&amp;width=100%&amp;height=400&amp;lang=ru_RU&amp;scroll=true"></script>
             </div>
         </div>
         <div class="col-md-12">

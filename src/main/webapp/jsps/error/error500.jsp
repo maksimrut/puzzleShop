@@ -42,7 +42,7 @@
     <hr/>
     ${code} ${pageContext.errorData.statusCode}<br/>
     <hr/>
-        <h5>${requestScope['jakarta.servlet.error.message']}</h5>
+    <h5>${requestScope['jakarta.servlet.error.message']}</h5>
     <br/>
     <hr/>
     <a style="height: 25px; color: midnightblue" href="${abs}/index.jsp">${home}</a>

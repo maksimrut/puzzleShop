@@ -61,14 +61,18 @@
                        required pattern="^[A-ZА-Я]{1}[a-zа-я]{2,20}$">
                 <small id="name_help" style="color: black" class="form-text text-muted">${name_helper}</small>
             </div>
-            <c:if test="${name_change_result eq 'incorrect_message'}"><div><b>${incorrect_name_message}</b></div></c:if>
+            <c:if test="${name_change_result eq 'incorrect_message'}">
+                <div><b>${incorrect_name_message}</b></div>
+            </c:if>
             <div class="form-group">
                 <label for="exampleInputPassword1">${phone_number}</label>
                 <input type="text" class="form-control" id="exampleInputPassword1"
                        name="phone" value="${user_phone_number}"
                        required pattern="^(25|29|33|44)\d{7}$">
             </div>
-            <c:if test="${phone_change_result eq 'incorrect_message'}"><div><b>${incorrect_phone_message}</b></div></c:if>
+            <c:if test="${phone_change_result eq 'incorrect_message'}">
+                <div><b>${incorrect_phone_message}</b></div>
+            </c:if>
             <br/>
 
             <button type="submit" class="btn btn-primary"

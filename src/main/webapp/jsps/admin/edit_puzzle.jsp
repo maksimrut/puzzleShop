@@ -26,6 +26,7 @@
 
     <script type="text/javascript">
         window.history.forward();
+
         function noBack() {
             window.history.forward();
         }
@@ -34,8 +35,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
           integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 
-    <%--    <script src="${abs}/js/message.js"></script>--%>
-    <%--    <link rel="stylesheet" href="${abs}/css/registration.css">--%>
     <title>${title}</title>
 </head>
 <body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
@@ -44,8 +43,7 @@
 <div class="container">
     <form action="${abs}/controller" method="post">
         <input type="hidden" name="command" value="edit_puzzle">
-<%--        <input type="hidden" name="isAvailable" value="${requestScope.jewelryToEdit.available}">--%>
-<%--        <input type="hidden" name="page" value="${requestScope.page}">--%>
+
         <div class="form-group">
             <label for="readOnlyInput">${id}</label>
             <input class="form-control" type="number" id="readOnlyInput" name="puzzle_id"
@@ -82,7 +80,7 @@
             <div class="form-group form-check" style="color: red">
                 <input type="hidden" class="form-check-input" id="exampleCheck1">
                 <label class="form-check-label" for="exampleCheck1">
-                    ${invalid}
+                        ${invalid}
                 </label>
             </div>
         </c:if>

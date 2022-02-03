@@ -13,6 +13,12 @@ import org.apache.logging.log4j.Logger;
 import static com.rutkouski.puzzleshop.controller.command.PagePath.TO_USER_MANAGEMENT_PAGE;
 import static com.rutkouski.puzzleshop.controller.command.ParameterName.USER_ID;
 
+/**
+ * The BlockUserCommand allows to administrator
+ * change user status to BLOCKED
+ *
+ * @see com.rutkouski.puzzleshop.controller.command.Command
+ */
 public class BlockUserCommand implements Command {
     static Logger logger = LogManager.getLogger();
     UserServiceImpl userService = UserServiceImpl.getInstance();

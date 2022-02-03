@@ -10,10 +10,18 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.Optional;
+
 import static com.rutkouski.puzzleshop.controller.command.AttributeName.PUZZLE_TO_EDIT;
 import static com.rutkouski.puzzleshop.controller.command.PagePath.EDIT_PUZZLE_PAGE;
 import static com.rutkouski.puzzleshop.controller.command.ParameterName.PUZZLE_ID;
 
+/**
+ * The command directs the administrator
+ * to the edit puzzle page.
+ *
+ * @see com.rutkouski.puzzleshop.controller.command.Command
+ */
 public class GoToEditPuzzleCommand implements Command {
     static Logger logger = LogManager.getLogger();
     private final PuzzleServiceImpl puzzleService = PuzzleServiceImpl.getInstance();
@@ -24,9 +32,12 @@ public class GoToEditPuzzleCommand implements Command {
         int puzzleId = Integer.parseInt(request.getParameter(PUZZLE_ID));
 
         try {
-            Puzzle puzzle = puzzleService.findPuzzleById(puzzleId).get();
-            request.setAttribute(PUZZLE_TO_EDIT, puzzle);
-            router.setPagePath(EDIT_PUZZLE_PAGE);
+            Optional<Puzzle> optionalPuzzle = puzzleService.findPuzzleById(puzzleId);
+            if (optionalPuzzle.isPresent()) {
+                Puzzle puzzle = optionalPuzzle.get();
+                request.setAttribute(PUZZLE_TO_EDIT, puzzle);
+                router.setPagePath(EDIT_PUZZLE_PAGE);
+            }
         } catch (ServiceException e) {
             logger.error("Exception occurred in GoToEditPuzzleCommand class", e);
             throw new CommandException("Exception occurred in GoToEditPuzzleCommand class" + e);

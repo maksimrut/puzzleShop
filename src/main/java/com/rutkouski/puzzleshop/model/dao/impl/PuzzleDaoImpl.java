@@ -10,10 +10,13 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The {@link PuzzleDaoImpl} class provides access to
+ * the 'puzzles' database table
+ */
 public class PuzzleDaoImpl implements PuzzleDao {
     static Logger logger = LogManager.getLogger();
 
@@ -27,16 +30,13 @@ public class PuzzleDaoImpl implements PuzzleDao {
             INSERT INTO puzzles (name, price, difficulty_level, description, image)
             VALUES(?, ?, ?, ?, ?)""";
     private static final String SQL_FIND_ALL_BY_DIFFICULTY_LEVEL = """
-            SELECT id, name, price, difficulty_level, description, image 
+            SELECT id, name, price, difficulty_level, description, image
             FROM puzzles
             WHERE difficulty_level=?""";
     private static final String SQL_UPDATE_PUZZLE = """
             UPDATE puzzles
             SET name=?, price=?, difficulty_level=?, description=?, image=?
             WHERE id=?""";
-    private static final String SQL_CREATE_PUZZLE = """
-            INSERT INTO puzzles (name, price, difficulty_level, description, image)
-            VALUES ()""";
 
     private static PuzzleDaoImpl instance;
     private final RowMapper<Puzzle> mapper = new PuzzleMapper();

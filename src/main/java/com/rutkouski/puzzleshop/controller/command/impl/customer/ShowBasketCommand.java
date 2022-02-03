@@ -5,6 +5,7 @@ import com.rutkouski.puzzleshop.controller.command.Command;
 import com.rutkouski.puzzleshop.exception.CommandException;
 import com.rutkouski.puzzleshop.exception.ServiceException;
 import com.rutkouski.puzzleshop.model.entity.Puzzle;
+import com.rutkouski.puzzleshop.model.entity.User;
 import com.rutkouski.puzzleshop.model.service.impl.PuzzleServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -17,6 +18,12 @@ import java.util.*;
 import static com.rutkouski.puzzleshop.controller.command.AttributeName.*;
 import static com.rutkouski.puzzleshop.controller.command.PagePath.BASKET_PAGE;
 
+/**
+ * The command shows to the {@link User}
+ * his basket with chosen goods.
+ *
+ * @see com.rutkouski.puzzleshop.controller.command.Command
+ */
 public class ShowBasketCommand implements Command {
     static Logger logger = LogManager.getLogger();
     private final PuzzleServiceImpl puzzleService = PuzzleServiceImpl.getInstance();
@@ -40,7 +47,6 @@ public class ShowBasketCommand implements Command {
             }
             String stringDiscount = (String) session.getAttribute(USER_DISCOUNT);
             int discount = stringDiscount == null ? 0 : Integer.parseInt(stringDiscount);
-//            int discount = (int) session.getAttribute(USER_DISCOUNT);
             BigDecimal totalCost = puzzleService.calculatePuzzleSet(basket, discount);
 
             request.setAttribute(TOTAL_COST, totalCost);

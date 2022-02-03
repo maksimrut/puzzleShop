@@ -17,6 +17,12 @@ import static com.rutkouski.puzzleshop.controller.command.AttributeName.INVALID_
 import static com.rutkouski.puzzleshop.controller.command.PagePath.*;
 import static com.rutkouski.puzzleshop.controller.command.ParameterName.*;
 
+/**
+ * The EditPuzzleCommand provides changing
+ * puzzle data in database
+ *
+ * @see com.rutkouski.puzzleshop.controller.command.Command
+ */
 public class EditPuzzleCommand implements Command {
     static Logger logger = LogManager.getLogger();
     private final PuzzleServiceImpl puzzleService = PuzzleServiceImpl.getInstance();

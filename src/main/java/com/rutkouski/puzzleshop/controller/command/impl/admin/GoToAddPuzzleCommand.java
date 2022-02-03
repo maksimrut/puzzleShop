@@ -7,6 +7,12 @@ import jakarta.servlet.http.HttpServletRequest;
 
 import static com.rutkouski.puzzleshop.controller.command.PagePath.GO_TO_ADD_PUZZLE_PAGE;
 
+/**
+ * The command directs the administrator
+ * to the add puzzle page.
+ *
+ * @see com.rutkouski.puzzleshop.controller.command.Command
+ */
 public class GoToAddPuzzleCommand implements Command {
 
     @Override

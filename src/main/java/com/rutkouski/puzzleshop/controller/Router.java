@@ -3,9 +3,11 @@ package com.rutkouski.puzzleshop.controller;
 import com.rutkouski.puzzleshop.controller.command.PagePath;
 
 /**
- *  The {@link Router} class contains
- *  pagePath and route fields for request and response
- *  RouteType defining
+ * @author Maksim Rutkouski
+ *
+ * The {@link Router} class contains
+ * pagePath and route fields for request and response
+ * RouteType defining
  */
 
 public class Router {
@@ -30,9 +32,8 @@ public class Router {
     }
 
     public void setRoute(RouteType route) {
-        if (route == null) {
-            this.route = RouteType.FORWARD;
+        if (route != null) {
+            this.route = route;
         }
-        this.route = route;
     }
 }

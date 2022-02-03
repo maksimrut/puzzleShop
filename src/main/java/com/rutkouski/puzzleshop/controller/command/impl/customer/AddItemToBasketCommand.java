@@ -3,6 +3,7 @@ package com.rutkouski.puzzleshop.controller.command.impl.customer;
 import com.rutkouski.puzzleshop.controller.Router;
 import com.rutkouski.puzzleshop.controller.command.Command;
 import com.rutkouski.puzzleshop.exception.CommandException;
+import com.rutkouski.puzzleshop.model.entity.User;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
@@ -15,6 +16,12 @@ import static com.rutkouski.puzzleshop.controller.command.AttributeName.BASKET;
 import static com.rutkouski.puzzleshop.controller.command.PagePath.SHOW_ALL_GOODS_PAGE;
 import static com.rutkouski.puzzleshop.controller.command.ParameterName.PUZZLE_ID;
 
+/**
+ * The command provides adding to the basker
+ * chosen by {@link User} goods
+ *
+ * @see com.rutkouski.puzzleshop.controller.command.Command
+ */
 public class AddItemToBasketCommand implements Command {
     static Logger logger = LogManager.getLogger();
 

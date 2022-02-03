@@ -2,6 +2,9 @@ package com.rutkouski.puzzleshop.model.mapper;
 
 import java.math.BigDecimal;
 
+/**
+ * The database columns names by table name
+ */
 public final class ColumnName {
 
     /* users table */
@@ -32,7 +35,7 @@ public final class ColumnName {
     public static final String ORDER_CUSTOMER_ID = "orders.customer_id";
     /* order_statuses table */
     public static final String ORDER_STATUS = "order_statuses.status";
-    /* order_statuses table */
+    /* order_items table */
     public static final String ORDER_ITEM_ID = "order_items.id";
     public static final String ITEM_QUANTITY = "order_items.item_quantity";
     public static final String ITEM_ID = "order_items.puzzle_id";

@@ -9,6 +9,11 @@ import java.util.Optional;
 
 import static com.rutkouski.puzzleshop.model.mapper.ColumnName.*;
 
+/**
+ * The user mapper
+ *
+ * @see RowMapper
+ */
 public class UserMapper implements RowMapper<User> {
 
     @Override

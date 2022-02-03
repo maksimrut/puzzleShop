@@ -7,7 +7,6 @@ import com.rutkouski.puzzleshop.exception.ServiceException;
 import com.rutkouski.puzzleshop.model.entity.User;
 import com.rutkouski.puzzleshop.model.service.impl.UserServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -16,6 +15,12 @@ import java.util.List;
 import static com.rutkouski.puzzleshop.controller.command.AttributeName.USER_LIST;
 import static com.rutkouski.puzzleshop.controller.command.PagePath.USER_MANAGEMENT_PAGE;
 
+/**
+ * The command directs the administrator
+ * to the user management page.
+ *
+ * @see com.rutkouski.puzzleshop.controller.command.Command
+ */
 public class UserManagementCommand implements Command {
     static Logger logger = LogManager.getLogger();
     private final UserServiceImpl userService = UserServiceImpl.getInstance();

@@ -11,6 +11,11 @@ import java.util.Optional;
 
 import static com.rutkouski.puzzleshop.model.mapper.ColumnName.*;
 
+/**
+ * The puzzle mapper
+ *
+ * @see RowMapper
+ */
 public class PuzzleMapper implements RowMapper<Puzzle> {
 
     @Override

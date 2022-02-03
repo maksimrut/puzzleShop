@@ -30,6 +30,7 @@
 
     <script type="text/javascript">
         window.history.forward();
+
         function noBack() {
             window.history.forward();
         }
@@ -44,7 +45,6 @@
 <br/>
 
 <div class="sign" style="height: 100vh">
-
     <div class="container" style="height: 110vh">
         <div class="row">
             <table class="table table-striped" style="height: inherit">
@@ -113,42 +113,6 @@
             </table>
         </div>
     </div>
-
-    <%--    <div class="container">--%>
-    <%--        <div class="row" style="justify-content: center">--%>
-    <%--            <nav aria-label="Page navigation">--%>
-    <%--                <ul class="pagination">--%>
-    <%--                    <li class="page-item">--%>
-    <%--                        <c:choose>--%>
-    <%--                            <c:when test="${requestScope.page > 1}">--%>
-    <%--                                <a class="page-link"--%>
-    <%--                                   href="${pageContext.request.contextPath}/controller?command=show_all_orders&page=${requestScope.page-1}"--%>
-    <%--                                   aria-label="Previous">--%>
-    <%--                                    <span aria-hidden="true">&laquo;</span>--%>
-    <%--                                </a>--%>
-    <%--                            </c:when>--%>
-    <%--                            <c:otherwise>--%>
-    <%--                                <a class="page-link"--%>
-    <%--                                   href="#"--%>
-    <%--                                   aria-label="Previous" hidden>--%>
-    <%--                                    <span aria-hidden="true">&laquo;</span>--%>
-    <%--                                </a>--%>
-    <%--                            </c:otherwise>--%>
-    <%--                        </c:choose>--%>
-    <%--                    </li>--%>
-    <%--                    <li class="page-item"><span class="page-link">${requestScope.page}</span></li>--%>
-    <%--                    <li class="page-item">--%>
-    <%--                        <a class="page-link"--%>
-    <%--                           href="${pageContext.request.contextPath}/controller?command=show_all_orders&page=${requestScope.page+1}"--%>
-    <%--                           aria-label="Next">--%>
-    <%--                            <span aria-hidden="true">&raquo;</span>--%>
-    <%--                        </a>--%>
-    <%--                    </li>--%>
-    <%--                </ul>--%>
-    <%--            </nav>--%>
-    <%--        </div>--%>
-    <%--    </div>--%>
-
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"

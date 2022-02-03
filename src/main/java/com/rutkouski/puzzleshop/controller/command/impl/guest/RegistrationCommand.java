@@ -22,7 +22,7 @@ import static com.rutkouski.puzzleshop.controller.command.ParameterName.*;
 
 /**
  * Command provides users registration on website.
- * In case of correct input data {@link User} can sign in.
+ * In case of correct input data {@link User} automatically sign in.
  *
  * @see com.rutkouski.puzzleshop.controller.command.Command
  */

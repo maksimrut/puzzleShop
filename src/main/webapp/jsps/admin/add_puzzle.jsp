@@ -26,6 +26,7 @@
 
     <script type="text/javascript">
         window.history.forward();
+
         function noBack() {
             window.history.forward();
         }
@@ -34,8 +35,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
           integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 
-    <%--    <script src="${abs}/js/message.js"></script>--%>
-    <%--    <link rel="stylesheet" href="${abs}/css/registration.css">--%>
     <title>${title}</title>
 </head>
 <body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
@@ -51,16 +50,17 @@
         <div class="form-group">
             <label for="exampleFormControlInput2">${name}</label>
             <input type="text" class="form-control" id="exampleFormControlInput2" name="name"
-                  required value="${requestScope.name['name']}" pattern="[^<>]{1,40}">
+                   required value="${requestScope.name['name']}" pattern="[^<>]{1,40}">
         </div>
         <div class="form-group">
             <label for="exampleFormControlInput3">${difficulty_level}</label>
             <input type="text" class="form-control" id="exampleFormControlInput3" name="difficulty_level"
-                  required value="${requestScope.difficulty_level['difficulty_level']}" pattern="[123]">
+                   required value="${requestScope.difficulty_level['difficulty_level']}" pattern="[123]">
         </div>
         <div class="form-group">
             <label for="exampleFormControlInput4">${price}</label>
-            <input type="number" step="0.01" min="0" max="999.99" class="form-control" id="exampleFormControlInput4" name="price"
+            <input type="number" step="0.01" min="0" max="999.99" class="form-control" id="exampleFormControlInput4"
+                   name="price"
                    value="${requestScope.price['price']}"
                    required pattern="^\\d{1,3}(\\.\\d{1,2})?$">
             <small id="passwordHelpBlockF" class="form-text text-muted" style="color: black">
@@ -70,7 +70,7 @@
         <div class="form-group">
             <label for="exampleFormControlTextarea1">${description}</label>
             <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="description">
-                    ${requestScope.description['description']}
+                ${requestScope.description['description']}
             </textarea>
         </div>
 

@@ -18,6 +18,11 @@ import static com.rutkouski.puzzleshop.controller.command.AttributeName.ALL_CUST
 import static com.rutkouski.puzzleshop.controller.command.AttributeName.SESSION_USER;
 import static com.rutkouski.puzzleshop.controller.command.PagePath.CUSTOMER_ORDERS_LIST_PAGE;
 
+/**
+ * The command show all orders made by the {@link User}
+ *
+ * @see com.rutkouski.puzzleshop.controller.command.Command
+ */
 public class ShowOrdersForCustomerCommand implements Command {
     static Logger logger = LogManager.getLogger();
     private final OrderServiceImpl orderService = OrderServiceImpl.getInstance();

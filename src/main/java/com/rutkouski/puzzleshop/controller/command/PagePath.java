@@ -15,10 +15,7 @@ public final class PagePath {
     public static final String GO_TO_PROFILE_PAGE = "/jsps/user_profile.jsp";
     public static final String UPDATE_PASSWORD_PAGE = "/jsps/update_password.jsp";
     public static final String UPDATE_PROFILE_PAGE = "/jsps/update_profile.jsp";
-
-    /* error pages */
     public static final String ERROR_404_PAGE = "jsps/error/error404.jsp";
-    public static final String ERROR_500_PAGE = "jsps/error/error500.jsp";
 
     /* customer pages */
     public static final String GOODS_PAGE = "/jsps/goods.jsp";

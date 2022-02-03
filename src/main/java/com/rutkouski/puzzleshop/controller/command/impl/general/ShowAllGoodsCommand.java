@@ -5,6 +5,7 @@ import com.rutkouski.puzzleshop.controller.command.Command;
 import com.rutkouski.puzzleshop.exception.CommandException;
 import com.rutkouski.puzzleshop.exception.ServiceException;
 import com.rutkouski.puzzleshop.model.entity.Puzzle;
+import com.rutkouski.puzzleshop.model.entity.User;
 import com.rutkouski.puzzleshop.model.service.impl.PuzzleServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import org.apache.logging.log4j.LogManager;
@@ -15,6 +16,12 @@ import java.util.List;
 import static com.rutkouski.puzzleshop.controller.command.AttributeName.PUZZLES_LIST;
 import static com.rutkouski.puzzleshop.controller.command.PagePath.GOODS_PAGE;
 
+/**
+ * The command shows to {@link User}
+ * list of all available goods
+ *
+ * @see com.rutkouski.puzzleshop.controller.command.Command
+ */
 public class ShowAllGoodsCommand implements Command {
     static Logger logger = LogManager.getLogger();
     private final PuzzleServiceImpl puzzleService = PuzzleServiceImpl.getInstance();

@@ -10,6 +10,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
+/**
+ * Connection factory for creating {@link CustomConnectionPool}
+ */
 public class ConnectionFactory {
     static Logger logger = LogManager.getLogger();
     private static final String PROPERTY_FILE_PATH = "config/database.properties";
@@ -53,7 +56,8 @@ public class ConnectionFactory {
         logger.info("Database connection completed: URL - {}", DATABASE_URL);
     }
 
-    private ConnectionFactory() {}
+    private ConnectionFactory() {
+    }
 
     static Connection createConnection() throws SQLException {
         return DriverManager.getConnection(DATABASE_URL, DATABASE_USER, DATABASE_PASSWORD);

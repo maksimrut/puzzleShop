@@ -18,6 +18,12 @@ import static com.rutkouski.puzzleshop.controller.command.AttributeName.*;
 import static com.rutkouski.puzzleshop.controller.command.PagePath.UPDATE_PASSWORD_PAGE;
 import static com.rutkouski.puzzleshop.controller.command.ParameterName.*;
 
+/**
+ * Updating password command.
+ * Used by {@link User} for changing their password
+ *
+ * @see com.rutkouski.puzzleshop.controller.command.Command
+ */
 public class UpdateUserPasswordCommand implements Command {
     static Logger logger = LogManager.getLogger();
     UserServiceImpl userService = UserServiceImpl.getInstance();

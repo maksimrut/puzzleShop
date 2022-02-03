@@ -17,6 +17,10 @@ import java.util.Optional;
 import static com.rutkouski.puzzleshop.controller.command.AttributeName.*;
 import static com.rutkouski.puzzleshop.controller.command.ParameterName.*;
 
+/**
+ * The {@link UserServiceImpl} class provides logic for future access to
+ * users table in the database
+ */
 public class UserServiceImpl implements UserService {
     static Logger logger = LogManager.getLogger();
     private static UserServiceImpl instance;
@@ -192,7 +196,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean changeUserRole(int userId, User.Role role) throws ServiceException {
+    public boolean updateUserRole(int userId, User.Role role) throws ServiceException {
         try {
             return userDao.updateUserRole(userId, role);
         } catch (DaoException e) {

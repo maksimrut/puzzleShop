@@ -12,6 +12,10 @@ import org.apache.logging.log4j.Logger;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The {@link OrderServiceImpl} class provides logic for future access to
+ * orders and order_items tables in the database
+ */
 public class OrderServiceImpl implements OrderService {
     static Logger logger = LogManager.getLogger();
     private static OrderServiceImpl instance;

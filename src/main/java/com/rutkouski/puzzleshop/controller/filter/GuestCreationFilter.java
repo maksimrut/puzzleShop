@@ -12,12 +12,12 @@ import java.util.Optional;
 import static com.rutkouski.puzzleshop.controller.command.AttributeName.SESSION_USER;
 
 /**
- *
+ * @author Maksim Rutkouski
+ * <p>
  * The new user (Guest creation) filter.
  */
 
 @WebFilter(urlPatterns = {"/*"}, dispatcherTypes = {DispatcherType.REQUEST, DispatcherType.FORWARD, DispatcherType.INCLUDE})
-// TODO: 21.01.2022 learn dispatcher types 
 public class GuestCreationFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {

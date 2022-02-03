@@ -2,6 +2,7 @@ package com.rutkouski.puzzleshop.controller.command.impl.general;
 
 import com.rutkouski.puzzleshop.controller.Router;
 import com.rutkouski.puzzleshop.controller.command.Command;
+import com.rutkouski.puzzleshop.model.entity.User;
 import com.rutkouski.puzzleshop.validator.LocaleValidator;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -12,6 +13,12 @@ import static com.rutkouski.puzzleshop.controller.command.AttributeName.CURRENT_
 import static com.rutkouski.puzzleshop.controller.command.PagePath.MAIN_PAGE;
 import static com.rutkouski.puzzleshop.controller.command.ParameterName.SESSION_LOCALE;
 
+/**
+ * The command provides to the {@link User}
+ * locale changing.
+ *
+ * @see com.rutkouski.puzzleshop.controller.command.Command
+ */
 public class ChangeLocaleCommand implements Command {
     static Logger logger = LogManager.getLogger();
 

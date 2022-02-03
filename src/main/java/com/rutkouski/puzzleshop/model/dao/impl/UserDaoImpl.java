@@ -10,41 +10,39 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 /**
- *  The {@link UserDaoImpl} class provides access to
- *  the 'users', 'roles', 'user_statuses' database tables
+ * The {@link UserDaoImpl} class provides access to
+ * the 'users', 'roles', 'user_statuses' database tables
  */
-
 public class UserDaoImpl implements UserDao {
     static Logger logger = LogManager.getLogger();
 
     private static final String SQL_FIND_ALL = """
-			SELECT users.id, login, password, email, first_name, phone, role, status
-			FROM users
-			JOIN roles ON role_id=roles.id
-			JOIN user_statuses ON status_id=user_statuses.id""";
+            SELECT users.id, login, password, email, first_name, phone, role, status
+            FROM users
+            JOIN roles ON role_id=roles.id
+            JOIN user_statuses ON status_id=user_statuses.id""";
     private static final String SQL_FIND_BY_ID = """
-			SELECT users.id, login, password, email, first_name, phone, role, status
-			FROM users
-			JOIN roles ON role_id=roles.id
-			JOIN user_statuses ON status_id=user_statuses.id
-			WHERE users.id=?""";
+            SELECT users.id, login, password, email, first_name, phone, role, status
+            FROM users
+            JOIN roles ON role_id=roles.id
+            JOIN user_statuses ON status_id=user_statuses.id
+            WHERE users.id=?""";
     private static final String SQL_FIND_ALL_ACTIVE_USERS = """
-			SELECT users.id, login, password, email, first_name, phone, role, status
-			FROM users
-			JOIN roles ON role_id=roles.id
-			JOIN user_statuses ON status_id=user_statuses.id
-			WHERE user_statuses.status='active'""";
+            SELECT users.id, login, password, email, first_name, phone, role, status
+            FROM users
+            JOIN roles ON role_id=roles.id
+            JOIN user_statuses ON status_id=user_statuses.id
+            WHERE user_statuses.status='active'""";
     private static final String SQL_FIND_USER_BY_EMAIL = """
-			SELECT users.id, login, password, email, first_name, phone, role, status
-			FROM users
-			JOIN roles ON role_id=roles.id
-			JOIN user_statuses ON status_id=user_statuses.id
-			WHERE users.email=?""";
+            SELECT users.id, login, password, email, first_name, phone, role, status
+            FROM users
+            JOIN roles ON role_id=roles.id
+            JOIN user_statuses ON status_id=user_statuses.id
+            WHERE users.email=?""";
     private static final String SQL_FIND_USER_ID_BY_LOGIN =
             "SELECT users.id FROM users WHERE login=?";
     private static final String SQL_FIND_USER_ID_BY_EMAIL =
@@ -57,17 +55,17 @@ public class UserDaoImpl implements UserDao {
             "UPDATE users SET password=? WHERE users.id=?";
     private static final String SQL_UPDATE_USER_EMAIL =
             "UPDATE users SET email=? WHERE users.id=?";
-    private static final String SQL_DELETE_USER_BY_ID  =
+    private static final String SQL_DELETE_USER_BY_ID =
             "DELETE FROM users WHERE users.id=?";
     private static final String SQL_INSERT_NEW_USER = """
-			INSERT INTO users (login, password, email, first_name, phone, role_id, status_id)
-			VALUES (?, ?, ?, ?, ?, ?, ?)""";
+            INSERT INTO users (login, password, email, first_name, phone, role_id, status_id)
+            VALUES (?, ?, ?, ?, ?, ?, ?)""";
     private static final String SQL_FIND_USER_BY_LOGIN_AND_PASSWORD = """
-			SELECT users.id, login, password, email, first_name, phone, role, status
-			FROM users
-			JOIN roles ON role_id=roles.id
-			JOIN user_statuses ON status_id=user_statuses.id
-			WHERE users.login=? AND users.password=?""";
+            SELECT users.id, login, password, email, first_name, phone, role, status
+            FROM users
+            JOIN roles ON role_id=roles.id
+            JOIN user_statuses ON status_id=user_statuses.id
+            WHERE users.login=? AND users.password=?""";
     private static final String SQL_UPDATE_USER_STATUS =
             "UPDATE users SET status_id=? WHERE users.id=?";
     private static final String SQL_FIND_USER_BY_ID_AND_PASSWORD =
@@ -124,7 +122,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public List<User> findAllActiveUsers() throws DaoException {
-        List<User> users = new ArrayList<>();
+        List<User> users;
         try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
              PreparedStatement statement = connection.prepareStatement(SQL_FIND_ALL_ACTIVE_USERS);
              ResultSet resultSet = statement.executeQuery()) {
@@ -186,7 +184,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public User create(User user) throws DaoException { // TODO: 02.02.2022
+    public User create(User user) throws DaoException {
         try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
              PreparedStatement statement = connection.prepareStatement(SQL_INSERT_NEW_USER, Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(FIRST_PARAM_INDEX, user.getLogin());

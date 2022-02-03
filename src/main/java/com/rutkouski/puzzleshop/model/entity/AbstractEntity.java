@@ -2,6 +2,10 @@ package com.rutkouski.puzzleshop.model.entity;
 
 import java.util.Objects;
 
+/**
+ * The Abstract class far all entities.
+ * Contains int field 'id'
+ */
 public abstract class AbstractEntity {
     private int id;
 

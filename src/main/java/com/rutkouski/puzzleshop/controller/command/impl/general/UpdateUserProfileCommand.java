@@ -16,6 +16,12 @@ import static com.rutkouski.puzzleshop.controller.command.PagePath.UPDATE_PROFIL
 import static com.rutkouski.puzzleshop.controller.command.ParameterName.FIRST_NAME;
 import static com.rutkouski.puzzleshop.controller.command.ParameterName.PHONE_NUMBER;
 
+/**
+ * Updating profile command.
+ * Used by {@link User} for editing their personal data.
+ *
+ * @see com.rutkouski.puzzleshop.controller.command.Command
+ */
 public class UpdateUserProfileCommand implements Command {
     static Logger logger = LogManager.getLogger();
     UserServiceImpl userService = UserServiceImpl.getInstance();

@@ -8,7 +8,6 @@ import com.rutkouski.puzzleshop.model.entity.Order;
 import com.rutkouski.puzzleshop.model.service.impl.CustomerServiceImpl;
 import com.rutkouski.puzzleshop.model.service.impl.OrderServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -17,6 +16,12 @@ import java.util.Optional;
 import static com.rutkouski.puzzleshop.controller.command.PagePath.TO_ORDER_MANAGEMENT_PAGE;
 import static com.rutkouski.puzzleshop.controller.command.ParameterName.ORDER_ID;
 
+/**
+ * The CompleteOrderCommand allows to administrator
+ * close the order by updating order status to COMPLETE
+ *
+ * @see com.rutkouski.puzzleshop.controller.command.Command
+ */
 public class CompleteOrderCommand implements Command {
     static Logger logger = LogManager.getLogger();
     private static final int MAX_DISCOUNT_VALUE = 15;
@@ -27,7 +32,6 @@ public class CompleteOrderCommand implements Command {
     @Override
     public Router execute(HttpServletRequest request) throws CommandException {
         Router router = new Router();
-        HttpSession session = request.getSession();
         int orderId = Integer.parseInt(request.getParameter(ORDER_ID));
 
         try {

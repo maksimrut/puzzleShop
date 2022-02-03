@@ -13,6 +13,12 @@ import org.apache.logging.log4j.Logger;
 import static com.rutkouski.puzzleshop.controller.command.PagePath.TO_USER_MANAGEMENT_PAGE;
 import static com.rutkouski.puzzleshop.controller.command.ParameterName.USER_ID;
 
+/**
+ * The administrator command
+ * change {@link User} status to ACTIVE
+ *
+ * @see com.rutkouski.puzzleshop.controller.command.Command
+ */
 public class UnblockUserCommand implements Command {
     static Logger logger = LogManager.getLogger();
     UserServiceImpl userService = UserServiceImpl.getInstance();

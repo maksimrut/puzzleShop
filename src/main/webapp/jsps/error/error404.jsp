@@ -19,6 +19,7 @@
 
     <script type="text/javascript">
         window.history.forward();
+
         function noBack() {
             window.history.forward();
         }
@@ -34,8 +35,6 @@
 
 <h1 align="center">${message}</h1><br/><br/>
 <h3 align="center"><a href="${abs}/index.jsp">${home}</a></h3>
-
-
 
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"

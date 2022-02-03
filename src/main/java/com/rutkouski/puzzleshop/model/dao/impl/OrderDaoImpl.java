@@ -4,7 +4,6 @@ import com.rutkouski.puzzleshop.exception.DaoException;
 import com.rutkouski.puzzleshop.model.dao.OrderDao;
 import com.rutkouski.puzzleshop.model.entity.Order;
 import com.rutkouski.puzzleshop.model.entity.OrderItem;
-import com.rutkouski.puzzleshop.model.entity.User;
 import com.rutkouski.puzzleshop.model.mapper.RowMapper;
 import com.rutkouski.puzzleshop.model.mapper.impl.OrderMapper;
 import com.rutkouski.puzzleshop.model.pool.CustomConnectionPool;
@@ -18,6 +17,10 @@ import java.util.Optional;
 
 import static com.rutkouski.puzzleshop.model.mapper.ColumnName.*;
 
+/**
+ * The {@link OrderDaoImpl} class provides access to
+ * the 'orders', 'order_status_id', 'order_items' database tables
+ */
 public class OrderDaoImpl implements OrderDao {
     static Logger logger = LogManager.getLogger();
 
@@ -46,7 +49,6 @@ public class OrderDaoImpl implements OrderDao {
     private static final String SQL_FIND_ALL_ORDER_ITEMS_BY_ORDER_ID = """
             SELECT order_items.id, item_quantity, puzzle_id, order_id
             FROM order_items WHERE order_id=?""";
-
 
     private static OrderDaoImpl instance;
     private final RowMapper<Order> mapper = new OrderMapper();
@@ -200,7 +202,7 @@ public class OrderDaoImpl implements OrderDao {
         try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
              PreparedStatement statement = connection.prepareStatement(SQL_FIND_ALL_ORDER_ITEMS_BY_ORDER_ID)) {
             statement.setInt(FIRST_PARAM_INDEX, orderId);
-            try(ResultSet resultSet = statement.executeQuery()) {
+            try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
                     OrderItem foundOrderItem = extractOrderItemsValues(resultSet);
                     orderItems.add(foundOrderItem);

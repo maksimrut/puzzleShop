@@ -12,6 +12,7 @@
         <entry key="file://$PROJECT_DIR$/src/main/webapp/jsps/order_info.jsp" value="file://$PROJECT_DIR$/src/main/webapp/jsps" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/jsps/registration.jsp" value="file://$PROJECT_DIR$/src/main/webapp/jsps" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/jsps/sign_in.jsp" value="file://$PROJECT_DIR$/src/main/webapp/jsps" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/jsps/user_profile.jsp" value="file://$PROJECT_DIR$/src/main/webapp/jsps" />
       </map>
     </option>
   </component>

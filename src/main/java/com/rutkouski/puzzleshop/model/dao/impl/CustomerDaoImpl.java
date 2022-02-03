@@ -9,13 +9,16 @@ import com.rutkouski.puzzleshop.model.pool.CustomConnectionPool;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.math.BigDecimal;
 import java.sql.*;
 import java.util.List;
 import java.util.Optional;
 
 import static com.rutkouski.puzzleshop.model.mapper.ColumnName.DISCOUNT_VALUE;
 
+/**
+ * The {@link CustomerDaoImpl} class provides access to
+ * the 'customers', 'users', 'roles', 'user_statuses' database tables
+ */
 public class CustomerDaoImpl implements CustomerDao {
     static Logger logger = LogManager.getLogger();
 
@@ -24,13 +27,13 @@ public class CustomerDaoImpl implements CustomerDao {
             FROM users
             JOIN customers ON users.id=customers.id
             JOIN roles ON users.role_id=roles.id
-			JOIN user_statuses ON users.status_id=user_statuses.id""";
+            JOIN user_statuses ON users.status_id=user_statuses.id""";
     private static final String SQL_FIND_BY_ID = """
             SELECT customers.id, login, password, email, first_name, phone, role, status, discount
             FROM users
             JOIN customers ON users.id=customers.id
             JOIN roles ON users.role_id=roles.id
-			JOIN user_statuses ON users.status_id=user_statuses.id
+            JOIN user_statuses ON users.status_id=user_statuses.id
             WHERE customers.id=?""";
     private static final String SQL_FIND_DISCOUNT_BY_CUSTOMER_ID = """
             SELECT discount FROM customers
@@ -39,9 +42,10 @@ public class CustomerDaoImpl implements CustomerDao {
             "UPDATE customers SET discount=? WHERE customers.id=?";
     private static final String SQL_INSERT_NEW_USER = """
             INSERT INTO users (login, password, email, first_name, phone, role_id, status_id)
-			VALUES (?, ?, ?, ?, ?, ?, ?)""";
+            VALUES (?, ?, ?, ?, ?, ?, ?)""";
     private static final String SQL_INSERT_NEW_CUSTOMER =
             "INSERT INTO customers (customers.id) VALUES (?)";
+
     private static CustomerDaoImpl instance;
     private final RowMapper<Customer> mapper = new CustomerMapper();
 
@@ -91,12 +95,12 @@ public class CustomerDaoImpl implements CustomerDao {
     }
 
     @Override
-    public boolean deleteById(Integer id) throws DaoException {
+    public boolean deleteById(Integer id) {
         throw new UnsupportedOperationException("Customer deleting can be realized only through user deleting!");
     }
 
     @Override
-    public boolean delete(Customer entity) throws DaoException {
+    public boolean delete(Customer entity) {
         throw new UnsupportedOperationException("Customer deleting can be realized only through user deleting!");
     }
 

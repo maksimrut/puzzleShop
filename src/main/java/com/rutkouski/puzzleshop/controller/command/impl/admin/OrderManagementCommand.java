@@ -7,7 +7,6 @@ import com.rutkouski.puzzleshop.exception.ServiceException;
 import com.rutkouski.puzzleshop.model.entity.Order;
 import com.rutkouski.puzzleshop.model.service.impl.OrderServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -16,6 +15,12 @@ import java.util.List;
 import static com.rutkouski.puzzleshop.controller.command.AttributeName.ORDER_LIST;
 import static com.rutkouski.puzzleshop.controller.command.PagePath.ORDER_MANAGEMENT_PAGE;
 
+/**
+ * The command directs the administrator
+ * to the order management page.
+ *
+ * @see com.rutkouski.puzzleshop.controller.command.Command
+ */
 public class OrderManagementCommand implements Command {
     static Logger logger = LogManager.getLogger();
     private final OrderServiceImpl orderService = OrderServiceImpl.getInstance();

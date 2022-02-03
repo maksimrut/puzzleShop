@@ -7,7 +7,8 @@ import jakarta.servlet.annotation.WebInitParam;
 import java.io.IOException;
 
 /**
- *
+ * @author Maksim Rutkouski
+ * <p>
  * The Encoding filter.
  */
 

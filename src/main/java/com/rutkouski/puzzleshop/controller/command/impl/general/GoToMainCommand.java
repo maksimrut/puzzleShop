@@ -2,12 +2,17 @@ package com.rutkouski.puzzleshop.controller.command.impl.general;
 
 import com.rutkouski.puzzleshop.controller.Router;
 import com.rutkouski.puzzleshop.controller.command.Command;
+import com.rutkouski.puzzleshop.model.entity.User;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 
 import static com.rutkouski.puzzleshop.controller.command.PagePath.MAIN_PAGE;
-import static com.rutkouski.puzzleshop.controller.command.ParameterName.SESSION_LOCALE;
 
+/**
+ * The command directs the {@link User}
+ * to the main page.
+ *
+ * @see com.rutkouski.puzzleshop.controller.command.Command
+ */
 public class GoToMainCommand implements Command {
 
     @Override

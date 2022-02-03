@@ -50,20 +50,26 @@
                 <input type="password" class="form-control" id="old_psw" aria-describedby="emailHelp"
                        name="old_password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}">
             </div>
-            <c:if test="${password_change_result eq 'incorrect_message'}"><div><b>${incorrect_psw_message}</b></div></c:if>
+            <c:if test="${password_change_result eq 'incorrect_message'}">
+                <div><b>${incorrect_psw_message}</b></div>
+            </c:if>
             <div class="form-group">
                 <label for="new_psw">${new_password}</label>
                 <input type="password" class="form-control" id="new_psw"
                        name="new_password" required pattern="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,20}">
                 <small id="emailHelp" class="form-text text-muted">${helper}</small>
             </div>
-            <c:if test="${password_change_result eq 'invalid_message'}"><div><b>${invalid_psw_message}</b></div></c:if>
+            <c:if test="${password_change_result eq 'invalid_message'}">
+                <div><b>${invalid_psw_message}</b></div>
+            </c:if>
             <div class="form-group">
                 <label for="psw_confirmation">${confirm_password}</label>
                 <input type="password" class="form-control" id="psw_confirmation"
                        name="confirm_password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}">
             </div>
-            <c:if test="${password_change_result eq 'password_mismatch'}"><div><b>${password_mismatch_message}</b></div></c:if>
+            <c:if test="${password_change_result eq 'password_mismatch'}">
+                <div><b>${password_mismatch_message}</b></div>
+            </c:if>
             <br/>
             <button type="submit" class="btn btn-primary"
                     style="border-color: black">${update}</button>

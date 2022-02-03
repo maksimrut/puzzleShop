@@ -18,6 +18,12 @@ import static com.rutkouski.puzzleshop.controller.command.AttributeName.*;
 import static com.rutkouski.puzzleshop.controller.command.PagePath.MAIN_PAGE;
 import static com.rutkouski.puzzleshop.controller.command.ParameterName.*;
 
+/**
+ * The SignInCommand is an authentication command.
+ * Checks input by user data in database
+ *
+ * @see com.rutkouski.puzzleshop.controller.command.Command
+ */
 public class SignInCommand implements Command {
     static Logger logger = LogManager.getLogger();
     private final UserServiceImpl userService = UserServiceImpl.getInstance();
@@ -39,7 +45,7 @@ public class SignInCommand implements Command {
                     session.setAttribute(USER_NAME, user.getFirstName());
                     session.setAttribute(USER_PHONE_NUMBER, user.getPhoneNumber());
                     session.setAttribute(SIGN_IN_RESULT, Boolean.TRUE);
-
+// TODO: 03.02.2022
                     // role? for immidiate user blocking or changing to admin
                     if (user.getRole().equals(User.Role.CUSTOMER)) {
                         int discount = customerService.findCustomerDiscountById(user.getId());

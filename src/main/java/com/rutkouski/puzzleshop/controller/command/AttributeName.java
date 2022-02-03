@@ -1,14 +1,13 @@
 package com.rutkouski.puzzleshop.controller.command;
 
 /**
- *
+ * @author Maksim Rutkouski
+ * <p>
  * The session names and request attributes alphabetically
  */
-
 public final class AttributeName {
 
     public static final String ALL_CUSTOMER_ORDERS = "all_customer_orders";
-    public static final String ADMIN_SIGN_UP_RESULT = "admin_sign_up_result";
     public static final String BASKET = "basket";
     public static final String BASKET_ITEMS_LIST = "basket_items_list";
     public static final String CURRENT_PAGE = "current_page";

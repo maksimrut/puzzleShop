@@ -12,6 +12,11 @@ import java.util.EnumSet;
 
 import static com.rutkouski.puzzleshop.model.entity.User.Role.*;
 
+/**
+ * @author Maksim Rutkouski
+ * <p>
+ * The enum Command type.
+ */
 public enum CommandType {
 
     /* general commands */
@@ -31,7 +36,7 @@ public enum CommandType {
 
     /* guest commands */
     GO_TO_REGISTRATION(new GoToRegistrationCommand(), EnumSet.of(GUEST)),
-	REGISTRATION(new RegistrationCommand(), EnumSet.of(GUEST)),
+    REGISTRATION(new RegistrationCommand(), EnumSet.of(GUEST)),
     SIGN_IN(new SignInCommand(), EnumSet.of(GUEST)),
 
     /* customer commands */

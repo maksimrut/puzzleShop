@@ -1,20 +1,21 @@
 package com.rutkouski.puzzleshop.controller;
 
-import java.io.*;
-
 import com.rutkouski.puzzleshop.controller.command.Command;
 import com.rutkouski.puzzleshop.controller.command.CommandFactory;
 import com.rutkouski.puzzleshop.controller.command.ParameterName;
 import com.rutkouski.puzzleshop.exception.CommandException;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.http.*;
-import jakarta.servlet.annotation.*;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import static com.rutkouski.puzzleshop.controller.command.PagePath.ERROR_500_PAGE;
+import java.io.IOException;
 
 /**
+ * @author Maksim Rutkouski
  *
  * The {@link Controller} class is a main HttpServlet.
  * Overrides doPost and doGet methods by calling
@@ -36,7 +37,7 @@ public class Controller extends HttpServlet {
     private void doRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String commandName = request.getParameter(ParameterName.COMMAND);
         Command command = CommandFactory.getCommand(commandName);
-        Router router = null;
+        Router router;
         try {
             router = command.execute(request);
             switch (router.getRoute()) {

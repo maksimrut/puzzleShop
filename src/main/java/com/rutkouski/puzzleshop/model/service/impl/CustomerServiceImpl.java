@@ -12,7 +12,6 @@ import com.rutkouski.puzzleshop.validator.UserValidator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -20,6 +19,10 @@ import java.util.Optional;
 import static com.rutkouski.puzzleshop.controller.command.AttributeName.PASSWORD_MISMATCH;
 import static com.rutkouski.puzzleshop.controller.command.ParameterName.*;
 
+/**
+ * The {@link CustomerServiceImpl} class provides logic for future access to
+ * customers table in the database
+ */
 public class CustomerServiceImpl implements CustomerService {
     static Logger logger = LogManager.getLogger();
     private static CustomerServiceImpl instance;
@@ -38,7 +41,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Customer registerNewCustomer(Map<String, String> formValues) throws ServiceException {
-        boolean result = false;
+        boolean result;
         Customer registeredCustomer = null;
         String login = formValues.get(LOGIN);
         String password = formValues.get(PASSWORD);

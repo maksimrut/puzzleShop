@@ -12,6 +12,12 @@ import org.apache.logging.log4j.Logger;
 import static com.rutkouski.puzzleshop.controller.command.PagePath.SHOW_ALL_GOODS_PAGE;
 import static com.rutkouski.puzzleshop.controller.command.ParameterName.PUZZLE_ID;
 
+/**
+ * The DeletePuzzleCommand allows to administrator
+ * delete chosen puzzle
+ *
+ * @see com.rutkouski.puzzleshop.controller.command.Command
+ */
 public class DeletePuzzleCommand implements Command {
     static Logger logger = LogManager.getLogger();
     private final PuzzleServiceImpl puzzleService = PuzzleServiceImpl.getInstance();

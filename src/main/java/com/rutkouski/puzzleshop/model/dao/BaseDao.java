@@ -7,64 +7,64 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * The interface Base dao.
- *
  * @param <K> the type parameter
  * @param <T> the type parameter
+ * @author Maksim Rutkouski
+ * <p>
+ * The interface Base dao. The parent of other dao interfaces.
+ * Provides access to the database
  */
 public interface BaseDao<K, T extends AbstractEntity> {
 
-    static final int FIRST_PARAM_INDEX = 1;
-    static final int SECOND_PARAM_INDEX = 2;
-     static final int THIRD_PARAM_INDEX = 3;
-     static final int FOURTH_PARAM_INDEX = 4;
-    static final int FIFTH_PARAM_INDEX = 5;
-     static final int SIXTH_PARAM_INDEX = 6;
-    static final int SEVENTH_PARAM_INDEX = 7;
-     static final int EIGHT_PARAM_INDEX = 8; //TODO check quantity
-     static final int NINE_PARAM_INDEX = 9;
+    int FIRST_PARAM_INDEX = 1;
+    int SECOND_PARAM_INDEX = 2;
+    int THIRD_PARAM_INDEX = 3;
+    int FOURTH_PARAM_INDEX = 4;
+    int FIFTH_PARAM_INDEX = 5;
+    int SIXTH_PARAM_INDEX = 6;
+    int SEVENTH_PARAM_INDEX = 7;
 
     /**
-     * Find all list.
+     * Finds all entities
      *
-     * @return the list
-     * @throws DaoException the dao exception
+     * @return the list of entities
+     * @throws DaoException happens if the request to database could not be handled
      */
     List<T> findAll() throws DaoException;
 
     /**
-     * Find by id optional.
+     * Finds entity by id
      *
-     * @param id the id
-     * @return the optional
-     * @throws DaoException the dao exception
+     * @param id the entity's id
+     * @return the optional entity
+     * @throws DaoException happens if the request to database could not be handled
      */
     Optional<T> findById(K id) throws DaoException;
 
     /**
-     * Delete by id boolean.
+     * Deletes entity by id
      *
-     * @param id the id
-     * @return the boolean
-     * @throws DaoException the dao exception
+     * @param id the entity's id
+     * @return the boolean result
+     * @throws DaoException happens if the request to database could not be handled
      */
     boolean deleteById(K id) throws DaoException;
 
     /**
-     * Delete boolean.
+     * Deletes entity
      *
-     * @param entity the entity
-     * @return the boolean
-     * @throws DaoException the dao exception
+     * @param entity the entity to delete
+     * @return the boolean result
+     * @throws DaoException happens if the request to database could not be handled
      */
     boolean delete(T entity) throws DaoException;
 
     /**
-     * Create int.
+     * Creates entity
      *
-     * @param entity the entity
-     * @return the int
-     * @throws DaoException the dao exception
+     * @param entity the entity to insert into the database
+     * @return the created entity
+     * @throws DaoException happens if the request to database could not be handled
      */
     T create(T entity) throws DaoException;
 }

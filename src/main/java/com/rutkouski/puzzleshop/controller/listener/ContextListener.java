@@ -8,8 +8,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 /**
- *
- * The Context listener.
+ * @author Maksim Rutkouski
+ * <p>
+ * The Context listener for initializing and destroying connection pool
  */
 
 @WebListener

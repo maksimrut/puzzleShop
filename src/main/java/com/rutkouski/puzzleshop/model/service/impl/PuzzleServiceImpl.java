@@ -15,6 +15,10 @@ import java.util.*;
 
 import static com.rutkouski.puzzleshop.controller.command.ParameterName.*;
 
+/**
+ * The {@link PuzzleServiceImpl} class provides logic for future access to
+ * puzzles table in the database
+ */
 public class PuzzleServiceImpl implements PuzzleService {
     static Logger logger = LogManager.getLogger();
     private static PuzzleServiceImpl instance;

@@ -17,6 +17,19 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import static com.rutkouski.puzzleshop.model.pool.ConnectionFactory.POOL_SIZE;
 
+/**
+ * @author Maksim Rutkouski
+ * <p>
+ * The {@link CustomConnectionPool} class has private BlockingQueues
+ * where ProxyConnections are stored.
+ * Amount of created connections is set by POOL_SIZE in config (by default this amaunt equals 8).
+ * The pool is created by the {@link ConnectionFactory}
+ * The connection can be taken from the BlockingQueue and released to it.
+ * Once an hour checks the pool for the quantity of connections in it
+ * and add connection to the pool if it is necessary.
+ * Thread safe.
+ * @see ProxyConnection
+ */
 public class CustomConnectionPool {
     static Logger logger = LogManager.getLogger();
 
@@ -140,25 +153,25 @@ public class CustomConnectionPool {
     private void checkPoolSizeTimer() {
         poolCheck = new Timer();
         poolCheck.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                int connectionsNumber = calculateConnectionsNumber();
-                if (connectionsNumber < POOL_SIZE) {
-                    int requiredConnections = POOL_SIZE - connectionsNumber;
-                    for (int i = 0; i < requiredConnections; i++) {
-                        try {
-                            Connection connection = ConnectionFactory.createConnection();
-                            boolean isAdded = freeConnections.offer((ProxyConnection) connection);
-                            logger.info("New connection has added to freeConnections: {}", isAdded);
-                        } catch (SQLException e) {
-                            logger.error("New connection was not created!", e);
-                        }
-                    }
-                }
-            }
-        }
-          , TimeUnit.HOURS.toMillis(DELAY_BEFORE_CONNECTION_NUMBER_CHECK)
-          , TimeUnit.HOURS.toMillis(PERIOD_BETWEEN_CONNECTION_NUMBER_CHECK));
+                               @Override
+                               public void run() {
+                                   int connectionsNumber = calculateConnectionsNumber();
+                                   if (connectionsNumber < POOL_SIZE) {
+                                       int requiredConnections = POOL_SIZE - connectionsNumber;
+                                       for (int i = 0; i < requiredConnections; i++) {
+                                           try {
+                                               Connection connection = ConnectionFactory.createConnection();
+                                               boolean isAdded = freeConnections.offer((ProxyConnection) connection);
+                                               logger.info("New connection has added to freeConnections: {}", isAdded);
+                                           } catch (SQLException e) {
+                                               logger.error("New connection was not created!", e);
+                                           }
+                                       }
+                                   }
+                               }
+                           }
+                , TimeUnit.HOURS.toMillis(DELAY_BEFORE_CONNECTION_NUMBER_CHECK)
+                , TimeUnit.HOURS.toMillis(PERIOD_BETWEEN_CONNECTION_NUMBER_CHECK));
     }
 
     private int calculateConnectionsNumber() {

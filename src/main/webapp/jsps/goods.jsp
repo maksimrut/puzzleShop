@@ -28,6 +28,7 @@
 
     <script type="text/javascript">
         window.history.forward();
+
         function noBack() {
             window.history.forward();
         }
@@ -36,12 +37,11 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
           integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 
-    <%--    <script src="${abs}/js/message.js"></script>--%>
-<%--    <link rel="stylesheet" href="${abs}/css/registration.css">--%>
     <title>${title}</title>
 </head>
 <body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
 <br/>
+
 <div class="container-fluid" id="container-fluid">
 
     <c:if test="${user.role=='ADMIN'}">
@@ -71,9 +71,6 @@
         <tbody>
         <c:forEach var="element" items="${requestScope.puzzles_list}">
             <tr>
-
-<%--                <td><img width="100" src="${pageContext.request.contextPath}/uploadImage?imagePath=${element.picturePath}"--%>
-<%--                         alt="pic"></td>--%>
                 <td><img width="100" src="${abs}/${element.picturePath}"
                          alt="pic"></td>
                 <td>${element.name}</td>

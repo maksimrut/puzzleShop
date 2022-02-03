@@ -25,6 +25,11 @@ import static com.rutkouski.puzzleshop.controller.command.AttributeName.SESSION_
 import static com.rutkouski.puzzleshop.controller.command.PagePath.CREATED_ORDER_RESULT_PAGE;
 import static com.rutkouski.puzzleshop.controller.command.ParameterName.ORDER_COST;
 
+/**
+ * The command creating the order for the {@link User}
+ *
+ * @see com.rutkouski.puzzleshop.controller.command.Command
+ */
 public class CreateOrderCommand implements Command {
     static Logger logger = LogManager.getLogger();
     private final PuzzleServiceImpl puzzleService = PuzzleServiceImpl.getInstance();
@@ -54,7 +59,6 @@ public class CreateOrderCommand implements Command {
             }
             basket.clear();
             router.setPagePath(CREATED_ORDER_RESULT_PAGE);
-//            router.setRoute(Router.RouteType.REDIRECT); todo
         } catch (ServiceException e) {
             logger.error("Order can not be created: ", e);
             throw new CommandException("Order can not be created: " + e);

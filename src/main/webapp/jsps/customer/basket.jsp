@@ -29,6 +29,7 @@
 
     <script type="text/javascript">
         window.history.forward();
+
         function noBack() {
             window.history.forward();
         }
@@ -37,8 +38,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
           integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 
-    <%--    <script src="${abs}/js/message.js"></script>--%>
-    <%--    <link rel="stylesheet" href="${abs}/css/registration.css">--%>
     <title>${title}</title>
 </head>
 <body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
@@ -87,7 +86,8 @@
             </table>
         </c:otherwise>
     </c:choose>
-    <hr/><br/>
+    <hr/>
+    <br/>
 
     <c:if test="${sessionScope.basket != null && !empty sessionScope.basket}">
         <p align="center">${totalCost}: ${requestScope.total_cost} &euro;</p>
@@ -104,8 +104,6 @@
             </div>
         </div>
     </c:if>
-    <br/><br/>
-
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"

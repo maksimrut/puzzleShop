@@ -18,6 +18,12 @@ import static com.rutkouski.puzzleshop.controller.command.AttributeName.*;
 import static com.rutkouski.puzzleshop.controller.command.PagePath.BASKET_PAGE;
 import static com.rutkouski.puzzleshop.controller.command.ParameterName.PUZZLE_ID;
 
+/**
+ * The command provides immediate basket recounting
+ * while removing item of order
+ *
+ * @see com.rutkouski.puzzleshop.controller.command.Command
+ */
 public class RecountOrderWhileRemovingItemCommand implements Command {
     static Logger logger = LogManager.getLogger();
     private final PuzzleServiceImpl puzzleService = PuzzleServiceImpl.getInstance();
@@ -42,7 +48,6 @@ public class RecountOrderWhileRemovingItemCommand implements Command {
                 Optional<Puzzle> puzzle = puzzleService.findPuzzleById(id);
                 puzzle.ifPresent(basketItems::add);
             }
-//            int discount = (int) session.getAttribute(USER_DISCOUNT);
             String stringDiscount = (String) session.getAttribute(USER_DISCOUNT);
             int discount = stringDiscount == null ? 0 : Integer.parseInt(stringDiscount);
             BigDecimal totalCost = puzzleService.calculatePuzzleSet(basket, discount);

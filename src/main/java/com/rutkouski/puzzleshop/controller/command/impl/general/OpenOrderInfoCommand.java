@@ -4,10 +4,7 @@ import com.rutkouski.puzzleshop.controller.Router;
 import com.rutkouski.puzzleshop.controller.command.Command;
 import com.rutkouski.puzzleshop.exception.CommandException;
 import com.rutkouski.puzzleshop.exception.ServiceException;
-import com.rutkouski.puzzleshop.model.entity.Customer;
-import com.rutkouski.puzzleshop.model.entity.Order;
-import com.rutkouski.puzzleshop.model.entity.OrderItem;
-import com.rutkouski.puzzleshop.model.entity.Puzzle;
+import com.rutkouski.puzzleshop.model.entity.*;
 import com.rutkouski.puzzleshop.model.service.impl.CustomerServiceImpl;
 import com.rutkouski.puzzleshop.model.service.impl.OrderServiceImpl;
 import com.rutkouski.puzzleshop.model.service.impl.PuzzleServiceImpl;
@@ -24,6 +21,12 @@ import static com.rutkouski.puzzleshop.controller.command.AttributeName.*;
 import static com.rutkouski.puzzleshop.controller.command.PagePath.ORDER_INFO_PAGE;
 import static com.rutkouski.puzzleshop.controller.command.ParameterName.ORDER_ID;
 
+/**
+ * The command shows to {@link User}
+ * additional info about certain order
+ *
+ * @see com.rutkouski.puzzleshop.controller.command.Command
+ */
 public class OpenOrderInfoCommand implements Command {
     static Logger logger = LogManager.getLogger();
     private final OrderServiceImpl orderService = OrderServiceImpl.getInstance();
