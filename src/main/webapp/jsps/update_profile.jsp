@@ -58,7 +58,7 @@
                 <label for="prof_name">${name}</label>
                 <input type="text" class="form-control" id="prof_name" aria-describedby="emailHelp"
                        name="first_name" value="${user_name}"
-                       required pattern="^[A-ZА-Я]{1}[a-zа-я]{2,20}$">
+                       required pattern="^[A-ZА-Я]{1}[a-zа-я]{2,39}$">
                 <small id="name_help" style="color: black" class="form-text text-muted">${name_helper}</small>
             </div>
             <c:if test="${name_change_result eq 'incorrect_message'}">

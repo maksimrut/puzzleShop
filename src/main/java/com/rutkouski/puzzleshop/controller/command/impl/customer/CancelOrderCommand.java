@@ -1,4 +1,4 @@
-package com.rutkouski.puzzleshop.controller.command.impl.general;
+package com.rutkouski.puzzleshop.controller.command.impl.customer;
 
 import com.rutkouski.puzzleshop.controller.Router;
 import com.rutkouski.puzzleshop.controller.command.Command;

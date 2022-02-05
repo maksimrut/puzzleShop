@@ -53,6 +53,7 @@ public enum CommandType {
     EDIT_PUZZLE(new EditPuzzleCommand(), EnumSet.of(ADMIN)),
     USER_MANAGEMENT(new UserManagementCommand(), EnumSet.of(ADMIN)),
     ORDER_MANAGEMENT(new OrderManagementCommand(), EnumSet.of(ADMIN)),
+    CANCEL_ORDER_ADMIN(new CancelOrderAdminCommand(), EnumSet.of(ADMIN)),
     UPDATE_ORDER_STATUS_TO_IN_PROCESS(new UpdateOrderStatusToInProcessCommand(), EnumSet.of(ADMIN)),
     COMPLETE_ORDER(new CompleteOrderCommand(), EnumSet.of(ADMIN)),
     ADD_PUZZLE(new AddPuzzleCommand(), EnumSet.of(ADMIN)),

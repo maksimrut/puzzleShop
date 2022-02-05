@@ -45,8 +45,6 @@ public class SignInCommand implements Command {
                     session.setAttribute(USER_NAME, user.getFirstName());
                     session.setAttribute(USER_PHONE_NUMBER, user.getPhoneNumber());
                     session.setAttribute(SIGN_IN_RESULT, Boolean.TRUE);
-// TODO: 03.02.2022
-                    // role? for immidiate user blocking or changing to admin
                     if (user.getRole().equals(User.Role.CUSTOMER)) {
                         int discount = customerService.findCustomerDiscountById(user.getId());
                         session.setAttribute(USER_DISCOUNT, discount);

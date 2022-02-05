@@ -73,7 +73,7 @@
                             <c:choose>
                                 <c:when test="${element.status == 'IN_PROCESS'}">
                                     <form action="${abs}/controller" method="post">
-                                        <input type="hidden" name="command" value="cancel_order">
+                                        <input type="hidden" name="command" value="cancel_order_admin">
                                         <input type="hidden" name="order_id" value="${element.id}">
                                         <button type="submit" class="btn btn-primary">${button_cancel}</button>
                                     </form>

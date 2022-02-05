@@ -82,7 +82,7 @@
         <br/>
         <label for="email-address">${email}</label><br/>
         <input type="email" required id="email-address" class="form-control" name="email_address" value="${valid_email}"
-               placeholder="${email}">
+               placeholder="${email}" pattern=".{8,80}">
         <c:choose>
             <c:when test="${invalid_email eq 'invalid_message'}">
                 <div><b>${invalid_email_message}</b></div>

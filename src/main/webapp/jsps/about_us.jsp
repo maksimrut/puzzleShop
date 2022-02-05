@@ -2,6 +2,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="abs">${pageContext.request.contextPath}</c:set>
+<%@taglib prefix="ctg" uri="customtags" %>
 
 <fmt:setLocale value="${sessionScope.locale}"/>
 <fmt:setBundle basename="/localization/locale"/>
@@ -65,6 +66,12 @@
     </div>
 </div>
 
+<nav class="navbar navbar-expand-lg fixed-bottom navbar-light bg-light">
+    <div class="collapse navbar-collapse" id="navbarSupportedContentf">
+        <ctg:footertag/>
+    </div>
+</nav>
+
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
@@ -74,7 +81,6 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"
         integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2"
         crossorigin="anonymous"></script>
-</body>
 
-<%@include file="fragment/footer.jsp" %>
+</body>
 </html>

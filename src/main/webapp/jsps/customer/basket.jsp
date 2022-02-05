@@ -33,6 +33,9 @@
         function noBack() {
             window.history.forward();
         }
+        if ( window.history.replaceState ) {
+            window.history.replaceState( null, null, window.location.href );
+        }
     </script>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
@@ -75,10 +78,20 @@
                         <td>${element.price}</td>
                         <td>${sessionScope.basket.get(element.id)}</td>
                         <td>
-                            <a href="${abs}/controller?command=recount_order_while_adding_item&puzzle_id=${element.id}">&#10010;</a>
+                            <form style="justify-content: center" action="${abs}/controller" method="post">
+                                <input type="hidden" name="command" value="recount_order_while_adding_item">
+                                <input type="hidden" name="puzzle_id" value=${element.id}>
+                                <button type="submit" class="btn btn-primary"
+                                        style="border-color: black">&#10010;</button>
+                            </form>
                         </td>
                         <td>
-                            <a href="${abs}/controller?command=recount_order_while_removing_item&puzzle_id=${element.id}">&#8212;</a>
+                            <form style="justify-content: center" action="${abs}/controller" method="post">
+                                <input type="hidden" name="command" value="recount_order_while_removing_item">
+                                <input type="hidden" name="puzzle_id" value=${element.id}>
+                                <button type="submit" class="btn btn-primary"
+                                        style="border-color: black">&#8212;</button>
+                            </form>
                         </td>
                     </tr>
                 </c:forEach>

@@ -32,6 +32,9 @@
         function noBack() {
             window.history.forward();
         }
+        if ( window.history.replaceState ) {
+            window.history.replaceState( null, null, window.location.href );
+        }
     </script>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
@@ -90,7 +93,12 @@
 
                 <c:if test="${user.role=='CUSTOMER'}">
                     <td>
-                        <a href="${abs}/controller?command=add_item_to_basket&puzzle_id=${element.id}">&#10010;</a>
+                        <form style="justify-content: center" action="${abs}/controller" method="post">
+                            <input type="hidden" name="command" value="add_item_to_basket">
+                            <input type="hidden" name="puzzle_id" value=${element.id}>
+                            <button type="submit" class="btn btn-primary"
+                                    style="border-color: black">&#10010;</button>
+                        </form>
                     </td>
                 </c:if>
             </tr>
