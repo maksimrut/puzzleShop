@@ -28,7 +28,7 @@ public enum CommandType {
     GO_TO_ABOUT_US(new GoToAboutUsCommand(), EnumSet.of(ADMIN, CUSTOMER, GUEST)),
     SHOW_PUZZLES_BY_DIFFICULTY_LEVEL(new ShowPuzzlesByDifficultyLevelCommand(), EnumSet.of(ADMIN, CUSTOMER, GUEST)),
     CANCEL_ORDER(new CancelOrderCommand(), EnumSet.of(ADMIN, CUSTOMER)),
-    GO_TO_PROFILE(new GoToProfileCommand(), EnumSet.of(CUSTOMER)),
+    GO_TO_PROFILE(new GoToProfileCommand(), EnumSet.of(ADMIN, CUSTOMER)),
     GO_TO_UPDATE_PASSWORD(new GoToUpdatePasswordCommand(), EnumSet.of(ADMIN, CUSTOMER)),
     GO_TO_UPDATE_PROFILE(new GoToUpdateProfileCommand(), EnumSet.of(ADMIN, CUSTOMER)),
     UPDATE_USER_PASSWORD(new UpdateUserPasswordCommand(), EnumSet.of(ADMIN, CUSTOMER)),

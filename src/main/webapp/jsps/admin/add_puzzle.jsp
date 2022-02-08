@@ -45,12 +45,12 @@
         <div class="form-group">
             <label for="exampleFormControlInput1">${image}</label>
             <input type="text" class="form-control" id="exampleFormControlInput1" name="picture_path"
-                   value="${requestScope.picture_path['picture_path']}" pattern="[^<>]{0,150}">
+                   value="${requestScope.picture_path['picture_path']}" pattern="[^<>]{0,60}">
         </div>
         <div class="form-group">
             <label for="exampleFormControlInput2">${name}</label>
             <input type="text" class="form-control" id="exampleFormControlInput2" name="name"
-                   required value="${requestScope.name['name']}" pattern="[^<>]{1,40}">
+                   required value="${requestScope.name['name']}" pattern="[^<>]{1,30}">
         </div>
         <div class="form-group">
             <label for="exampleFormControlInput3">${difficulty_level}</label>

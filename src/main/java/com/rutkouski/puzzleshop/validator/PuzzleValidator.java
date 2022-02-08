@@ -7,8 +7,8 @@ package com.rutkouski.puzzleshop.validator;
  */
 public class PuzzleValidator {
     private static final String DESCRIPTION_REGEX = "[^<>]+";
-    private static final String PICTURE_PATH_REGEX = "[^<>]{0,150}";
-    private static final String NAME_REGEX = "[^<>]{1,40}";
+    private static final String PICTURE_PATH_REGEX = "[^<>]{0,60}";
+    private static final String NAME_REGEX = "[^<>]{1,30}";
     private static final String DIFFICULTY_LEVEL = "\\d";
     private static final String PRICE_REGEX = "^\\d{1,3}(\\.\\d{1,2})?$";
 

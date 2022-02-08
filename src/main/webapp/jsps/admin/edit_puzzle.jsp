@@ -52,12 +52,12 @@
         <div class="form-group">
             <label for="exampleFormControlInput1">${image}</label>
             <input type="text" class="form-control" id="exampleFormControlInput1" name="picture_path"
-                   value="${requestScope.puzzle_to_edit.picturePath}" pattern="[^<>]{0,150}">
+                   value="${requestScope.puzzle_to_edit.picturePath}" pattern="[^<>]{0,60}">
         </div>
         <div class="form-group">
             <label for="exampleFormControlInput3">${name}</label>
             <input type="text" class="form-control" id="exampleFormControlInput3" name="name"
-                   value="${requestScope.puzzle_to_edit.name}" pattern="[^<>]{1,40}">
+                   value="${requestScope.puzzle_to_edit.name}" pattern="[^<>]{1,30}">
         </div>
         <div class="form-group">
             <label for="exampleFormControlInput2">${difficulty_level}</label>
