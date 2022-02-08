@@ -1,10 +1,10 @@
-#PUZZLESHOP
-##Mechanical puzzles online store
+PUZZLESHOP
+Mechanical puzzles online store
 
 The application is a store for selling mechanical puzzles. Application allows to choose and order puzzles with various difficulty level. 
 Data is stored in MySQL 8.0 database.  
 
-##Roles
+Roles
 There are three role in the application: guest, customer and administrator.
 
 GUEST may:
@@ -35,7 +35,7 @@ ADMIN may:
 - Change the language
 - Look through puzzles
 - Visit pages "About us" and "Main"
-- - Look through his profile data
+- Look through his profile data
 - Update password
 - Update profile data
 - Edit each puzzle data
