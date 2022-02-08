@@ -55,4 +55,4 @@ There are three role in the application: guest, customer and administrator.
 - Change from CUSTOMER to ADMIN and vice versa
 
 ## Database model
-![](I:\IdeaWebProjects\src\main\webapp\images\bd.jpg)
+![](\IdeaWebProjects\src\main\webapp\images\bd.jpg)
