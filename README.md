@@ -1,4 +1,4 @@
-#PUZZLESHOP
+# PUZZLESHOP #
 
 ##Mechanical puzzles online store
 
