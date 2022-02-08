@@ -1,20 +1,22 @@
-PUZZLESHOP
-Mechanical puzzles online store
+#PUZZLESHOP
+
+##Mechanical puzzles online store
 
 The application is a store for selling mechanical puzzles. Application allows to choose and order puzzles with various difficulty level. 
 Data is stored in MySQL 8.0 database.  
 
-Roles
+##Roles
+
 There are three role in the application: guest, customer and administrator.
 
-GUEST may:
+**GUEST** may:
 - Sign in
 - Sign up
 - Change the language
 - Look through puzzles
 - Visit pages "About us" and "Main"
 
-CUSTOMER may:
+**CUSTOMER** may:
 - Log out
 - Change the language
 - Look through puzzles
@@ -30,7 +32,7 @@ CUSTOMER may:
 - Update password
 - Update profile data
 
-ADMIN may:
+**ADMIN** may:
 - Log out
 - Change the language
 - Look through puzzles
@@ -51,3 +53,6 @@ ADMIN may:
 - Delete user (except himself)
 - Block customer
 - Change from CUSTOMER to ADMIN and vice versa
+
+##Database model
+![](I:\IdeaWebProjects\src\main\webapp\images\bd.jpg)
